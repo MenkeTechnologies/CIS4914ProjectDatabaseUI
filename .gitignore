@@ -654,3 +654,9 @@ share/python-wheels/
 *.egg
 MANIFEST
 #}}}***********************************************************
+README.md
+node_modules
+package-lock.json
+package.json
+public
+src
