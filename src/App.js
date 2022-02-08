@@ -20,15 +20,17 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { Add, ArrowForward, Dashboard, Mail } from "@mui/icons-material";
+import { Add, ArrowForward, Close, Dashboard, Mail } from "@mui/icons-material";
 import Grid from '@mui/material/Grid';
-import { styled } from '@mui/material/styles';
-import Paper from '@mui/material/Paper';
 import { LEFT, OFFERING, POST_TYPE, TITLE } from "./Consts";
 import { posts } from "./MockData";
-import { Button, Chip, Stack } from "@mui/material";
+import ProjectPost from "./ProjectPost";
+import SeekingPost from "./SeekingPost";
+import { makeStyles } from "@mui/material";
 
-function App() {
+
+
+function App(props) {
   const [state, setState] = React.useState({
     [LEFT]: true,
   });
@@ -65,10 +67,12 @@ function App() {
     <Box
       sx={{width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250}}
       role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
+        <ListItem button key={'Close'} onClick={toggleDrawer(anchor, false)}>
+          <ListItemIcon> <Close/> </ListItemIcon>
+          <ListItemText primary={'Close'}/>
+        </ListItem>
         <ListItem button key={'My Posts'}>
 
           <ListItemIcon> <Dashboard/> </ListItemIcon>
@@ -127,13 +131,6 @@ function App() {
     </IconButton>
   )
 
-  const Item = styled(Paper)(({theme}) => ({
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  }));
-
   return (
     <div className="App">
       <AppBar position="static">
@@ -146,7 +143,14 @@ function App() {
               {TITLE}
             </Typography>
           </Typography>
-          <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+          <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" textColor={"#ccc"}
+                TabIndicatorProps={{
+                  style: {
+                    backgroundColor: "#ccc"
+                  }
+                }}
+
+          >
             <Tab label="All" {...a11yProps(0)} />
             <Tab label="Student" {...a11yProps(1)} />
             <Tab label="Faculty" {...a11yProps(2)} />
@@ -181,114 +185,8 @@ function App() {
         <TabPanel value={value} index={0}>
           <Box sx={{flexGrow: 1}}>
             <Grid container spacing={2}>
-              {posts.map(p => {
-                  if (p[POST_TYPE] === OFFERING) {
-                    return <Grid item xs={6}>
-                      <Item>
-                        <Item>
-
-                          <h1>
-                            <Stack direction="row" spacing={1}>
-                              {p.title}
-                              <Chip label={p.userType}/>
-                              <Chip label={p.date} variant="outlined"/>
-                            </Stack>
-                          </h1>
-                          {p.details}
-
-                          <Grid container item spacing={2}>
-                            <Grid item xs={6}>
-                              <h2>
-                                Skills
-                              </h2>
-                              {p.skills}
-                            </Grid>
-                            <Grid item xs={6}>
-                              <h2>
-                                Software
-                              </h2>
-                              {p.software}
-                            </Grid>
-                          </Grid>
-
-                          <Grid container item spacing={2}>
-                            <Grid item xs={4}>
-                              <h2>
-                                Advisor
-                              </h2>
-                            </Grid>
-                            <Grid item xs={8}>
-                              <h2>
-                                {p.advisor}
-                              </h2>
-                            </Grid>
-                          </Grid>
-                          <h2>Members</h2>
-
-                          {p.members.map(m =>
-                            <div>{m}</div>
-                          )}
-
-                        </Item>
-
-                        <Item>
-                          <Stack direction="row" spacing={1}>
-                            <Chip label="6/6 Members"/>
-                            <Button variant={"contained"}>Request to Join</Button>
-                            <Button variant={"contained"}>Edit</Button>
-                          </Stack>
-                        </Item>
-
-                      </Item>
-                    </Grid>
-
-                  } else {
-                    return <Grid item xs={6}>
-                      <Item>
-                        <Item>
-
-                          <h1>
-                            <Stack direction="row" spacing={1}>
-                              {p.title}
-                            </Stack>
-                          </h1>
-                          {p.details}
-                          <Grid container item spacing={2}>
-                            <Grid item xs={4}>
-                              <h2>
-                                Name
-                              </h2>
-                            </Grid>
-                            <Grid item xs={8}>
-                              <h2>
-                                {p.name}
-                              </h2>
-                            </Grid>
-                          </Grid>
-                          <Grid container item spacing={2}>
-                            <Grid item xs={4}>
-                              <h2>
-                                Contact
-                              </h2>
-                            </Grid>
-                            <Grid item xs={8}>
-                              <h2>
-                                {p.contact}
-                              </h2>
-                            </Grid>
-                          </Grid>
-                        </Item>
-                        <Item>
-                          <Stack direction="row" spacing={1}>
-                            <Button variant={"contained"}>Add to My Group</Button>
-                            <Button variant={"contained"}>Message</Button>
-                          </Stack>
-                        </Item>
-                      </Item>
-                    </Grid>
-                  }
-
-                }
+              {posts.map(post =>
+                post[POST_TYPE] === OFFERING ? <ProjectPost post={post}/> : <SeekingPost post={post}/>
               )}
             </Grid>
           </Box>
