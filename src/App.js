@@ -14,8 +14,13 @@ import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+import SearchIcon from '@mui/icons-material/Search';
+import TextField from '@mui/material/TextField';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import { Add, ArrowForward, Dashboard, Mail } from "@mui/icons-material";
 
 const LEFT = 'left';
 
@@ -36,7 +41,7 @@ function App() {
   };
 
   function TabPanel(props) {
-    const { children, value, index, ...other } = props;
+    const {children, value, index, ...other} = props;
 
     return (
       <div
@@ -47,7 +52,7 @@ function App() {
         {...other}
       >
         {value === index && (
-          <Box sx={{ p: 3 }}>
+          <Box sx={{p: 3}}>
             <Typography>{children}</Typography>
           </Box>
         )}
@@ -63,23 +68,38 @@ function App() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {['My Posts', 'Project Post', 'Looking for Group Post', 'Message'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon/> : <MailIcon/>}
-            </ListItemIcon>
-            <ListItemText primary={text}/>
-          </ListItem>
-        ))}
+        <ListItem button key={'My Posts'}>
+
+          <ListItemIcon> <Dashboard/> </ListItemIcon>
+          <ListItemText primary={'My Posts'}/>
+        </ListItem>
+
+        <ListItem button key={'Project Post'}>
+          <ListItemIcon> <Add/> </ListItemIcon>
+          <ListItemText primary={'Project Post'}/>
+        </ListItem>
+
+        <ListItem button key={'Looking for Group Post'}>
+          <ListItemIcon> <Add/> </ListItemIcon>
+          <ListItemText primary={'Looking for Group Post'}/>
+        </ListItem>
+
+        <ListItem button key={'Messages'}>
+          <ListItemIcon> <Mail/> </ListItemIcon>
+          <ListItemText primary={'Messages'}/>
+        </ListItem>
+
       </List>
       <Divider/>
       <List>
-        {['Search Name / UFID', 'Student 1', 'Student 2', 'Student 3'].map((text, index) => (
+        <TextField id="outlined-basic" label="Search Name / UFID" variant="outlined"
+                   InputProps={{endAdornment: <SearchButton/>}}/>
+        {['Student 1', 'Student 2', 'Student 3'].map((text, index) => (
           <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon/> : <MailIcon/>}
-            </ListItemIcon>
             <ListItemText primary={text}/>
+            <ListItemIcon>
+              <ArrowForward/>
+            </ListItemIcon>
           </ListItem>
         ))}
       </List>
@@ -98,6 +118,13 @@ function App() {
   };
 
   const [value, setValue] = React.useState(0);
+  const [age, setAge] = React.useState('');
+
+  const SearchButton = () => (
+    <IconButton>
+      <SearchIcon/>
+    </IconButton>
+  )
 
   return (
     <div className="App">
@@ -116,6 +143,28 @@ function App() {
             <Tab label="Student" {...a11yProps(1)} />
             <Tab label="Faculty" {...a11yProps(2)} />
           </Tabs>
+
+          <FormControl sx={{m: 1, minWidth: 120}}>
+            <InputLabel id="demo-simple-select-helper-label">Sort By</InputLabel>
+            <Select
+              labelId="demo-simple-select-helper-label"
+              id="demo-simple-select-helper"
+              value={age}
+              label="Age"
+              onChange={handleChange}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value={10}>Ten</MenuItem>
+              <MenuItem value={20}>Twenty</MenuItem>
+              <MenuItem value={30}>Thirty</MenuItem>
+            </Select>
+          </FormControl>
+
+          <TextField id="outlined-basic" label="Search text" variant="outlined"
+                     InputProps={{endAdornment: <SearchButton/>}}
+          />
         </Toolbar>
       </AppBar>
       <Box sx={{width: '100%'}}>
@@ -131,7 +180,6 @@ function App() {
           Faculty
         </TabPanel>
       </Box>
-
 
       <Drawer
         anchor={LEFT}
