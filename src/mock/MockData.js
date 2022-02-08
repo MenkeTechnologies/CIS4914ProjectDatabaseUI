@@ -1,4 +1,4 @@
-import { FACULTY, OFFERING, POST_TYPE, SEEKING, STUDENT } from "./Consts";
+import { FACULTY, OFFERING, POST_TYPE, SEEKING, STUDENT } from "../util/Consts";
 
 const projectPostDummy = {
   title: "Project Topic",

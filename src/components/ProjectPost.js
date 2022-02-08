@@ -11,7 +11,7 @@ const Item = styled(Paper)(({theme}) => ({
   color: theme.palette.text.secondary,
 }));
 
-function ProjectPost(props) {
+const ProjectPost = props => {
   const {post: {title, userType, date, details, skills, software, members, advisor}} = props;
   return (
     <Grid item xs={6}>
@@ -73,6 +73,6 @@ function ProjectPost(props) {
       </Item>
     </Grid>
   );
-}
+};
 
 export default ProjectPost;

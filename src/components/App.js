@@ -1,4 +1,4 @@
-import './App.css';
+import '../style/App.css';
 import * as React from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -22,15 +22,17 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { Add, ArrowForward, Close, Dashboard, Mail } from "@mui/icons-material";
 import Grid from '@mui/material/Grid';
-import { FACULTY, LEFT, OFFERING, POST_TYPE, STUDENT, TITLE } from "./Consts";
-import { posts } from "./MockData";
+import { FACULTY, LEFT, OFFERING, POST_TYPE, STUDENT, TITLE } from "../util/Consts";
+import { posts } from "../mock/MockData";
 import ProjectPost from "./ProjectPost";
 import SeekingPost from "./SeekingPost";
 
-function App(props) {
+const App = props => {
   const [state, setState] = React.useState({
-    [LEFT]: true,
+    [LEFT]: false,
   });
+  const [activeTab, setActiveTab] = React.useState(0);
+  const [age, setAge] = React.useState('');
 
 
   const toggleDrawer = (anchor, open) => (event) => {
@@ -41,7 +43,7 @@ function App(props) {
     setState({...state, [anchor]: open});
   };
 
-  function TabPanel(props) {
+  const TabPanel = props => {
     const {children, value, index, ...other} = props;
 
     return (
@@ -59,7 +61,7 @@ function App(props) {
         )}
       </div>
     );
-  }
+  };
 
   const list = (anchor) => (
     <Box
@@ -109,19 +111,14 @@ function App(props) {
     </Box>
   );
 
-  function a11yProps(index) {
-    return {
-      id: `simple-tab-${index}`,
-      'aria-controls': `simple-tabpanel-${index}`,
-    };
-  }
+  const a11yProps = index => ({
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
+  });
 
   const handleChange = (event, newValue) => {
     setActiveTab(newValue);
   };
-
-  const [activeTab, setActiveTab] = React.useState(0);
-  const [age, setAge] = React.useState('');
 
   const SearchButton = () => (
     <IconButton>
@@ -219,6 +216,6 @@ function App(props) {
       </Drawer>
     </div>
   );
-}
+};
 
 export default App;
