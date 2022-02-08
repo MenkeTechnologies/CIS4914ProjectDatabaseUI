@@ -4,17 +4,9 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-// const useStyles = makeStyles((theme) => ({
-//     appBar: {
-//       position: 'relative',
-//       zIndex: theme.zIndex.drawer + 1
-//     }
-//   })
-// );
-
 ReactDOM.render(
   <React.StrictMode>
-        <App />
+    <App/>
   </React.StrictMode>,
   document.getElementById('root')
 );

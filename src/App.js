@@ -26,14 +26,13 @@ import { LEFT, OFFERING, POST_TYPE, TITLE } from "./Consts";
 import { posts } from "./MockData";
 import ProjectPost from "./ProjectPost";
 import SeekingPost from "./SeekingPost";
-import { makeStyles } from "@mui/material";
-
 
 
 function App(props) {
   const [state, setState] = React.useState({
     [LEFT]: true,
   });
+
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -133,7 +132,7 @@ function App(props) {
 
   return (
     <div className="App">
-      <AppBar position="static">
+      <AppBar position="fixed">
         <Toolbar variant="dense">
           <IconButton edge="start" color="inherit" aria-label="menu" sx={{mr: 2}} onClick={toggleDrawer(LEFT, true)}>
             <MenuIcon/>
@@ -179,7 +178,7 @@ function App(props) {
           />
         </Toolbar>
       </AppBar>
-      <Box sx={{width: '100%'}}>
+      <Box sx={{width: '100%', marginTop: 7}}>
         <Box sx={{borderBottom: 1, borderColor: 'divider'}}>
         </Box>
         <TabPanel value={value} index={0}>
