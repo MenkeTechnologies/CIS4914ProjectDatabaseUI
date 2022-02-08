@@ -22,11 +22,10 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { Add, ArrowForward, Close, Dashboard, Mail } from "@mui/icons-material";
 import Grid from '@mui/material/Grid';
-import { LEFT, OFFERING, POST_TYPE, TITLE } from "./Consts";
+import { FACULTY, LEFT, OFFERING, POST_TYPE, STUDENT, TITLE } from "./Consts";
 import { posts } from "./MockData";
 import ProjectPost from "./ProjectPost";
 import SeekingPost from "./SeekingPost";
-
 
 function App(props) {
   const [state, setState] = React.useState({
@@ -118,10 +117,10 @@ function App(props) {
   }
 
   const handleChange = (event, newValue) => {
-    setValue(newValue);
+    setActiveTab(newValue);
   };
 
-  const [value, setValue] = React.useState(0);
+  const [activeTab, setActiveTab] = React.useState(0);
   const [age, setAge] = React.useState('');
 
   const SearchButton = () => (
@@ -142,7 +141,7 @@ function App(props) {
               {TITLE}
             </Typography>
           </Typography>
-          <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" textColor={"#ccc"}
+          <Tabs value={activeTab} onChange={handleChange} aria-label="basic tabs example" textColor={"#ccc"}
                 TabIndicatorProps={{
                   style: {
                     backgroundColor: "#ccc"
@@ -181,7 +180,7 @@ function App(props) {
       <Box sx={{width: '100%', marginTop: 7}}>
         <Box sx={{borderBottom: 1, borderColor: 'divider'}}>
         </Box>
-        <TabPanel value={value} index={0}>
+        <TabPanel value={activeTab} index={0}>
           <Box sx={{flexGrow: 1}}>
             <Grid container spacing={2}>
               {posts.map(post =>
@@ -191,11 +190,23 @@ function App(props) {
           </Box>
 
         </TabPanel>
-        <TabPanel value={value} index={1}>
-          Student
+        <TabPanel value={activeTab} index={1}>
+          <Box sx={{flexGrow: 1}}>
+            <Grid container spacing={2}>
+              {posts.filter(p => p.userType === STUDENT).map(post =>
+                post[POST_TYPE] === OFFERING ? <ProjectPost post={post}/> : <SeekingPost post={post}/>
+              )}
+            </Grid>
+          </Box>
         </TabPanel>
-        <TabPanel value={value} index={2}>
-          Faculty
+        <TabPanel value={activeTab} index={2}>
+          <Box sx={{flexGrow: 1}}>
+            <Grid container spacing={2}>
+              {posts.filter(p => p.userType === FACULTY).map(post =>
+                post[POST_TYPE] === OFFERING ? <ProjectPost post={post}/> : <SeekingPost post={post}/>
+              )}
+            </Grid>
+          </Box>
         </TabPanel>
       </Box>
 
