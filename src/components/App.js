@@ -22,10 +22,11 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { Add, ArrowForward, Close, Dashboard, Mail } from "@mui/icons-material";
 import Grid from '@mui/material/Grid';
-import { FACULTY, LEFT, OFFERING, POST_TYPE, STUDENT, TITLE } from "../util/Consts";
+import { FACULTY, LEFT, OFFERING, POST_TYPE, STUDENT, TITLE, WHITE } from "../util/Consts";
 import { posts } from "../mock/MockData";
 import ProjectPost from "./ProjectPost";
 import SeekingPost from "./SeekingPost";
+
 
 const App = props => {
   const [state, setState] = React.useState({
@@ -69,10 +70,7 @@ const App = props => {
       role="presentation"
     >
       <List>
-        <ListItem button key={'Close'} onClick={toggleDrawer(anchor, false)}>
-          <ListItemIcon> <Close/> </ListItemIcon>
-          <ListItemText primary={'Close'}/>
-        </ListItem>
+
         <ListItem button key={'My Posts'}>
 
           <ListItemIcon> <Dashboard/> </ListItemIcon>
@@ -122,15 +120,15 @@ const App = props => {
 
   const SearchButton = () => (
     <IconButton>
-      <SearchIcon/>
+      <SearchIcon sx={{ color: WHITE}}/>
     </IconButton>
   )
 
   return (
     <div className="App">
-      <AppBar position="fixed">
+      <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
         <Toolbar variant="dense">
-          <IconButton edge="start" color="inherit" aria-label="menu" sx={{mr: 2}} onClick={toggleDrawer(LEFT, true)}>
+          <IconButton edge="start" color="inherit" aria-label="menu" sx={{mr: 2}} onClick={toggleDrawer(LEFT, !state[LEFT])}>
             <MenuIcon/>
           </IconButton>
           <Typography variant="h6" color="inherit" component="div">
@@ -152,25 +150,24 @@ const App = props => {
           </Tabs>
 
           <FormControl sx={{m: 1, minWidth: 120}}>
-            <InputLabel id="demo-simple-select-helper-label">Sort By</InputLabel>
+            <InputLabel sx={{color: WHITE }} id="demo-simple-select-helper-label" >Sort By</InputLabel>
             <Select
               labelId="demo-simple-select-helper-label"
               id="demo-simple-select-helper"
               value={age}
               label="Age"
-              onChange={handleChange}
+              // onChange={handleChange}
             >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
+
+              <MenuItem value={"Date_Posted"}>Date Posted</MenuItem>
+              <MenuItem value={"Availability"}>Availability</MenuItem>
+              <MenuItem value={"Advisor_ready"}>Advisor Ready</MenuItem>
+              <MenuItem value={"Project_Looking"}>Project vs. Looking</MenuItem>
             </Select>
           </FormControl>
 
-          <TextField id="outlined-basic" label="Search text" variant="outlined"
-                     InputProps={{endAdornment: <SearchButton/>}}
+          <TextField sx={{label: { color: WHITE}, input: {color:WHITE}}} id="outlined-basic" label="Search text" variant="outlined"
+                     InputProps={{ endAdornment: <SearchButton />}}
           />
         </Toolbar>
       </AppBar>
@@ -207,11 +204,12 @@ const App = props => {
         </TabPanel>
       </Box>
 
-      <Drawer
+      <Drawer variant="temporary"
         anchor={LEFT}
         open={state[LEFT]}
         onClose={toggleDrawer(LEFT, false)}
       >
+        <Toolbar />
         {list(LEFT)}
       </Drawer>
     </div>
