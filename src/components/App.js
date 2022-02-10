@@ -20,7 +20,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { Add, ArrowForward, Close, Dashboard, Mail } from "@mui/icons-material";
+import { Add, ArrowForward, Dashboard, Mail } from "@mui/icons-material";
 import Grid from '@mui/material/Grid';
 import { FACULTY, LEFT, OFFERING, POST_TYPE, STUDENT, TITLE, WHITE } from "../util/Consts";
 import { posts } from "../mock/MockData";
@@ -120,15 +120,16 @@ const App = props => {
 
   const SearchButton = () => (
     <IconButton>
-      <SearchIcon sx={{ color: WHITE}}/>
+      <SearchIcon sx={{color: WHITE}}/>
     </IconButton>
   )
 
   return (
     <div className="App">
-      <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+      <AppBar position="fixed" sx={{zIndex: (theme) => theme.zIndex.drawer + 1}}>
         <Toolbar variant="dense">
-          <IconButton edge="start" color="inherit" aria-label="menu" sx={{mr: 2}} onClick={toggleDrawer(LEFT, !state[LEFT])}>
+          <IconButton edge="start" color="inherit" aria-label="menu" sx={{mr: 2}}
+                      onClick={toggleDrawer(LEFT, !state[LEFT])}>
             <MenuIcon/>
           </IconButton>
           <Typography variant="h6" color="inherit" component="div">
@@ -150,7 +151,7 @@ const App = props => {
           </Tabs>
 
           <FormControl sx={{m: 1, minWidth: 120}}>
-            <InputLabel sx={{color: WHITE }} id="demo-simple-select-helper-label" >Sort By</InputLabel>
+            <InputLabel sx={{color: WHITE}} id="demo-simple-select-helper-label">Sort By</InputLabel>
             <Select
               labelId="demo-simple-select-helper-label"
               id="demo-simple-select-helper"
@@ -166,8 +167,9 @@ const App = props => {
             </Select>
           </FormControl>
 
-          <TextField sx={{label: { color: WHITE}, input: {color:WHITE}}} id="outlined-basic" label="Search text" variant="outlined"
-                     InputProps={{ endAdornment: <SearchButton />}}
+          <TextField sx={{label: {color: WHITE}, input: {color: WHITE}}} id="outlined-basic" label="Search text"
+                     variant="outlined"
+                     InputProps={{endAdornment: <SearchButton/>}}
           />
         </Toolbar>
       </AppBar>
@@ -205,11 +207,11 @@ const App = props => {
       </Box>
 
       <Drawer variant="temporary"
-        anchor={LEFT}
-        open={state[LEFT]}
-        onClose={toggleDrawer(LEFT, false)}
+              anchor={LEFT}
+              open={state[LEFT]}
+              onClose={toggleDrawer(LEFT, false)}
       >
-        <Toolbar />
+        <Toolbar/>
         {list(LEFT)}
       </Drawer>
     </div>

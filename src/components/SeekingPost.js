@@ -11,8 +11,7 @@ const Item = styled(Paper)(({theme}) => ({
   color: theme.palette.text.secondary,
 }));
 
-const SeekingPost = props => {
-  const {post: {title, details, name, contact}} = props;
+const SeekingPost = ({post: {title, details, name, contact}}) => {
   return (<Grid item xs={6}>
       <Item>
         <Item>
