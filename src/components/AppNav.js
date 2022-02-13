@@ -1,5 +1,15 @@
 import React from 'react';
-import { GRAY, LEFT, TITLE, WHITE } from "../util/Consts";
+import {
+  ACTIVE_TAB,
+  ADVISOR_READY,
+  AVAILABILITY,
+  DATE_POSTED,
+  GRAY,
+  PROJECT_LOOKING,
+  SORT_BY,
+  TITLE,
+  WHITE
+} from "../util/Consts";
 import TextField from "@mui/material/TextField";
 import Toolbar from "@mui/material/Toolbar";
 import SearchButton from "./SearchButton";
@@ -15,22 +25,18 @@ import MenuItem from "@mui/material/MenuItem";
 import { AppBar } from "@mui/material";
 
 
-const AppNav = ({state, activeTab, setActiveTab, toggleDrawer}) => {
-
-  const [sortBy, setSortBy] = React.useState('');
+const AppNav = ({state: {[ACTIVE_TAB]: activeTab, [SORT_BY]: sortBy}, setTab, setSortBy, toggleDrawer}) => {
 
   const a11yProps = index => ({
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
+    id: `simple-tab-${index}`, 'aria-controls': `simple-tabpanel-${index}`,
   });
 
-  const handleTabChange = (event, newValue) => setActiveTab(newValue);
   const handleSortByChange = (event) => setSortBy(event.target.value);
 
   return <AppBar position="fixed" sx={{zIndex: (theme) => theme.zIndex.drawer + 1}}>
     <Toolbar variant="dense">
       <IconButton edge="start" color="inherit" aria-label="menu" sx={{mr: 2}}
-                  onClick={toggleDrawer(LEFT, !state[LEFT])}>
+                  onClick={toggleDrawer}>
         <MenuIcon/>
       </IconButton>
       <Typography variant="h6" color="inherit" component="div">
@@ -38,7 +44,7 @@ const AppNav = ({state, activeTab, setActiveTab, toggleDrawer}) => {
           {TITLE}
         </Typography>
       </Typography>
-      <Tabs value={activeTab} onChange={handleTabChange} aria-label="basic tabs example" textColor={GRAY}
+      <Tabs value={activeTab} onChange={setTab} aria-label="basic tabs example" textColor={GRAY}
             TabIndicatorProps={{
               style: {
                 backgroundColor: GRAY
@@ -65,10 +71,10 @@ const AppNav = ({state, activeTab, setActiveTab, toggleDrawer}) => {
                 onChange={handleSortByChange}
         >
 
-          <MenuItem value={"Date_Posted"}>Date Posted</MenuItem>
-          <MenuItem value={"Availability"}>Availability</MenuItem>
-          <MenuItem value={"Advisor_ready"}>Advisor Ready</MenuItem>
-          <MenuItem value={"Project_Looking"}>Project vs. Looking</MenuItem>
+          <MenuItem value={DATE_POSTED}>Date Posted</MenuItem>
+          <MenuItem value={AVAILABILITY}>Availability</MenuItem>
+          <MenuItem value={ADVISOR_READY}>Advisor Ready</MenuItem>
+          <MenuItem value={PROJECT_LOOKING}>Project vs. Looking</MenuItem>
         </Select>
       </FormControl>
 

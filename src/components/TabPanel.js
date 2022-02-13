@@ -11,9 +11,9 @@ const TabPanel = ({children, value, index, ...other}) =>
     {...other}
   >
     {value === index && <Box sx={{p: 3}}>
-        <Typography>{children}</Typography>
-      </Box>
-   }
+      <Typography>{children}</Typography>
+    </Box>
+    }
   </div>
 
 
