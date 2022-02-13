@@ -17,8 +17,7 @@ import { AppBar } from "@mui/material";
 
 const AppNav = ({state, activeTab, setActiveTab, toggleDrawer}) => {
 
-  const [age, setAge] = React.useState('');
-
+  const [sortBy, setSortBy] = React.useState('');
 
   const a11yProps = index => ({
     id: `simple-tab-${index}`,
@@ -27,6 +26,9 @@ const AppNav = ({state, activeTab, setActiveTab, toggleDrawer}) => {
 
   const handleTabChange = (event, newValue) => {
     setActiveTab(newValue);
+  };
+  const handleSortByChange = (event) => {
+    setSortBy(event.target.value)
   };
 
   return (
@@ -52,7 +54,7 @@ const AppNav = ({state, activeTab, setActiveTab, toggleDrawer}) => {
           <Tab label="All" {...a11yProps(0)} />
           <Tab label="Student" {...a11yProps(1)} />
           <Tab label="Faculty" {...a11yProps(2)} />
-          <Tab label="MyPosts" {...a11yProps(3)} />
+          <Tab label="My Posts" {...a11yProps(3)} />
           <Tab label="Project Post" {...a11yProps(4)} />
           <Tab label="Seeking Post" {...a11yProps(5)} />
           <Tab label="Messages" {...a11yProps(6)} />
@@ -60,12 +62,12 @@ const AppNav = ({state, activeTab, setActiveTab, toggleDrawer}) => {
 
         <FormControl sx={{m: 1, minWidth: 120}}>
           <InputLabel sx={{color: WHITE}} id="demo-simple-select-helper-label">Sort By</InputLabel>
-          <Select
-            labelId="demo-simple-select-helper-label"
-            id="demo-simple-select-helper"
-            value={age}
-            label="Age"
-            // onChange={handleChange}
+          <Select sx={{color: WHITE}}
+                  labelId="demo-simple-select-helper-label"
+                  id="demo-simple-select-helper"
+                  value={sortBy}
+                  label="SortBy"
+                  onChange={handleSortByChange}
           >
 
             <MenuItem value={"Date_Posted"}>Date Posted</MenuItem>
