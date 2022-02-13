@@ -9,6 +9,9 @@ export const POST_TYPE = "postType"
 export const STUDENT = 'Student';
 export const FACULTY = 'Faculty';
 export const WHITE = "#fff";
+export const KEYDOWN = 'KEYDOWN';
+export const TAB = 'Tab';
+export const SHIFT = 'Shift';
 
 export const Item = styled(Paper)(({theme}) => ({
   ...theme.typography.body2,

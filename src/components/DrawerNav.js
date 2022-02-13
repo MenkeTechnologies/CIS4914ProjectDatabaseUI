@@ -21,7 +21,7 @@ const DrawerNav = ({state, setState, toggleDrawer, setActiveTab}) => {
       setActiveTab(newValue)
     }
 
-  const list = (anchor) => (
+  const navItems = (anchor) => (
     <Box
       sx={{width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250}}
       role="presentation"
@@ -88,7 +88,7 @@ const DrawerNav = ({state, setState, toggleDrawer, setActiveTab}) => {
             open={state[LEFT]}
             onClose={toggleDrawer(LEFT, false)}>
       <Toolbar/>
-      {list(LEFT)}
+      {navItems(LEFT)}
     </Drawer>
   );
 };

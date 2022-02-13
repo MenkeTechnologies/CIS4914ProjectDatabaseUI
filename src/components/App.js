@@ -1,10 +1,9 @@
 import '../style/App.css';
 import * as React from 'react';
-import { LEFT } from "../util/Consts";
+import { KEYDOWN, LEFT, SHIFT, TAB } from "../util/Consts";
 import TabContent from "./TabContent";
 import DrawerNav from "./DrawerNav";
 import AppNav from "./AppNav";
-
 
 const App = () => {
   const [state, setState] = React.useState({
@@ -13,7 +12,7 @@ const App = () => {
   const [activeTab, setActiveTab] = React.useState(0);
 
   const toggleDrawer = (anchor, open) => (event) => {
-    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+    if (event.type === KEYDOWN && (event.key === TAB || event.key === SHIFT)) {
       return;
     }
     setState({...state, [anchor]: open});
