@@ -11,12 +11,8 @@ const App = () => {
   });
   const [activeTab, setActiveTab] = React.useState(0);
 
-  const toggleDrawer = (anchor, open) => (event) => {
-    if (event.type === KEYDOWN && (event.key === TAB || event.key === SHIFT)) {
-      return;
-    }
-    setState({...state, [anchor]: open});
-  };
+  const toggleDrawer = (anchor, open) => (event) =>
+    (event.type === KEYDOWN && (event.key === TAB || event.key === SHIFT)) || setState({...state, [anchor]: open});
 
   return <div className="App">
 

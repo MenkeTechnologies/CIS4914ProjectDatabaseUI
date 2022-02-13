@@ -1,5 +1,5 @@
 import React from 'react';
-import { LEFT, TITLE, WHITE } from "../util/Consts";
+import { GRAY, LEFT, TITLE, WHITE } from "../util/Consts";
 import TextField from "@mui/material/TextField";
 import Toolbar from "@mui/material/Toolbar";
 import SearchButton from "./SearchButton";
@@ -24,12 +24,8 @@ const AppNav = ({state, activeTab, setActiveTab, toggleDrawer}) => {
     'aria-controls': `simple-tabpanel-${index}`,
   });
 
-  const handleTabChange = (event, newValue) => {
-    setActiveTab(newValue);
-  };
-  const handleSortByChange = (event) => {
-    setSortBy(event.target.value)
-  };
+  const handleTabChange = (event, newValue) => setActiveTab(newValue);
+  const handleSortByChange = (event) => setSortBy(event.target.value);
 
   return <AppBar position="fixed" sx={{zIndex: (theme) => theme.zIndex.drawer + 1}}>
     <Toolbar variant="dense">
@@ -42,10 +38,10 @@ const AppNav = ({state, activeTab, setActiveTab, toggleDrawer}) => {
           {TITLE}
         </Typography>
       </Typography>
-      <Tabs value={activeTab} onChange={handleTabChange} aria-label="basic tabs example" textColor={"#ccc"}
+      <Tabs value={activeTab} onChange={handleTabChange} aria-label="basic tabs example" textColor={GRAY}
             TabIndicatorProps={{
               style: {
-                backgroundColor: "#ccc"
+                backgroundColor: GRAY
               }
             }}
 

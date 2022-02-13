@@ -70,14 +70,14 @@ const DrawerNav = ({state, setState, toggleDrawer, setActiveTab}) => {
       <List>
         <TextField id="outlined-basic" label="Search Name / UFID" variant="outlined"
                    InputProps={{endAdornment: <SearchButton/>}}/>
-        {['Student 1', 'Student 2', 'Student 3'].map((text, index) => (
+        {['Student 1', 'Student 2', 'Student 3'].map((text, index) =>
           <ListItem button key={text}>
             <ListItemText primary={text}/>
             <ListItemIcon>
               <ArrowForward/>
             </ListItemIcon>
           </ListItem>
-        ))}
+        )}
       </List>
     </Box>
   );

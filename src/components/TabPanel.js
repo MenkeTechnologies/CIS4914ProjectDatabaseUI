@@ -10,11 +10,10 @@ const TabPanel = ({children, value, index, ...other}) =>
     aria-labelledby={`simple-tab-${index}`}
     {...other}
   >
-    {value === index && (
-      <Box sx={{p: 3}}>
+    {value === index && <Box sx={{p: 3}}>
         <Typography>{children}</Typography>
       </Box>
-    )}
+   }
   </div>
 
 
