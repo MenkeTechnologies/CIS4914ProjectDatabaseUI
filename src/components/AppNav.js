@@ -31,59 +31,57 @@ const AppNav = ({state, activeTab, setActiveTab, toggleDrawer}) => {
     setSortBy(event.target.value)
   };
 
-  return (
-    <AppBar position="fixed" sx={{zIndex: (theme) => theme.zIndex.drawer + 1}}>
-      <Toolbar variant="dense">
-        <IconButton edge="start" color="inherit" aria-label="menu" sx={{mr: 2}}
-                    onClick={toggleDrawer(LEFT, !state[LEFT])}>
-          <MenuIcon/>
-        </IconButton>
+  return <AppBar position="fixed" sx={{zIndex: (theme) => theme.zIndex.drawer + 1}}>
+    <Toolbar variant="dense">
+      <IconButton edge="start" color="inherit" aria-label="menu" sx={{mr: 2}}
+                  onClick={toggleDrawer(LEFT, !state[LEFT])}>
+        <MenuIcon/>
+      </IconButton>
+      <Typography variant="h6" color="inherit" component="div">
         <Typography variant="h6" color="inherit" component="div">
-          <Typography variant="h6" color="inherit" component="div">
-            {TITLE}
-          </Typography>
+          {TITLE}
         </Typography>
-        <Tabs value={activeTab} onChange={handleTabChange} aria-label="basic tabs example" textColor={"#ccc"}
-              TabIndicatorProps={{
-                style: {
-                  backgroundColor: "#ccc"
-                }
-              }}
+      </Typography>
+      <Tabs value={activeTab} onChange={handleTabChange} aria-label="basic tabs example" textColor={"#ccc"}
+            TabIndicatorProps={{
+              style: {
+                backgroundColor: "#ccc"
+              }
+            }}
 
+      >
+        <Tab label="All" {...a11yProps(0)} />
+        <Tab label="Student" {...a11yProps(1)} />
+        <Tab label="Faculty" {...a11yProps(2)} />
+        <Tab label="My Posts" {...a11yProps(3)} />
+        <Tab label="Project Post" {...a11yProps(4)} />
+        <Tab label="Seeking Post" {...a11yProps(5)} />
+        <Tab label="Messages" {...a11yProps(6)} />
+      </Tabs>
+
+      <FormControl sx={{m: 1, minWidth: 120}}>
+        <InputLabel sx={{color: WHITE}} id="demo-simple-select-helper-label">Sort By</InputLabel>
+        <Select sx={{color: WHITE}}
+                labelId="demo-simple-select-helper-label"
+                id="demo-simple-select-helper"
+                value={sortBy}
+                label="SortBy"
+                onChange={handleSortByChange}
         >
-          <Tab label="All" {...a11yProps(0)} />
-          <Tab label="Student" {...a11yProps(1)} />
-          <Tab label="Faculty" {...a11yProps(2)} />
-          <Tab label="My Posts" {...a11yProps(3)} />
-          <Tab label="Project Post" {...a11yProps(4)} />
-          <Tab label="Seeking Post" {...a11yProps(5)} />
-          <Tab label="Messages" {...a11yProps(6)} />
-        </Tabs>
 
-        <FormControl sx={{m: 1, minWidth: 120}}>
-          <InputLabel sx={{color: WHITE}} id="demo-simple-select-helper-label">Sort By</InputLabel>
-          <Select sx={{color: WHITE}}
-                  labelId="demo-simple-select-helper-label"
-                  id="demo-simple-select-helper"
-                  value={sortBy}
-                  label="SortBy"
-                  onChange={handleSortByChange}
-          >
+          <MenuItem value={"Date_Posted"}>Date Posted</MenuItem>
+          <MenuItem value={"Availability"}>Availability</MenuItem>
+          <MenuItem value={"Advisor_ready"}>Advisor Ready</MenuItem>
+          <MenuItem value={"Project_Looking"}>Project vs. Looking</MenuItem>
+        </Select>
+      </FormControl>
 
-            <MenuItem value={"Date_Posted"}>Date Posted</MenuItem>
-            <MenuItem value={"Availability"}>Availability</MenuItem>
-            <MenuItem value={"Advisor_ready"}>Advisor Ready</MenuItem>
-            <MenuItem value={"Project_Looking"}>Project vs. Looking</MenuItem>
-          </Select>
-        </FormControl>
-
-        <TextField sx={{label: {color: WHITE}, input: {color: WHITE}}} id="outlined-basic" label="Search text"
-                   variant="outlined"
-                   InputProps={{endAdornment: <SearchButton/>}}
-        />
-      </Toolbar>
-    </AppBar>
-  );
+      <TextField sx={{label: {color: WHITE}, input: {color: WHITE}}} id="outlined-basic" label="Search text"
+                 variant="outlined"
+                 InputProps={{endAdornment: <SearchButton/>}}
+      />
+    </Toolbar>
+  </AppBar>
 };
 
 export default AppNav;

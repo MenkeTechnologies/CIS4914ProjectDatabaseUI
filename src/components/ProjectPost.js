@@ -3,8 +3,8 @@ import Grid from "@mui/material/Grid";
 import { Button, Chip, Stack } from "@mui/material";
 import { Item } from "../util/Consts";
 
-const ProjectPost = ({post: {title, userType, date, details, skills, software, members, advisor}}) => {
-  return (<Grid item xs={6}>
+const ProjectPost = ({post: {title, userType, date, details, skills, software, members, advisor}}) =>
+  <Grid item xs={6}>
     <Item>
       <Item>
 
@@ -59,7 +59,6 @@ const ProjectPost = ({post: {title, userType, date, details, skills, software, m
       </Item>
 
     </Item>
-  </Grid>);
-};
+  </Grid>
 
 export default ProjectPost;

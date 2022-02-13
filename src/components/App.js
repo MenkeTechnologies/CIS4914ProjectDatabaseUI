@@ -18,7 +18,7 @@ const App = () => {
     setState({...state, [anchor]: open});
   };
 
-  return (<div className="App">
+  return <div className="App">
 
     <AppNav activeTab={activeTab} setActiveTab={setActiveTab} state={state} toggleDrawer={toggleDrawer}/>
 
@@ -26,7 +26,7 @@ const App = () => {
 
     <DrawerNav state={state} setState={setState} toggleDrawer={toggleDrawer} setActiveTab={setActiveTab}/>
 
-  </div>);
+  </div>;
 };
 
 export default App;

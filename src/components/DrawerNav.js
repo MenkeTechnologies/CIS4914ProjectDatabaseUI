@@ -82,15 +82,13 @@ const DrawerNav = ({state, setState, toggleDrawer, setActiveTab}) => {
     </Box>
   );
 
-  return (
-    <Drawer variant="temporary"
-            anchor={LEFT}
-            open={state[LEFT]}
-            onClose={toggleDrawer(LEFT, false)}>
-      <Toolbar/>
-      {navItems(LEFT)}
-    </Drawer>
-  );
+  return <Drawer variant="temporary"
+                 anchor={LEFT}
+                 open={state[LEFT]}
+                 onClose={toggleDrawer(LEFT, false)}>
+    <Toolbar/>
+    {navItems(LEFT)}
+  </Drawer>
 };
 
 export default DrawerNav;
