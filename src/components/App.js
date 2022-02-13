@@ -25,7 +25,7 @@ const App = () => {
 
     <TabContent activeTab={activeTab}/>
 
-    <DrawerNav state={state} setState={setState} toggleDrawer={toggleDrawer}/>
+    <DrawerNav state={state} setState={setState} toggleDrawer={toggleDrawer} setActiveTab={setActiveTab}/>
 
   </div>);
 };

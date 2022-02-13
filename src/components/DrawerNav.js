@@ -4,7 +4,7 @@ import { LEFT } from "../util/Consts";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import { Add, ArrowForward, Dashboard, Mail } from "@mui/icons-material";
+import { Add, ArrowForward, Dashboard, FilterAlt, Mail, Person } from "@mui/icons-material";
 import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
 import TextField from "@mui/material/TextField";
@@ -13,7 +13,13 @@ import Toolbar from "@mui/material/Toolbar";
 import SearchButton from "./SearchButton";
 
 
-const DrawerNav = ({state, setState, toggleDrawer}) => {
+const DrawerNav = ({state, setState, toggleDrawer, setActiveTab}) => {
+
+  const handleNavChange = (newValue) =>
+    () => {
+      setState([LEFT], !state[LEFT])
+      setActiveTab(newValue)
+    }
 
   const list = (anchor) => (
     <Box
@@ -22,23 +28,39 @@ const DrawerNav = ({state, setState, toggleDrawer}) => {
     >
       <List>
 
-        <ListItem button key={'My Posts'}>
+        <ListItem button key={'All'} onClick={handleNavChange(0)}>
+
+          <ListItemIcon> <Person/> </ListItemIcon>
+          <ListItemText primary={'All'}/>
+        </ListItem>
+        <ListItem button key={'Student'} onClick={handleNavChange(1)}>
+
+          <ListItemIcon> <FilterAlt/> </ListItemIcon>
+          <ListItemText primary={'Student'}/>
+        </ListItem>
+        <ListItem button key={'Faculty'} onClick={handleNavChange(2)}>
+
+          <ListItemIcon> <FilterAlt/> </ListItemIcon>
+          <ListItemText primary={'Faculty'}/>
+        </ListItem>
+
+        <ListItem button key={'My Posts'} onClick={handleNavChange(3)}>
 
           <ListItemIcon> <Dashboard/> </ListItemIcon>
           <ListItemText primary={'My Posts'}/>
         </ListItem>
 
-        <ListItem button key={'Project Post'}>
+        <ListItem button key={'Project Post'} onClick={handleNavChange(4)}>
           <ListItemIcon> <Add/> </ListItemIcon>
           <ListItemText primary={'Project Post'}/>
         </ListItem>
 
-        <ListItem button key={'Looking for Group Post'}>
+        <ListItem button key={'Looking for Group Post'} onClick={handleNavChange(5)}>
           <ListItemIcon> <Add/> </ListItemIcon>
           <ListItemText primary={'Looking for Group Post'}/>
         </ListItem>
 
-        <ListItem button key={'Messages'}>
+        <ListItem button key={'Messages'} onClick={handleNavChange(6)}>
           <ListItemIcon> <Mail/> </ListItemIcon>
           <ListItemText primary={'Messages'}/>
         </ListItem>

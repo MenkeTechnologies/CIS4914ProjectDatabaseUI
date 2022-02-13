@@ -52,6 +52,10 @@ const AppNav = ({state, activeTab, setActiveTab, toggleDrawer}) => {
           <Tab label="All" {...a11yProps(0)} />
           <Tab label="Student" {...a11yProps(1)} />
           <Tab label="Faculty" {...a11yProps(2)} />
+          <Tab label="MyPosts" {...a11yProps(3)} />
+          <Tab label="Project Post" {...a11yProps(4)} />
+          <Tab label="Seeking Post" {...a11yProps(5)} />
+          <Tab label="Messages" {...a11yProps(6)} />
         </Tabs>
 
         <FormControl sx={{m: 1, minWidth: 120}}>
