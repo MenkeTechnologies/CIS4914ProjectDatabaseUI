@@ -3,18 +3,19 @@ import * as React from 'react';
 import TabContent from "./TabContent";
 import DrawerNav from "./DrawerNav";
 import AppNav from "./AppNav";
-import { createReducers } from "../state/Reducers";
 import initialState from "../state/InitialState";
+import GlobalState from "../state/GlobalState";
+import { createReducers } from "../state/Reducers";
 
 const App = () => {
   const [state, setState] = React.useState(initialState);
-  const {setTab, hideDrawerAndSetTab, toggleDrawer, setSortBy} = createReducers(state, setState);
+  const reducers = createReducers(state, setState);
 
-  return <div className="App">
-    <AppNav state={state} setTab={setTab} toggleDrawer={toggleDrawer} setSortBy={setSortBy}/>
-    <TabContent state={state}/>
-    <DrawerNav state={state} hideDrawerAndSetTab={hideDrawerAndSetTab} toggleDrawer={toggleDrawer}/>
-  </div>;
+  return <GlobalState.Provider value={{state, setState, ...reducers}}>
+    <AppNav/>
+    <TabContent/>
+    <DrawerNav/>
+  </GlobalState.Provider>
 };
 
 export default App;

@@ -1,6 +1,6 @@
 import React from 'react';
 import Box from "@mui/material/Box";
-import { LEFT } from "../util/Consts";
+import { LEFT, STATE } from "../util/Consts";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -11,9 +11,12 @@ import TextField from "@mui/material/TextField";
 import Drawer from "@mui/material/Drawer";
 import Toolbar from "@mui/material/Toolbar";
 import SearchButton from "./SearchButton";
+import GlobalState from "../state/GlobalState";
 
 
-const DrawerNav = ({state: {[LEFT]: open}, hideDrawerAndSetTab, toggleDrawer}) => {
+const DrawerNav = () => {
+
+  const {[STATE]: {[LEFT]: open}, toggleDrawer, hideDrawerAndSetTab} = React.useContext(GlobalState);
 
   const handleNavChange = (tabIdx) => (e) => hideDrawerAndSetTab(e, tabIdx)
 

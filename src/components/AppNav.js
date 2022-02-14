@@ -7,6 +7,7 @@ import {
   GRAY,
   PROJECT_LOOKING,
   SORT_BY,
+  STATE,
   TITLE,
   WHITE
 } from "../util/Consts";
@@ -23,9 +24,14 @@ import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { AppBar } from "@mui/material";
+import GlobalState from "../state/GlobalState";
 
 
-const AppNav = ({state: {[ACTIVE_TAB]: activeTab, [SORT_BY]: sortBy}, setTab, setSortBy, toggleDrawer}) => {
+const AppNav = () => {
+
+  const {
+    [STATE]: {[ACTIVE_TAB]: activeTab, [SORT_BY]: sortBy}, toggleDrawer, setTab, setSortBy
+  } = React.useContext(GlobalState);
 
   const a11yProps = index => ({
     id: `simple-tab-${index}`, 'aria-controls': `simple-tabpanel-${index}`,

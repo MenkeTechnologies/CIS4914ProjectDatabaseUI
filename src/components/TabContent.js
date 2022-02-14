@@ -2,13 +2,17 @@ import React from 'react';
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import { posts } from "../mock/MockData";
-import { ACTIVE_TAB, FACULTY, OFFERING, POST_TYPE, STUDENT } from "../util/Consts";
+import { ACTIVE_TAB, FACULTY, OFFERING, POST_TYPE, STATE, STUDENT } from "../util/Consts";
 import ProjectPost from "./ProjectPost";
 import SeekingPost from "./SeekingPost";
 import TabPanel from "./TabPanel";
+import GlobalState from "../state/GlobalState";
 
-const TabContent = ({state: {[ACTIVE_TAB]: activeTab}}) =>
-  <Box sx={{width: '100%', marginTop: 7}}>
+const TabContent = () => {
+
+  const {[STATE]: {[ACTIVE_TAB]: activeTab}} = React.useContext(GlobalState);
+
+  return <Box sx={{width: '100%', marginTop: 7}}>
     <Box sx={{borderBottom: 1, borderColor: 'divider'}}>
     </Box>
     <TabPanel value={activeTab} index={0}>
@@ -40,5 +44,6 @@ const TabContent = ({state: {[ACTIVE_TAB]: activeTab}}) =>
       </Box>
     </TabPanel>
   </Box>
+}
 
 export default TabContent;

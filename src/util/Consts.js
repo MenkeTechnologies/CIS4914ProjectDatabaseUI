@@ -2,6 +2,7 @@ import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 
 export const LEFT = 'left';
+export const STATE = 'state';
 export const SORT_BY = 'sortBy';
 export const ACTIVE_TAB = 'activeTab';
 export const TITLE = 'Senior Project App';
