@@ -1,6 +1,7 @@
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 
+export const DRAWER_OPEN = 'drawerOpen';
 export const LEFT = 'left';
 export const STATE = 'state';
 export const SORT_BY = 'sortBy';

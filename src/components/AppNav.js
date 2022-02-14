@@ -30,7 +30,7 @@ import GlobalState from "../state/GlobalState";
 const AppNav = () => {
 
   const {
-    [STATE]: {[ACTIVE_TAB]: activeTab, [SORT_BY]: sortBy}, toggleDrawer, setTab, setSortBy
+    [STATE]: {[ACTIVE_TAB]: activeTab, [SORT_BY]: sortBy}, toggleDrawer, setTab, hideDrawerAndSetTab , setSortBy
   } = React.useContext(GlobalState);
 
   const a11yProps = index => ({
@@ -50,7 +50,7 @@ const AppNav = () => {
           {TITLE}
         </Typography>
       </Typography>
-      <Tabs value={activeTab} onChange={setTab} aria-label="basic tabs example" textColor={GRAY}
+      <Tabs value={activeTab} onChange={hideDrawerAndSetTab} aria-label="basic tabs example" textColor={GRAY}
             TabIndicatorProps={{
               style: {
                 backgroundColor: GRAY

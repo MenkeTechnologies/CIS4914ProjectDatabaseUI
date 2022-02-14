@@ -1,6 +1,6 @@
 import React from 'react';
 import Box from "@mui/material/Box";
-import { LEFT, STATE } from "../util/Consts";
+import { DRAWER_OPEN, LEFT, STATE } from "../util/Consts";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -16,7 +16,7 @@ import GlobalState from "../state/GlobalState";
 
 const DrawerNav = () => {
 
-  const {[STATE]: {[LEFT]: open}, toggleDrawer, hideDrawerAndSetTab} = React.useContext(GlobalState);
+  const {[STATE]: {[DRAWER_OPEN]: open}, toggleDrawer, hideDrawerAndSetTab} = React.useContext(GlobalState);
 
   const handleNavChange = (tabIdx) => (e) => hideDrawerAndSetTab(e, tabIdx)
 
@@ -82,7 +82,7 @@ const DrawerNav = () => {
                  open={open}
                  onClose={toggleDrawer}>
     <Toolbar/>
-    {navItems(LEFT)}
+    {navItems(DRAWER_OPEN)}
   </Drawer>
 };
 

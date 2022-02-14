@@ -1,7 +1,7 @@
-import { ACTIVE_TAB, LEFT, SORT_BY } from "../util/Consts";
+import { ACTIVE_TAB, DRAWER_OPEN, SORT_BY } from "../util/Consts";
 
 const initialState = {
-  [LEFT]: false,
+  [DRAWER_OPEN]: false,
   [ACTIVE_TAB]: 0,
   [SORT_BY]: ''
 };
