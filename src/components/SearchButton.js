@@ -3,8 +3,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import { WHITE } from "../util/Consts";
 import * as React from "react";
 
-const SearchButton = () =>
-  <IconButton>
+const SearchButton = ({click}) =>
+  <IconButton onClick={click}>
     <SearchIcon sx={{color: WHITE}}/>
   </IconButton>
 

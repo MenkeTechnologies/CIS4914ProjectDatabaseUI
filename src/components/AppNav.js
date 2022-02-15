@@ -2,12 +2,19 @@ import React from 'react';
 import {
   ACTIVE_TAB,
   ADVISOR_READY,
+  ALL_TAB,
   AVAILABILITY,
   DATE_POSTED,
+  FACULTY_TAB,
   GRAY,
+  MESSAGES_TAB,
+  POST_TAB,
   PROJECT_LOOKING,
+  PROJECT_TAB,
+  SEEKING_TAB,
   SORT_BY,
   STATE,
+  STUDENT_TAB,
   TITLE,
   WHITE
 } from "../util/Consts";
@@ -30,14 +37,17 @@ import GlobalState from "../state/GlobalState";
 const AppNav = () => {
 
   const {
-    [STATE]: {[ACTIVE_TAB]: activeTab, [SORT_BY]: sortBy}, toggleDrawer, setTab, hideDrawerAndSetTab , setSortBy
+    [STATE]: {[ACTIVE_TAB]: activeTab, [SORT_BY]: sortBy}, toggleDrawer, hideDrawer, hideDrawerAndSetTab, setSortBy
   } = React.useContext(GlobalState);
 
   const a11yProps = index => ({
     id: `simple-tab-${index}`, 'aria-controls': `simple-tabpanel-${index}`,
   });
 
-  const handleSortByChange = (event) => setSortBy(event.target.value);
+  const handleSortByChange = (e) => {
+    hideDrawer()
+    setSortBy(e.target.value);
+  };
 
   return <AppBar position="fixed" sx={{zIndex: (theme) => theme.zIndex.drawer + 1}}>
     <Toolbar variant="dense">
@@ -58,13 +68,13 @@ const AppNav = () => {
             }}
 
       >
-        <Tab label="All" {...a11yProps(0)} />
-        <Tab label="Student" {...a11yProps(1)} />
-        <Tab label="Faculty" {...a11yProps(2)} />
-        <Tab label="My Posts" {...a11yProps(3)} />
-        <Tab label="Project Post" {...a11yProps(4)} />
-        <Tab label="Seeking Post" {...a11yProps(5)} />
-        <Tab label="Messages" {...a11yProps(6)} />
+        <Tab label="All" {...a11yProps(ALL_TAB)} />
+        <Tab label="Student" {...a11yProps(STUDENT_TAB)} />
+        <Tab label="Faculty" {...a11yProps(FACULTY_TAB)} />
+        <Tab label="My Posts" {...a11yProps(POST_TAB)} />
+        <Tab label="Project Post" {...a11yProps(PROJECT_TAB)} />
+        <Tab label="Seeking Post" {...a11yProps(SEEKING_TAB)} />
+        <Tab label="Messages" {...a11yProps(MESSAGES_TAB)} />
       </Tabs>
 
       <FormControl sx={{m: 1, minWidth: 120}}>
@@ -86,7 +96,7 @@ const AppNav = () => {
 
       <TextField sx={{label: {color: WHITE}, input: {color: WHITE}}} id="outlined-basic" label="Search text"
                  variant="outlined"
-                 InputProps={{endAdornment: <SearchButton/>}}
+                 InputProps={{endAdornment: <SearchButton click={hideDrawer}/>}}
       />
     </Toolbar>
   </AppBar>

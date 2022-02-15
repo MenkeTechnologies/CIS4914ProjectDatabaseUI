@@ -1,10 +1,16 @@
 import React from 'react';
 import Grid from "@mui/material/Grid";
 import { Button, Stack } from "@mui/material";
-import { Item } from "../util/Consts";
+import { ACTIVE_TAB, Item, MESSAGES_TAB, POST_TAB, SORT_BY, STATE } from "../util/Consts";
+import GlobalState from "../state/GlobalState";
 
-const SeekingPost = ({post: {title, details, name, contact}}) =>
-  <Grid item xs={6}>
+const SeekingPost = ({post: {title, details, name, contact}}) => {
+
+  const {
+    [STATE]: {[ACTIVE_TAB]: activeTab, [SORT_BY]: sortBy}, hideDrawer, handleNavChange, hideDrawerAndSetTab,
+  } = React.useContext(GlobalState);
+
+  return <Grid item xs={6}>
     <Item>
       <Item>
         <h1>
@@ -40,11 +46,12 @@ const SeekingPost = ({post: {title, details, name, contact}}) =>
       </Item>
       <Item>
         <Stack direction="row" spacing={1}>
-          <Button variant={"contained"}>Add to My Group</Button>
-          <Button variant={"contained"}>Message</Button>
+          <Button variant={"contained"} onClick={handleNavChange(POST_TAB)}>Add to My Group</Button>
+          <Button variant={"contained"} onClick={handleNavChange(MESSAGES_TAB)}>Message</Button>
         </Stack>
       </Item>
     </Item>
-  </Grid>
+  </Grid>;
+}
 
 export default SeekingPost;

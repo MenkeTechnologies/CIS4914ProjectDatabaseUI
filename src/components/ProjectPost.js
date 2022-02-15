@@ -1,10 +1,16 @@
 import React from 'react';
 import Grid from "@mui/material/Grid";
 import { Button, Chip, Stack } from "@mui/material";
-import { Item } from "../util/Consts";
+import { ACTIVE_TAB, Item, MESSAGES_TAB, PROJECT_TAB, SORT_BY, STATE } from "../util/Consts";
+import GlobalState from "../state/GlobalState";
 
-const ProjectPost = ({post: {title, userType, date, details, skills, software, members, advisor}}) =>
-  <Grid item xs={6}>
+const ProjectPost = ({post: {title, userType, date, details, skills, software, members, advisor}}) => {
+
+  const {
+    [STATE]: {[ACTIVE_TAB]: activeTab, [SORT_BY]: sortBy}, hideDrawer, handleNavChange, hideDrawerAndSetTab,
+  } = React.useContext(GlobalState);
+
+  return <Grid item xs={6}>
     <Item>
       <Item>
 
@@ -53,12 +59,14 @@ const ProjectPost = ({post: {title, userType, date, details, skills, software, m
       <Item>
         <Stack direction="row" spacing={1}>
           <Chip label="6/6 Members"/>
-          <Button variant={"contained"}>Request to Join</Button>
-          <Button variant={"contained"}>Edit</Button>
+          <Button variant={"contained"} onClick={handleNavChange(MESSAGES_TAB)}>Request to Join</Button>
+          <Button variant={"contained"} onClick={handleNavChange(PROJECT_TAB)}>Edit</Button>
         </Stack>
       </Item>
 
     </Item>
   </Grid>
+}
+
 
 export default ProjectPost;

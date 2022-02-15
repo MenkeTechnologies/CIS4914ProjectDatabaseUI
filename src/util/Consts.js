@@ -21,6 +21,13 @@ export const DATE_POSTED = "Date_Posted";
 export const AVAILABILITY = "Availability";
 export const ADVISOR_READY = "Advisor_ready";
 export const PROJECT_LOOKING = "Project_Looking";
+export const ALL_TAB = 0;
+export const STUDENT_TAB = 1;
+export const FACULTY_TAB = 2;
+export const POST_TAB = 3;
+export const PROJECT_TAB = 4;
+export const SEEKING_TAB = 5;
+export const MESSAGES_TAB = 6;
 
 export const Item = styled(Paper)(({theme}) => ({
   ...theme.typography.body2,
