@@ -7,6 +7,8 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 
+import ProjectTopicPostForm from './Components/ProjectTopicPostForm';
+
 function App() {
   return (
     <div className="App">
@@ -20,10 +22,9 @@ function App() {
           </Typography>
         </Toolbar>
       </AppBar>
-      <header className="App-header">
 
-        <h1>CIS 4914 Project Database</h1>
-      </header>
+      <ProjectTopicPostForm />
+
     </div>
   );
 }
