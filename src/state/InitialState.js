@@ -10,7 +10,7 @@ import {
 } from "../util/Consts";
 
 const initialState = {
-  [LOGGED_IN]: true,
+  [LOGGED_IN]: false,
   [DRAWER_OPEN]: false,
   [ACTIVE_TAB]: 0,
   [SORT_BY]: '',

@@ -7,6 +7,7 @@ import initialState from "../state/InitialState";
 import GlobalState from "../state/GlobalState";
 import { createReducers } from "../state/Reducers";
 import { LOGGED_IN } from "../util/Consts";
+import Login from "./Login";
 
 const App = () => {
   const [state, setState] = React.useState(initialState);
@@ -19,9 +20,7 @@ const App = () => {
         <TabContent/>
         <DrawerNav/>
       </React.Fragment> :
-      <React.Fragment>
-        <h1>need to login...</h1>
-      </React.Fragment>
+      <Login/>
     }
   </GlobalState.Provider>
 };
