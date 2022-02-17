@@ -1,11 +1,10 @@
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
-import { WHITE } from "../util/Consts";
 import * as React from "react";
 
-const SearchButton = ({click}) =>
+const SearchButton = ({click, color}) =>
   <IconButton onClick={click}>
-    <SearchIcon sx={{color: WHITE}}/>
+    <SearchIcon sx={{color: color}}/>
   </IconButton>
 
 export default SearchButton;

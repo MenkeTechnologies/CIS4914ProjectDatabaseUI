@@ -2,6 +2,7 @@ import React from 'react';
 import Box from "@mui/material/Box";
 import {
   ALL_TAB,
+  DK_GRAY,
   DRAWER_OPEN,
   FACULTY_TAB,
   LEFT,
@@ -15,7 +16,17 @@ import {
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import { Add, ArrowForward, Dashboard, FilterAlt, Mail, Person } from "@mui/icons-material";
+import {
+  Add,
+  ArrowForward,
+  Dashboard,
+  FilterAlt,
+  Logout,
+  Mail,
+  PeopleAlt,
+  Person,
+  YoutubeSearchedFor
+} from "@mui/icons-material";
 import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
 import TextField from "@mui/material/TextField";
@@ -31,7 +42,9 @@ const DrawerNav = () => {
     [STATE]: {[DRAWER_OPEN]: open},
     toggleDrawer,
     hideDrawerAndSetTab,
-    handleNavChange
+    hideDrawer,
+    handleNavChange,
+    logoutUser
   } = React.useContext(GlobalState);
 
   const navItems = (anchor) => <Box
@@ -55,6 +68,8 @@ const DrawerNav = () => {
         <ListItemIcon> <FilterAlt/> </ListItemIcon>
         <ListItemText primary={'Faculty'}/>
       </ListItem>
+
+      <Divider/>
 
       <ListItem button key={'My Posts'} onClick={handleNavChange(POST_TAB)}>
 
@@ -80,14 +95,42 @@ const DrawerNav = () => {
     </List>
     <Divider/>
     <List>
-      <TextField id="outlined-basic" label="Search Name / UFID" variant="outlined"
-                 InputProps={{endAdornment: <SearchButton/>}}/>
+      <ListItem>
+        <ListItemIcon>
+          <PeopleAlt/>
+        </ListItemIcon>
+        <ListItemText primary={"My Team Members"}/>
+      </ListItem>
+
       {['Student 1', 'Student 2', 'Student 3'].map((text, index) => <ListItem button key={text}>
         <ListItemText primary={text}/>
         <ListItemIcon>
           <ArrowForward/>
         </ListItemIcon>
       </ListItem>)}
+
+      <Divider/>
+
+      <ListItem>
+        <ListItemIcon>
+          <YoutubeSearchedFor/>
+        </ListItemIcon>
+        <ListItemText primary={"User Search"}/>
+      </ListItem>
+
+      <TextField id="outlined-basic" label="Search Name / UFID" variant="outlined"
+                 InputProps={{endAdornment: <SearchButton click={hideDrawer} color={DK_GRAY}/>}}/>
+
+    </List>
+    <Divider/>
+    <List>
+
+      <ListItem button key={'Logout'} onClick={logoutUser}>
+
+        <ListItemIcon> <Logout/> </ListItemIcon>
+        <ListItemText primary={'Logout'}/>
+      </ListItem>
+
     </List>
   </Box>
 

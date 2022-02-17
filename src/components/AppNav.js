@@ -3,6 +3,7 @@ import {
   ACTIVE_TAB,
   ADVISOR_READY,
   ALL_TAB,
+  API_HOSTNAME,
   AVAILABILITY,
   DATE_POSTED,
   FACULTY_TAB,
@@ -16,6 +17,7 @@ import {
   STATE,
   STUDENT_TAB,
   TITLE,
+  USERNAME,
   WHITE
 } from "../util/Consts";
 import TextField from "@mui/material/TextField";
@@ -30,14 +32,21 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import { AppBar } from "@mui/material";
+import { AppBar, Button } from "@mui/material";
 import GlobalState from "../state/GlobalState";
+import Box from "@mui/material/Box";
+import { Logout } from "@mui/icons-material";
 
 
 const AppNav = () => {
 
   const {
-    [STATE]: {[ACTIVE_TAB]: activeTab, [SORT_BY]: sortBy}, toggleDrawer, hideDrawer, hideDrawerAndSetTab, setSortBy
+    [STATE]: {[ACTIVE_TAB]: activeTab, [SORT_BY]: sortBy, [USERNAME]: username, [API_HOSTNAME]: apiHostname},
+    toggleDrawer,
+    hideDrawer,
+    hideDrawerAndSetTab,
+    setSortBy,
+    logoutUser
   } = React.useContext(GlobalState);
 
   const a11yProps = index => ({
@@ -96,8 +105,18 @@ const AppNav = () => {
 
       <TextField sx={{label: {color: WHITE}, input: {color: WHITE}}} id="outlined-basic" label="Search text"
                  variant="outlined"
-                 InputProps={{endAdornment: <SearchButton click={hideDrawer}/>}}
+                 InputProps={{endAdornment: <SearchButton click={hideDrawer} color={WHITE}/>}}
       />
+
+      <Box sx={{display: "flex", flex: "1", justifyContent: "flex-end"}}>
+        <Typography variant="h6" color="inherit" component="div" sx={{mr: 1}}>
+          {username}
+        </Typography>
+        <Button variant={"contained"} onClick={logoutUser} sx={{backgroundColor: GRAY}}>
+          <Logout/>
+          Logout
+        </Button>
+      </Box>
     </Toolbar>
   </AppBar>
 };
