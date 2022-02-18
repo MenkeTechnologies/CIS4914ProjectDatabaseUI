@@ -4,6 +4,7 @@ import TextField from '@mui/material/TextField';
 import {Button, ImageList, ImageListItem, ImageListItemBar} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import GlobalState from "../state/GlobalState";
+import { TITLE } from "../util/Consts";
 
 
 const Login = () => {
@@ -13,14 +14,23 @@ const Login = () => {
 
     return <React.Fragment>
 
-        <img
+        <Box
+          component="form"
+          sx={{
+              display: "flex", flex: "1", justifyContent: "center", mt: 2
+          }}
+          noValidate
+          autoComplete="off"
+        >
+            <img
             src={require('../img/logo-uf-primary.png')}
             alt={"UF Logo"}
-            style={{height: 138.908/3,
-                width: 757/3,
+            style={{height: 138.908,
+                width: 757,
                 margin: 44.8462/5
             }}
         />
+        </Box>
 
 
         <Box
@@ -31,7 +41,7 @@ const Login = () => {
             noValidate
             autoComplete="off"
         >
-            <Typography sx={{color: "darkgray"}} variant={"h2"} mt={3}>Senior Project Database</Typography>
+            <Typography sx={{color: "darkgray"}} variant={"h2"} mt={3}>{TITLE}</Typography>
         </Box>
         <Box
             component="form"
