@@ -14,7 +14,7 @@ const Login = () => {
     return <React.Fragment>
 
         <img
-            src={'https://www.uff.ufl.edu/wp/wp-content/uploads/2020/02/logo-uf-primary.png'}
+            src={require('../img/logo-uf-primary.png')}
             alt={"UF Logo"}
             style={{height: 138.908/3,
                 width: 757/3,
