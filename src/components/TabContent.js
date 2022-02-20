@@ -1,8 +1,7 @@
 import React from 'react';
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import { posts } from "../mock/MockData";
-import { messages } from "../mock/MockData";
+import { messages, posts } from "../mock/MockData";
 import { ACTIVE_TAB, FACULTY, OFFERING, POST_TYPE, SEEKING, STATE, STUDENT } from "../util/Consts";
 import Message from "./Message";
 import ProjectPost from "./ProjectPost";

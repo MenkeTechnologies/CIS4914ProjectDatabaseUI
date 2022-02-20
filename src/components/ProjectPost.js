@@ -20,7 +20,7 @@ const ProjectPost = ({post: {title, name, userType, date, details, skills, softw
             {title}
             <Chip label={userType}/>
             <Chip label={date} variant="outlined"/>
-            <Chip icon={<AccountCircle />} label={name} />
+            <Chip icon={<AccountCircle/>} label={name}/>
           </Stack>
         </h1>
         {details}
