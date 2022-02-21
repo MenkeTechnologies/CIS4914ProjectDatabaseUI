@@ -4,7 +4,7 @@ import TextField from '@mui/material/TextField';
 import { Avatar, Button, Checkbox, FormControlLabel } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import GlobalState from "../state/GlobalState";
-import { API_HOSTNAME, BLUE, DK_GRAY, emptyOrInvalid, LT_GRAY, ORANGE, TITLE, validationSchema } from "../util/Consts";
+import { BLUE, DK_GRAY, emptyOrInvalid, LT_GRAY, ORANGE, TITLE, validationSchema } from "../util/Consts";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import LoginIcon from '@mui/icons-material/Login';

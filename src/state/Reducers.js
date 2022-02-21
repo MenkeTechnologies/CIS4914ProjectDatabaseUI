@@ -17,7 +17,7 @@ export const createReducers = (state, setState) => {
 
   const setUserName = (uname) => {
     state[USERNAME] = uname
-    localStorage.setItem(USERNAME, uname)
+    sessionStorage.setItem(USERNAME, uname)
   };
 
   const hideDrawer = () => {
@@ -30,7 +30,7 @@ export const createReducers = (state, setState) => {
 
   const loginUser = () => {
     hideDrawer();
-    localStorage.setItem(LOGGED_IN, 'true')
+    sessionStorage.setItem(LOGGED_IN, 'true')
     addState({[LOGGED_IN]: 'true'})
   }
 
@@ -50,8 +50,8 @@ export const createReducers = (state, setState) => {
   }
 
   const logoutUser = () => {
-    localStorage.removeItem(LOGGED_IN)
-    localStorage.removeItem(USERNAME)
+    sessionStorage.removeItem(LOGGED_IN)
+    sessionStorage.removeItem(USERNAME)
     state[LOGGED_IN] = null;
   }
 
