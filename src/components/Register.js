@@ -85,15 +85,17 @@ const Register = () => {
               />
               <FormControl fullWidth sx={{mt: 2}}>
                 <InputLabel id="demo-simple-select-helper-label">User Type</InputLabel>
-                <Select
-                  labelId="demo-simple-select-helper-label"
-                  id="demo-simple-select-helper"
-                  label="User Type"
-                  name='userType'
+                <Field as={Select}
+                       labelId="demo-simple-select-helper-label"
+                       id="demo-simple-select-helper"
+                       label="User Type"
+                       name='userType'
+                       fullWidth required
+                       helperText={<ErrorMessage name="userType"/>}
                 >
                   <MenuItem value={STUDENT}>Student</MenuItem>
                   <MenuItem value={FACULTY}>Faculty</MenuItem>
-                </Select>
+                </Field>
               </FormControl>
               <Field as={TextField}
                      label='Email'

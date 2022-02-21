@@ -59,48 +59,48 @@ const Login = () => {
           loginUser()
         }}>
           {(props) => (<Form>
-              <Field as={TextField}
-                     label='Email'
-                     name='email'
-                     placeholder='Enter email'
-                     fullWidth required
-                     sx={{mt: 3}}
-                     helperText={<ErrorMessage name="email"/>}
-              />
-              <Field as={TextField}
-                     label='Password'
-                     name='password'
-                     placeholder='Enter Password'
-                     type='password'
-                     fullWidth required
-                     autoComplete="current-password"
-                     sx={{mt: 3, mb: 3}}
-                     helperText={<ErrorMessage name="password"/>}
-              />
-              <Field as={FormControlLabel}
-                     name='remember'
-                     control={<Checkbox
-                       color='primary'
-                     />}
-                     label="Remember me"
-              />
-              <Button type='submit' variant="contained"
-                      disabled={emptyOrInvalid(props)}
-                      color='primary'
-                      sx={{backgroundColor: BLUE}}
-                      style={btnStyle}
-                      fullWidth>{"Sign in"}
-              </Button>
+            <Field as={TextField}
+                   label='Email'
+                   name='email'
+                   placeholder='Enter email'
+                   fullWidth required
+                   sx={{mt: 3}}
+                   helperText={<ErrorMessage name="email"/>}
+            />
+            <Field as={TextField}
+                   label='Password'
+                   name='password'
+                   placeholder='Enter Password'
+                   type='password'
+                   fullWidth required
+                   autoComplete="current-password"
+                   sx={{mt: 3, mb: 3}}
+                   helperText={<ErrorMessage name="password"/>}
+            />
+            <Field as={FormControlLabel}
+                   name='remember'
+                   control={<Checkbox
+                     color='primary'
+                   />}
+                   label="Remember me"
+            />
+            <Button type='submit' variant="contained"
+                    disabled={emptyOrInvalid(props)}
+                    color='primary'
+                    sx={{backgroundColor: BLUE}}
+                    style={btnStyle}
+                    fullWidth>{"Sign in"}
+            </Button>
 
-              <Button type='submit' variant="contained"
-                      onClick={registering}
-                      color='primary'
-                      sx={{backgroundColor: BLUE}}
-                      style={btnStyle}
-                      fullWidth>{"Register"}
-              </Button>
+            <Button type='submit' variant="contained"
+                    onClick={registering}
+                    color='primary'
+                    sx={{backgroundColor: BLUE}}
+                    style={btnStyle}
+                    fullWidth>{"Register"}
+            </Button>
 
-            </Form>)}
+          </Form>)}
         </Formik>
 
       </Paper>
