@@ -12,7 +12,6 @@ import {
 
 const initialState = {
   [ACTIVE_TAB]: 0,
-  [API_HOSTNAME]: window.location.hostname.match(/(localhost|127\.0\.0\.[\d]+)/) ? LOCALHOST : DEPLOYED_API,
   [DRAWER_OPEN]: false,
   [LOGGED_IN]: localStorage.getItem(LOGGED_IN),
   [USERNAME]: localStorage.getItem(USERNAME) || "John Doe",

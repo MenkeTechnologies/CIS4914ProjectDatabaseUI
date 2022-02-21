@@ -40,9 +40,11 @@ export const POST_TAB        = 3;
 export const PROJECT_TAB     = 4;
 export const SEEKING_TAB     = 5;
 export const MESSAGES_TAB    = 6;
-export const API_HOSTNAME    = "apiHostname"
 export const DEPLOYED_API    = "https://cis4914projectdatabase-api.herokuapp.com:4000";
 export const LOCALHOST       = "http://localhost:4000";
+export const API_HOSTNAME    = window.location.hostname.match(/(localhost|127\.0\.0\.[\d]+)/) ? LOCALHOST : DEPLOYED_API;
+
+export const getUrl = (path) => `${API_HOSTNAME}/path`
 
 export const Item = styled(Paper)(({theme}) => ({
   ...theme.typography.body2,
