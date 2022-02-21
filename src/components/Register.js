@@ -1,72 +1,134 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import { Button, FormControl, FormHelperText, Input, InputLabel } from "@mui/material";
+import TextField from '@mui/material/TextField';
+import { Avatar, Button, Checkbox, FormControlLabel } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import GlobalState from "../state/GlobalState";
-import { REGISTRATION } from "../util/Consts";
+import { BLUE, DK_GRAY, emptyOrInvalid, LT_GRAY, ORANGE, TITLE } from "../util/Consts";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
+import LoginIcon from '@mui/icons-material/Login';
+import { ErrorMessage, Field, Form, Formik } from 'formik'
+import * as Yup from 'yup'
 
 
 const Register = () => {
   const {
-    loginUser,
-    notRegistering
+    notRegistering,
+    registerUser
   } = React.useContext(GlobalState);
 
-  return <React.Fragment>
+  const paperStyle = {padding: 20, height: '55vh', width: 300, margin: '30px auto'}
+  const avatarStyle = {backgroundColor: ORANGE}
+  const btnstyle = {margin: '20px 0'}
+  const initialValues = {
+    username: '',
+    email: '',
+    password: '',
+  }
+  const validationSchema = Yup.object().shape({
+    email: Yup.string().email('Please enter valid email').required("Required"),
+    password: Yup.string()
+      .min(8, 'Password is too short - should be 8 chars minimum.')
+      .required("Required")
+  })
 
+  return <React.Fragment>
     <Box
       component="form"
       sx={{
         display: "flex", flex: "1", justifyContent: "center", mt: 2
       }}
-      noValidate
-      autoComplete="off"
     >
-      <Typography sx={{color: "darkgray"}} variant={"h2"} mt={3}>{REGISTRATION}</Typography>
+      <img
+        src={require('../img/logo-uf-primary.png')}
+        alt={"UF Logo"}
+        style={{
+          height: 138.908 / 2.5,
+          width: 757 / 2.5,
+          margin: 44.8462 / 5
+        }}
+      />
     </Box>
     <Box
       component="form"
       sx={{
-        display: "flex", flex: "1", justifyContent: "center", mt: 8
+        display: "flex", flex: "1", justifyContent: "center", mt: 0
       }}
-      noValidate
-      autoComplete="off"
     >
+      <Typography sx={{color: LT_GRAY}} variant={"h2"} mt={7}>{TITLE}</Typography>
+    </Box>
+    <Grid>
+      <Paper elevation={10} style={paperStyle}>
+        <Grid align='center'>
+          <Typography sx={{color: DK_GRAY}} variant={"h6"}>Register
+          </Typography>
+          <Avatar style={avatarStyle}><LoginIcon/></Avatar>
+        </Grid>
+        <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={(v) => {
+          registerUser(v.username)
+        }}>
+          {(props) => (
+            <Form>
+              <Field as={TextField}
+                     label='Username'
+                     name='username'
+                     placeholder='Enter username'
+                     fullWidth required
+                     sx={{mt: 3}}
+                     helperText={<ErrorMessage name="username"/>}
+              />
+              <Field as={TextField}
+                     label='Email'
+                     name='email'
+                     placeholder='Enter email'
+                     fullWidth required
+                     sx={{mt: 3}}
+                     helperText={<ErrorMessage name="email"/>}
+              />
+              <Field as={TextField}
+                     label='Password'
+                     name='password'
+                     placeholder='Enter Password'
+                     type='password'
+                     fullWidth required
+                     autoComplete="current-password"
+                     sx={{mt: 3, mb: 3}}
+                     helperText={<ErrorMessage name="password"/>}
+              />
+              <Field as={FormControlLabel}
+                     name='remember'
+                     control={
+                       <Checkbox
+                         color='primary'
+                       />
+                     }
+                     label="Remember me"
+              />
+              <Button type='Submit' variant="contained"
+                      disabled={emptyOrInvalid(props)}
+                      color='primary'
+                      sx={{backgroundColor: BLUE}}
+                      style={btnstyle}
+                      fullWidth>{"Register"}
+              </Button>
 
-      <FormControl>
-        <InputLabel htmlFor="email">Email address</InputLabel>
-        <Input id="email" aria-describedby="my-helper-text"/>
-        <FormHelperText id="my-helper-text">We'll never share your email.</FormHelperText>
-      </FormControl>
+              <Button type={"button"} variant="contained"
+                      onClick={notRegistering}
+                      color='primary'
+                      sx={{backgroundColor: BLUE}}
+                      style={btnstyle}
+                      fullWidth>{"Login"}
+              </Button>
 
-      <FormControl>
-        <InputLabel htmlFor="pw">Password</InputLabel>
-        <Input id="pw" aria-describedby="my-helper-text"/>
-        <FormHelperText id="my-helper-text">Minimum 8 characters</FormHelperText>
-      </FormControl>
+            </Form>
+          )}
+        </Formik>
+
+      </Paper>
+    </Grid>
 
 
-    </Box>
-    <Box sx={{display: "flex", flex: "1", justifyContent: "center"}}>
-      <FormControl>
-        <InputLabel htmlFor="user">Username</InputLabel>
-        <Input id="user" aria-describedby="my-helper-text"/>
-        <FormHelperText id="my-helper-text">We'll never share your email.</FormHelperText>
-      </FormControl>
-    </Box>
-    <Box sx={{display: "flex", flex: "1", justifyContent: "center"}}>
-      <Button variant="contained" component="span" sx={{mt: 3}} onClick={loginUser}>
-        Register
-      </Button>
-    </Box>
-    <Box sx={{display: "flex", flex: "1", justifyContent: "center"}}>
-      <Typography sx={{color: "darkgray"}} variant={"h6"} mt={3}>Already registered?</Typography>
-    </Box>
-    <Box sx={{display: "flex", flex: "1", justifyContent: "center"}}>
-      <Button variant="contained" component="span" sx={{mt: 3}} onClick={notRegistering}>
-        Login
-      </Button>
-    </Box>
   </React.Fragment>
 }
 export default Register;

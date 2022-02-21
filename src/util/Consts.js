@@ -1,9 +1,12 @@
 import { styled } from "@mui/material/styles";
+
 import Paper from "@mui/material/Paper";
+import * as Yup from "yup";
 
 export const DRAWER_OPEN = 'drawerOpen';
-export const USERNAME = 'username';
-export const LOGGED_IN = 'loggedIn';
+const prefix = 'cis4914seniorprojectApp::';
+export const USERNAME = prefix + 'username';
+export const LOGGED_IN = prefix + 'loggedIn';
 export const REGISTER = 'register';
 export const LEFT = 'left';
 export const STATE = 'state';
@@ -19,6 +22,9 @@ export const FACULTY = 'Faculty';
 export const WHITE = "#FFF";
 export const BLACK = "#000";
 export const GRAY = "#CCC";
+export const LT_GRAY = "#C0C0C0";
+export const ORANGE = "rgba(255,103,0,0.83)"
+export const BLUE = "rgba(0,78,152,0.88)";
 export const DK_GRAY = "#888";
 export const KEYDOWN = 'keydown';
 export const TAB = 'Tab';
@@ -44,3 +50,12 @@ export const Item = styled(Paper)(({theme}) => ({
   textAlign: 'center',
   color: theme.palette.text.secondary,
 }));
+
+export const emptyOrInvalid = (props) => Object.values(props.values).some((v) => v === '') || !props.isValid
+
+export const validationSchema = Yup.object().shape({
+  email: Yup.string().email('Please enter valid email').required("Required"),
+  password: Yup.string()
+    .min(8, 'Password is too short - should be 8 chars minimum.')
+    .required("Required")
+})

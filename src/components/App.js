@@ -15,7 +15,7 @@ const App = () => {
   const reducers = createReducers(state, setState);
 
   return <GlobalState.Provider value={{state, setState, ...reducers}}>
-    {state[LOGGED_IN] ?
+    {state[LOGGED_IN] === 'true' ?
       <React.Fragment>
         <AppNav/>
         <TabContent/>

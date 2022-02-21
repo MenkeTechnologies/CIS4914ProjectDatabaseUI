@@ -46,7 +46,8 @@ const AppNav = () => {
     hideDrawer,
     hideDrawerAndSetTab,
     setSortBy,
-    logoutUser
+    logoutUser,
+    notRegistering
   } = React.useContext(GlobalState);
 
   const a11yProps = index => ({
@@ -112,7 +113,7 @@ const AppNav = () => {
         <Typography variant="h6" color="inherit" component="div" sx={{mr: 1}}>
           {username}
         </Typography>
-        <Button variant={"contained"} onClick={logoutUser} sx={{backgroundColor: GRAY}}>
+        <Button variant={"contained"} onClick={notRegistering} sx={{backgroundColor: GRAY}}>
           <Logout/>
           Logout
         </Button>

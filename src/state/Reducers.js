@@ -8,33 +8,50 @@ export const createReducers = (state, setState) => {
       addState({[DRAWER_OPEN]: !state[DRAWER_OPEN]});
     }
   };
-  const setTab = (e, v) => addState({[ACTIVE_TAB]: v});
-  const setSortBy = (v) => addState({[SORT_BY]: v})
+  const setTab = (e, v) => {
+    return addState({[ACTIVE_TAB]: v});
+  };
+  const setSortBy = (v) => {
+    return addState({[SORT_BY]: v});
+  }
 
   const setUserName = (uname) => {
-    addState({[USERNAME]: uname})
+    state[USERNAME] = uname
+    localStorage.setItem(USERNAME, uname)
   };
 
   const hideDrawer = () => {
     state[DRAWER_OPEN] = false
     addState({[DRAWER_OPEN]: false});
   };
-  const handleNavChange = (tabIdx) => (e) => hideDrawerAndSetTab(e, tabIdx)
-
-  const loginUser = (e) => {
-    addState({[LOGGED_IN]: true})
+  const handleNavChange = (tabIdx) => (e) => {
+    hideDrawerAndSetTab(e, tabIdx);
   }
 
-  const registering = (e) => {
-    addState({[REGISTER]: true, [LOGGED_IN]: false})
+  const loginUser = () => {
+    localStorage.setItem(LOGGED_IN, 'true')
+    addState({[LOGGED_IN]: 'true'})
   }
 
-  const notRegistering = (e) => {
-    addState({[REGISTER]: false, [LOGGED_IN]: false})
+  const registerUser = (uname) => {
+    setUserName(uname);
+    loginUser()
   }
 
-  const logoutUser = (e) => {
-    addState({[LOGGED_IN]: false})
+  const registering = () => {
+    logoutUser();
+    addState({[REGISTER]: true});
+  }
+
+  const notRegistering = () => {
+    logoutUser();
+    addState({[REGISTER]: false})
+  }
+
+  const logoutUser = () => {
+    localStorage.removeItem(LOGGED_IN)
+    localStorage.removeItem(USERNAME)
+    state[LOGGED_IN] = null;
   }
 
   const hideDrawerAndSetTab = (e, v) => {
@@ -56,6 +73,7 @@ export const createReducers = (state, setState) => {
     logoutUser,
     loginUser,
     registering,
-    notRegistering
+    notRegistering,
+    registerUser
   }
 }

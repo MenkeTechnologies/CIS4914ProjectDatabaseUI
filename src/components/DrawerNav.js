@@ -44,7 +44,8 @@ const DrawerNav = () => {
     hideDrawerAndSetTab,
     hideDrawer,
     handleNavChange,
-    logoutUser
+    notRegistering
+
   } = React.useContext(GlobalState);
 
   const navItems = (anchor) => <Box
@@ -125,7 +126,7 @@ const DrawerNav = () => {
     <Divider/>
     <List>
 
-      <ListItem button key={'Logout'} onClick={logoutUser}>
+      <ListItem button key={'Logout'} onClick={notRegistering}>
 
         <ListItemIcon> <Logout/> </ListItemIcon>
         <ListItemText primary={'Logout'}/>

@@ -4,13 +4,11 @@ import TextField from '@mui/material/TextField';
 import { Avatar, Button, Checkbox, FormControlLabel } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import GlobalState from "../state/GlobalState";
-import { TITLE } from "../util/Consts";
+import { BLUE, DK_GRAY, emptyOrInvalid, LT_GRAY, ORANGE, TITLE, validationSchema } from "../util/Consts";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import LoginIcon from '@mui/icons-material/Login';
 import { ErrorMessage, Field, Form, Formik } from 'formik'
-import * as Yup from 'yup'
-
 
 const Login = () => {
   const {
@@ -19,19 +17,14 @@ const Login = () => {
   } = React.useContext(GlobalState);
 
   const paperStyle = {padding: 20, height: '55vh', width: 300, margin: '30px auto'}
-  const avatarStyle = {backgroundColor: 'rgba(255,103,0,0.83)'}
-  const btnstyle = {margin: '20px 0'}
+  const avatarStyle = {backgroundColor: ORANGE}
+  const btnStyle = {margin: '20px 0'}
   const initialValues = {
-    username: '',
+    email: '',
     password: '',
     remember: false
   }
-  const validationSchema = Yup.object().shape({
-    email: Yup.string().email('Please enter valid email').required("Required"),
-    password: Yup.string()
-      .min(8, 'Password is too short - should be 8 chars minimum.')
-      .required("Required")
-  })
+
 
   return <React.Fragment>
     <Box
@@ -39,8 +32,6 @@ const Login = () => {
       sx={{
         display: "flex", flex: "1", justifyContent: "center", mt: 2
       }}
-      noValidate
-      autoComplete="off"
     >
       <img
         src={require('../img/logo-uf-primary.png')}
@@ -57,17 +48,21 @@ const Login = () => {
       sx={{
         display: "flex", flex: "1", justifyContent: "center", mt: 0
       }}
-      noValidate
-      autoComplete="off"
     >
-      <Typography sx={{color: "#C0C0C0"}} variant={"h2"} mt={7}>{TITLE}</Typography>
+      <Typography sx={{color: LT_GRAY}} variant={"h2"} mt={7}>{TITLE}</Typography>
     </Box>
+
     <Grid>
       <Paper elevation={10} style={paperStyle}>
         <Grid align='center'>
-          <Avatar style={avatarStyle}><LoginIcon/></Avatar>
+          <Typography sx={{color: DK_GRAY}} variant={"h6"}>Login
+            <Avatar style={avatarStyle}><LoginIcon/></Avatar>
+          </Typography>
         </Grid>
-        <Formik initialValues={initialValues} validationSchema={validationSchema}>
+        <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={(v) => {
+          //TODO Check user in db
+          loginUser()
+        }}>
           {(props) => (
             <Form>
               <Field as={TextField}
@@ -97,22 +92,19 @@ const Login = () => {
                      }
                      label="Remember me"
               />
-              <Button type='Submit' variant="contained"
-                      disabled={Object.keys(props.errors).length > 0}
-                      onClick={loginUser}
-                      component="span"
+              <Button type='submit' variant="contained"
+                      disabled={emptyOrInvalid(props)}
                       color='primary'
-                      sx={{backgroundColor: "rgba(0,78,152,0.88)"}}
-                      style={btnstyle}
+                      sx={{backgroundColor: BLUE}}
+                      style={btnStyle}
                       fullWidth>{"Sign in"}
               </Button>
 
-              <Button type='Submit' variant="contained"
+              <Button type='submit' variant="contained"
                       onClick={registering}
-                      component="span"
                       color='primary'
-                      sx={{backgroundColor: "rgba(0,78,152,0.88)"}}
-                      style={btnstyle}
+                      sx={{backgroundColor: BLUE}}
+                      style={btnStyle}
                       fullWidth>{"Register"}
               </Button>
 
