@@ -4,12 +4,16 @@ import TextField from '@mui/material/TextField';
 import { Avatar, Button, Checkbox, FormControlLabel } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import GlobalState from "../state/GlobalState";
-import { BLUE, DK_GRAY, emptyOrInvalid, LT_GRAY, ORANGE, TITLE } from "../util/Consts";
+import { BLUE, DK_GRAY, emptyOrInvalid, FACULTY, LT_GRAY, ORANGE, STUDENT, TITLE } from "../util/Consts";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import LoginIcon from '@mui/icons-material/Login';
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import * as Yup from 'yup'
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
 
 
 const Register = () => {
@@ -18,13 +22,14 @@ const Register = () => {
     registerUser
   } = React.useContext(GlobalState);
 
-  const paperStyle = {padding: 20, height: '55vh', width: 300, margin: '30px auto'}
+  const paperStyle = {padding: 20, width: 300, margin: '30px auto'}
   const avatarStyle = {backgroundColor: ORANGE}
-  const btnstyle = {margin: '20px 0'}
+  const btnStyle = {margin: '20px 0'}
   const initialValues = {
     username: '',
     email: '',
     password: '',
+    userType: ''
   }
   const validationSchema = Yup.object().shape({
     email: Yup.string().email('Please enter valid email').required("Required"),
@@ -78,6 +83,18 @@ const Register = () => {
                      sx={{mt: 3}}
                      helperText={<ErrorMessage name="username"/>}
               />
+              <FormControl fullWidth sx={{mt: 2}}>
+                <InputLabel id="demo-simple-select-helper-label">User Type</InputLabel>
+                <Select
+                  labelId="demo-simple-select-helper-label"
+                  id="demo-simple-select-helper"
+                  label="User Type"
+                  name='userType'
+                >
+                  <MenuItem value={STUDENT}>Student</MenuItem>
+                  <MenuItem value={FACULTY}>Faculty</MenuItem>
+                </Select>
+              </FormControl>
               <Field as={TextField}
                      label='Email'
                      name='email'
@@ -109,7 +126,7 @@ const Register = () => {
                       disabled={emptyOrInvalid(props)}
                       color='primary'
                       sx={{backgroundColor: BLUE}}
-                      style={btnstyle}
+                      style={btnStyle}
                       fullWidth>{"Register"}
               </Button>
 
@@ -117,9 +134,10 @@ const Register = () => {
                       onClick={notRegistering}
                       color='primary'
                       sx={{backgroundColor: BLUE}}
-                      style={btnstyle}
+                      style={btnStyle}
                       fullWidth>{"Login"}
               </Button>
+
 
             </Form>
           )}

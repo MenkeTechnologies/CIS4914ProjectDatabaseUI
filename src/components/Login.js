@@ -12,17 +12,14 @@ import { ErrorMessage, Field, Form, Formik } from 'formik'
 
 const Login = () => {
   const {
-    loginUser,
-    registering
+    loginUser, registering
   } = React.useContext(GlobalState);
 
-  const paperStyle = {padding: 20, height: '55vh', width: 300, margin: '30px auto'}
+  const paperStyle = {padding: 20, width: 300, margin: '30px auto'}
   const avatarStyle = {backgroundColor: ORANGE}
   const btnStyle = {margin: '20px 0'}
   const initialValues = {
-    email: '',
-    password: '',
-    remember: false
+    email: '', password: '', remember: false
   }
 
 
@@ -37,9 +34,7 @@ const Login = () => {
         src={require('../img/logo-uf-primary.png')}
         alt={"UF Logo"}
         style={{
-          height: 138.908 / 2.5,
-          width: 757 / 2.5,
-          margin: 44.8462 / 5
+          height: 138.908 / 2.5, width: 757 / 2.5, margin: 44.8462 / 5
         }}
       />
     </Box>
@@ -63,8 +58,7 @@ const Login = () => {
           //TODO Check user in db
           loginUser()
         }}>
-          {(props) => (
-            <Form>
+          {(props) => (<Form>
               <Field as={TextField}
                      label='Email'
                      name='email'
@@ -85,11 +79,9 @@ const Login = () => {
               />
               <Field as={FormControlLabel}
                      name='remember'
-                     control={
-                       <Checkbox
-                         color='primary'
-                       />
-                     }
+                     control={<Checkbox
+                       color='primary'
+                     />}
                      label="Remember me"
               />
               <Button type='submit' variant="contained"
@@ -108,8 +100,7 @@ const Login = () => {
                       fullWidth>{"Register"}
               </Button>
 
-            </Form>
-          )}
+            </Form>)}
         </Formik>
 
       </Paper>

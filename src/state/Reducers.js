@@ -29,6 +29,7 @@ export const createReducers = (state, setState) => {
   }
 
   const loginUser = () => {
+    hideDrawer();
     localStorage.setItem(LOGGED_IN, 'true')
     addState({[LOGGED_IN]: 'true'})
   }
