@@ -4,11 +4,13 @@ import Paper from "@mui/material/Paper";
 export const DRAWER_OPEN = 'drawerOpen';
 export const USERNAME = 'username';
 export const LOGGED_IN = 'loggedIn';
+export const REGISTER = 'register';
 export const LEFT = 'left';
 export const STATE = 'state';
 export const SORT_BY = 'sortBy';
 export const ACTIVE_TAB = 'activeTab';
 export const TITLE = 'Senior Project App';
+export const REGISTRATION = 'Senior Project App Registration';
 export const SEEKING = 'seeking';
 export const OFFERING = 'offering';
 export const POST_TYPE = "postType"

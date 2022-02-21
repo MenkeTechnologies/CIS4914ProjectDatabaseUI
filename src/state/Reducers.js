@@ -1,4 +1,4 @@
-import { ACTIVE_TAB, DRAWER_OPEN, KEYDOWN, LOGGED_IN, SHIFT, SORT_BY, TAB, USERNAME } from "../util/Consts";
+import { ACTIVE_TAB, DRAWER_OPEN, KEYDOWN, LOGGED_IN, REGISTER, SHIFT, SORT_BY, TAB, USERNAME } from "../util/Consts";
 
 export const createReducers = (state, setState) => {
   const addState = (obj) => setState({...state, ...obj})
@@ -25,6 +25,14 @@ export const createReducers = (state, setState) => {
     addState({[LOGGED_IN]: true})
   }
 
+  const registering = (e) => {
+    addState({[REGISTER]: true, [LOGGED_IN]: false})
+  }
+
+  const notRegistering = (e) => {
+    addState({[REGISTER]: false, [LOGGED_IN]: false})
+  }
+
   const logoutUser = (e) => {
     addState({[LOGGED_IN]: false})
   }
@@ -46,6 +54,8 @@ export const createReducers = (state, setState) => {
     handleNavChange,
     hideDrawerAndSetTab,
     logoutUser,
-    loginUser
+    loginUser,
+    registering,
+    notRegistering
   }
 }

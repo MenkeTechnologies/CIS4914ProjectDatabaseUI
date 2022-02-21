@@ -5,12 +5,14 @@ import {
   DRAWER_OPEN,
   LOCALHOST,
   LOGGED_IN,
+  REGISTER,
   SORT_BY,
   USERNAME
 } from "../util/Consts";
 
 const initialState = {
   [LOGGED_IN]: false,
+  [REGISTER]: false,
   [DRAWER_OPEN]: false,
   [ACTIVE_TAB]: 0,
   [SORT_BY]: '',
