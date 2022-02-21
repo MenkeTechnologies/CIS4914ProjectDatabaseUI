@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const checkUser = (email, password) => {
+export const getMessages = (uid) => {
 
   axios.post('/user', {
     firstName: 'Fred',
@@ -14,8 +14,7 @@ export const checkUser = (email, password) => {
     });
 }
 
-
-export const createUser = (user, email, password) => {
+export const createMessage = (uid, message) => {
 
   axios.post('/user', {
     firstName: 'Fred',
@@ -28,3 +27,4 @@ export const createUser = (user, email, password) => {
       console.log(error);
     });
 }
+
