@@ -27,19 +27,11 @@ const Login = () => {
     remember: false
   }
   const validationSchema = Yup.object().shape({
-    username: Yup.string().email('Please enter valid email').required("Required"),
-    password: Yup.string().required("Required")
+    email: Yup.string().email('Please enter valid email').required("Required"),
+    password: Yup.string()
+      .min(8, 'Password is too short - should be 8 chars minimum.')
+      .required("Required")
   })
-  const onSubmit = (values) => {
-    console.log(values)
-    // setTimeout(() => {
-    //     props.resetForm()
-    //     props.setSubmitting(false)
-    // }, 2000)
-  }
-  const onKeyDown = (e) => {
-
-  }
 
   return <React.Fragment>
     <Box
@@ -75,21 +67,19 @@ const Login = () => {
         <Grid align='center'>
           <Avatar style={avatarStyle}><LoginIcon/></Avatar>
         </Grid>
-        <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
+        <Formik initialValues={initialValues} validationSchema={validationSchema}>
           {(props) => (
             <Form>
               <Field as={TextField}
-                     label='Username'
-                     onKeyDown={onKeyDown}
-                     name='username'
-                     placeholder='Enter username'
+                     label='Email'
+                     name='email'
+                     placeholder='Enter email'
                      fullWidth required
                      sx={{mt: 3}}
-                     helperText={<ErrorMessage name="username"/>}
+                     helperText={<ErrorMessage name="email"/>}
               />
               <Field as={TextField}
                      label='Password'
-                     onKeyDown={onKeyDown}
                      name='password'
                      placeholder='Enter Password'
                      type='password'
@@ -108,7 +98,7 @@ const Login = () => {
                      label="Remember me"
               />
               <Button type='Submit' variant="contained"
-                      disabled={props}
+                      disabled={Object.keys(props.errors).length > 0}
                       onClick={loginUser}
                       component="span"
                       color='primary'
