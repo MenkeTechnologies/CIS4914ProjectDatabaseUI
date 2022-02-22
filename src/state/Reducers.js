@@ -1,4 +1,15 @@
-import { ACTIVE_TAB, DRAWER_OPEN, KEYDOWN, LOGGED_IN, REGISTER, SHIFT, SORT_BY, TAB, USERNAME } from "../util/Consts";
+import {
+  ACTIVE_TAB,
+  ACTIVE_TAB_STORED,
+  DRAWER_OPEN,
+  KEYDOWN,
+  LOGGED_IN,
+  REGISTER,
+  SHIFT,
+  SORT_BY,
+  TAB,
+  USERNAME
+} from "../util/Consts";
 
 export const createReducers = (state, setState) => {
   const addState = (obj) => setState({...state, ...obj})
@@ -50,17 +61,19 @@ export const createReducers = (state, setState) => {
   }
 
   const logoutUser = () => {
-    sessionStorage.removeItem(LOGGED_IN)
-    sessionStorage.removeItem(USERNAME)
+    sessionStorage.removeItem(LOGGED_IN);
+    sessionStorage.removeItem(USERNAME);
+    localStorage.removeItem(ACTIVE_TAB_STORED);
     state[LOGGED_IN] = null;
   }
 
-  const hideDrawerAndSetTab = (e, v) => {
+  const hideDrawerAndSetTab = (e, tab) => {
     hideDrawer();
     addState({
-        [ACTIVE_TAB]: v
+        [ACTIVE_TAB]: tab
       }
     );
+    localStorage.setItem(ACTIVE_TAB_STORED, tab)
   };
   return {
     addState,

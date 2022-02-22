@@ -12,6 +12,7 @@ export const LEFT = 'left';
 export const STATE = 'state';
 export const SORT_BY = 'sortBy';
 export const ACTIVE_TAB = 'activeTab';
+export const ACTIVE_TAB_STORED = LOCAL_STORAGE_PREFIX + 'activeTab';
 export const TITLE = 'Senior Project App';
 export const REGISTRATION = 'Senior Project App Registration';
 export const SEEKING = 'seeking';
