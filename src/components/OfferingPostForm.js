@@ -22,7 +22,7 @@ const OfferingPostForm = () => {
     registerUser
   } = React.useContext(GlobalState);
 
-  const paperStyle = {padding: 20, width: 300, margin: '30px auto'}
+  const paperStyle = {padding: 20, margin: '30px auto'}
   const avatarStyle = {backgroundColor: ORANGE}
   const btnStyle = {margin: '20px 0'}
   const initialValues = {
@@ -39,6 +39,7 @@ const OfferingPostForm = () => {
   })
 
   return <React.Fragment>
+
     <Grid>
       <Paper elevation={10} style={paperStyle}>
         <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={(v) => {
@@ -46,22 +47,29 @@ const OfferingPostForm = () => {
         }}>
           {(props) => (
             <Form>
-              <Field as={TextField}
-                     label='Topic'
-                     name='topic'
-                     placeholder='Enter topic'
-                     fullWidth required
-                     sx={{mt: 3}}
-                     helperText={<ErrorMessage name="topic"/>}
-              />
-              <Field as={TextField}
-                     label='Preferred Contact'
-                     name='preferredContact'
-                     placeholder='Enter preferred contact'
-                     fullWidth required
-                     sx={{mt: 3}}
-                     helperText={<ErrorMessage name="preferredContact"/>}
-              />
+              <Grid container item spacing={2}>
+                <Grid item xs={6}>
+                  <Field as={TextField}
+                         label='Topic'
+                         name='topic'
+                         placeholder='Enter topic'
+                         fullWidth required
+                         sx={{mt: 3}}
+                         helperText={<ErrorMessage name="topic"/>}
+                  />
+
+                </Grid>
+                <Grid item xs={6}>
+                  <Field as={TextField}
+                         label='Preferred Contact'
+                         name='preferredContact'
+                         placeholder='Enter preferred contact'
+                         fullWidth required
+                         sx={{mt: 3}}
+                         helperText={<ErrorMessage name="preferredContact"/>}
+                  />
+                </Grid>
+              </Grid>
               <Field as={TextField}
                      label='Email'
                      name='email'

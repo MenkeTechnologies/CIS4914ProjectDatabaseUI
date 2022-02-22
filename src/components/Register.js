@@ -61,7 +61,7 @@ const Register = () => {
         display: "flex", flex: "1", justifyContent: "center", mt: 0
       }}
     >
-      <Typography sx={{color: LT_GRAY}} variant={"h2"} mt={7}>{TITLE}</Typography>
+      <Typography sx={{color: LT_GRAY, textAlign: "center"}} variant={"h2"} mt={7}>{TITLE}</Typography>
     </Box>
     <Grid>
       <Paper elevation={10} style={paperStyle}>
