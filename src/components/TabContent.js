@@ -8,6 +8,9 @@ import ProjectPost from "./ProjectPost";
 import SeekingPost from "./SeekingPost";
 import TabPanel from "./TabPanel";
 import GlobalState from "../state/GlobalState";
+import OfferingPostForm from "./OfferingPostForm";
+import SeekingPostForm from "./SeekingPostForm";
+import MessageForm from "./MessageForm";
 
 const TabContent = () => {
 
@@ -55,24 +58,17 @@ const TabContent = () => {
     </TabPanel>
     <TabPanel value={activeTab} index={4}>
       <Box sx={{flexGrow: 1}}>
-        <Grid container spacing={2}>
-          {posts.filter(p => p.postType === OFFERING).map(post =>
-            post[POST_TYPE] === OFFERING ? <ProjectPost post={post}/> : <SeekingPost post={post}/>
-          )}
-        </Grid>
+        <OfferingPostForm/>
       </Box>
     </TabPanel>
     <TabPanel value={activeTab} index={5}>
       <Box sx={{flexGrow: 1}}>
-        <Grid container spacing={2}>
-          {posts.filter(p => p.postType === SEEKING).map(post =>
-            post[POST_TYPE] === OFFERING ? <ProjectPost post={post}/> : <SeekingPost post={post}/>
-          )}
-        </Grid>
+        <SeekingPostForm/>
       </Box>
     </TabPanel>
     <TabPanel value={activeTab} index={6}>
       <Box sx={{flexGrow: 1}}>
+        <MessageForm/>
         <Grid container spacing={2}>
           {messages.map(message =>
             <Message message={message}/>
