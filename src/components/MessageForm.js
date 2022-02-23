@@ -1,13 +1,10 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { Avatar, Button, Checkbox, FormControlLabel } from "@mui/material";
-import Typography from "@mui/material/Typography";
+import { Button, Checkbox, FormControlLabel } from "@mui/material";
 import GlobalState from "../state/GlobalState";
-import { BLUE, DK_GRAY, emptyOrInvalid, FACULTY, LT_GRAY, ORANGE, STUDENT, TITLE } from "../util/Consts";
+import { BLUE, emptyOrInvalid, FACULTY, ORANGE, STUDENT } from "../util/Consts";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-import LoginIcon from '@mui/icons-material/Login';
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import * as Yup from 'yup'
 import FormControl from "@mui/material/FormControl";
