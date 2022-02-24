@@ -1,125 +1,244 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import { Avatar, Button, Checkbox, FormControlLabel } from "@mui/material";
-import Typography from "@mui/material/Typography";
+import { TextField, Grid, Paper, Chip, Button, InputAdornment, IconButton, Divider } from '@mui/material';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import DeleteIcon from '@mui/icons-material/Delete';
 import GlobalState from "../state/GlobalState";
 import { BLUE, DK_GRAY, emptyOrInvalid, FACULTY, LT_GRAY, ORANGE, STUDENT, TITLE } from "../util/Consts";
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import LoginIcon from '@mui/icons-material/Login';
-import { ErrorMessage, Field, Form, Formik } from 'formik'
+import { FieldArray, FormikProvider, useFormik } from 'formik'
 import * as Yup from 'yup'
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
+import axios from 'axios';
 
+const paperStyle = {
+  padding: 20,
+  margin: '30px auto',
+  display: 'grid',
+  height: '100%',
+}
+const btnStyle = { margin: '20px 5px' }
 
-const SeekingPostForm = () => {
-  const {
-    notRegistering,
-    registerUser
-  } = React.useContext(GlobalState);
+const OfferingPostForm = () => {
 
-  const paperStyle = {padding: 20, width: 300, margin: '30px auto'}
-  const avatarStyle = {backgroundColor: ORANGE}
-  const btnStyle = {margin: '20px 0'}
   const initialValues = {
-    username: '',
-    email: '',
-    password: '',
-    userType: ''
+    authorType: "Student",
+    title: "",
+    preferredContact: "",
+    summary: "",
+    memberNameToAdd: "",
+    memberEmailToAdd: "",
+    memberContactToAdd: "",
+    memberList: []
   }
+
   const validationSchema = Yup.object().shape({
-    email: Yup.string().email('Please enter valid email').required("Required"),
-    password: Yup.string()
-      .min(8, 'Password is too short - should be 8 chars minimum.')
-      .required("Required")
-  })
+    title: Yup.string().required("Required"),
+    preferredContact: Yup.string().required("Required"),
+    summary: Yup.string().required("Required")
+  });
+
+  const formik = useFormik({
+    initialValues: initialValues,
+    validationSchema: validationSchema,
+    onSubmit: values => {
+      axios.post('/lookingforgroupposts/create-lookingforgrouppost', {
+        authorType: values.authorType,
+        title: values.title,
+        preferredContact: values.preferredContact,
+        summary: values.summary,
+        memberList: values.memberList
+      });
+    }
+  });
 
   return <React.Fragment>
-    <Grid>
-      <Paper elevation={10} style={paperStyle}>
-        <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={(v) => {
-          registerUser(v.username)
-        }}>
-          {(props) => (
-            <Form>
-              <Field as={TextField}
-                     label='Username'
-                     name='username'
-                     placeholder='Enter username'
-                     fullWidth required
-                     sx={{mt: 3}}
-                     helperText={<ErrorMessage name="username"/>}
-              />
-              <FormControl fullWidth sx={{mt: 2}}>
-                <InputLabel id="demo-simple-select-helper-label">User Type</InputLabel>
-                <Field as={Select}
-                       labelId="demo-simple-select-helper-label"
-                       id="demo-simple-select-helper"
-                       label="User Type"
-                       name='userType'
-                       fullWidth required
-                       helperText={<ErrorMessage name="userType"/>}
-                >
-                  <MenuItem value={STUDENT}>Student</MenuItem>
-                  <MenuItem value={FACULTY}>Faculty</MenuItem>
-                </Field>
-              </FormControl>
-              <Field as={TextField}
-                     label='Email'
-                     name='email'
-                     placeholder='Enter email'
-                     fullWidth required
-                     sx={{mt: 3}}
-                     helperText={<ErrorMessage name="email"/>}
-              />
-              <Field as={TextField}
-                     label='Password'
-                     name='password'
-                     placeholder='Enter Password'
-                     type='password'
-                     fullWidth required
-                     autoComplete="current-password"
-                     sx={{mt: 3, mb: 3}}
-                     helperText={<ErrorMessage name="password"/>}
-              />
-              <Field as={FormControlLabel}
-                     name='remember'
-                     control={
-                       <Checkbox
-                         color='primary'
-                       />
-                     }
-                     label="Remember me"
-              />
-              <Button type='Submit' variant="contained"
-                      disabled={emptyOrInvalid(props)}
-                      color='primary'
-                      sx={{backgroundColor: BLUE}}
-                      style={btnStyle}
-                      fullWidth>{"SeekingPostForm"}
-              </Button>
+    <Paper elevation={10} style={paperStyle}>
+      <form onSubmit={formik.handleSubmit}>
+        <Grid container spacing={4} justifyContent="center">
+          <Grid item xs={12}>
+            <Divider>
+              <Chip label="Student Data" />
+            </Divider>
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              fullWidth
+              required
+              id="title"
+              name="title"
+              label="Post Title"
+              value={formik.values.title}
+              onChange={formik.handleChange}
+              error={formik.touched.title && Boolean(formik.errors.title)}
+              helperText={formik.touched.title && formik.errors.title}
+            />
+          </Grid>
 
-              <Button type={"button"} variant="contained"
-                      onClick={notRegistering}
-                      color='primary'
-                      sx={{backgroundColor: BLUE}}
-                      style={btnStyle}
-                      fullWidth>{"Login"}
-              </Button>
+          <Grid item xs={6}>
+            <TextField
+              fullWidth
+              required
+              id="preferredContact"
+              name="preferredContact"
+              label="Preferred Contact"
+              value={formik.values.preferredContact}
+              onChange={formik.handleChange}
+              error={formik.touched.preferredContact && Boolean(formik.errors.preferredContact)}
+              helperText={formik.touched.preferredContact && formik.errors.preferredContact}
+            />
+          </Grid>
 
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              required
+              id="summary"
+              name="summary"
+              label="Summary"
+              value={formik.values.summary}
+              onChange={formik.handleChange}
+              error={formik.touched.summary && Boolean(formik.errors.summary)}
+              helperText={formik.touched.summary && formik.errors.summary}
+              multiline
+              rows={4}
+            />
+          </Grid>
 
-            </Form>
-          )}
-        </Formik>
+          <Grid item xs={12}>
+            <Divider>
+              <Chip label="Additional Members" />
+            </Divider>
+          </Grid>
+          <FormikProvider value={formik}>
+            <FieldArray name="memberList">
+              {({ remove, push }) => (
+                <>
+                  <Grid item xs={4}>
+                    <TextField
+                      fullWidth
+                      id="memberNameToAdd"
+                      name="memberNameToAdd"
+                      label="Member Name"
+                      value={formik.values.memberNameToAdd}
+                      onChange={formik.handleChange}
+                      error={formik.touched.memberNameToAdd && Boolean(formik.errors.memberNameToAdd)}
+                      helperText={formik.touched.memberNameToAdd && formik.errors.memberNameToAdd}
+                    />
+                  </Grid>
+                  <Grid item xs={4}>
+                    <TextField
+                      fullWidth
+                      id="memberContactToAdd"
+                      name="memberContactToAdd"
+                      label="Member Contact"
+                      value={formik.values.memberContactToAdd}
+                      onChange={formik.handleChange}
+                      error={formik.touched.memberContactToAdd && Boolean(formik.errors.memberContactToAdd)}
+                      helperText={formik.touched.memberContactToAdd && formik.errors.memberContactToAdd}
+                    />
+                  </Grid>
+                  <Grid item xs={3}>
+                    <TextField
+                      fullWidth
+                      id="memberEmailToAdd"
+                      name="memberEmailToAdd"
+                      label="Member Email"
+                      value={formik.values.memberEmailToAdd}
+                      onChange={formik.handleChange}
+                      error={formik.touched.memberEmailToAdd && Boolean(formik.errors.memberEmailToAdd)}
+                      helperText={formik.touched.memberEmailToAdd && formik.errors.memberEmailToAdd}
+                      InputProps={{
+                        endAdornment: <InputAdornment position="end">@ufl.edu</InputAdornment>,
+                      }}
+                    />
+                  </Grid>
+                  <Grid item xs={1}>
+                    <Button
+                      type="button"
+                      variant="outlined"
+                      fullWidth
+                      onClick={() => {
+                        push({
+                          memberName: formik.values.memberNameToAdd,
+                          memberContact: formik.values.memberContactToAdd,
+                          memberEmail: formik.values.memberEmailToAdd + "@ufl.edu"
+                        });
+                        formik.setFieldValue('memberNameToAdd', '');
+                        formik.setFieldValue('memberContactToAdd', '');
+                        formik.setFieldValue('memberEmailToAdd', '');
+                      }}
+                    >Add
+                    </Button>
+                  </Grid>
+                  {formik.values.memberList.length > 0 && formik.values.memberList.map((member, index) => (
+                    <>
+                      <Grid item xs={4}>
+                        <TextField
+                          fullWidth
+                          id={index + "name"}
+                          defaultValue={member.memberName}
+                          InputProps={{
+                            readOnly: true,
+                          }}
+                          variant="standard"
+                        />
+                      </Grid>
+                      <Grid item xs={4}>
+                        <TextField
+                          fullWidth
+                          id={index + "contact"}
+                          defaultValue={member.memberContact}
+                          InputProps={{
+                            readOnly: true,
+                          }}
+                          variant="standard"
+                        />
+                      </Grid>
+                      <Grid item xs={3}>
+                        <TextField
+                          fullWidth
+                          id={index + "email"}
+                          defaultValue={member.memberEmail}
+                          InputProps={{
+                            readOnly: true,
+                          }}
+                          variant="standard"
+                        />
+                      </Grid>
+                      <Grid item xs={1}>
+                        <IconButton
+                          size="small"
+                          onClick={() => remove(index)}>
+                          <DeleteIcon />
+                        </IconButton>
+                      </Grid>
+                    </>
+                  ))}
+                </>
+              )}
+            </FieldArray>
+          </FormikProvider>
 
-      </Paper>
-    </Grid>
-
-
+          <Grid item xs={2}>
+            <Button
+              type="submit"
+              variant="contained"
+              fullWidth
+              disabled={!(formik.isValid && formik.dirty)}
+            >Post
+            </Button>
+          </Grid>
+          <Grid item xs={2}>
+            <Button
+              type="button"
+              variant="outlined"
+              color="error"
+              fullWidth
+            >Cancel
+            </Button>
+          </Grid>
+        </Grid>
+      </form>
+    </Paper>
   </React.Fragment>
 }
-export default SeekingPostForm;
+export default OfferingPostForm;
+
