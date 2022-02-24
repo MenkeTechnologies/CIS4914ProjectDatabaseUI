@@ -32,10 +32,6 @@ const OfferingPostForm = () => {
     summary: Yup.string().required("Required"),
   })
 
-  const clear = props => {
-    Object.keys(props.values).forEach(v => props.values[v] = '');
-  };
-
   return <React.Fragment>
     <Grid container spacing={'spacing'}>
       <Paper elevation={10} style={paperStyle}>
@@ -84,7 +80,7 @@ const OfferingPostForm = () => {
                    name='members'
                    placeholder='List of other students'
                    sx={{
-                     mt: 3, ml: 9, width: '70%', display: 'flex',
+                     mt: 3, display: 'flex',
 
                    }}
             />

@@ -21,19 +21,15 @@ const MessageForm = () => {
   }
   const btnStyle = {margin: '20px 5px'}
   const initialValues = {
-    toName: '',
+    recipient: '',
     subject: '',
     message: ''
   }
   const validationSchema = Yup.object().shape({
-    username: Yup.string().required("Required"),
+    recipient: Yup.string().required("Required"),
     subject: Yup.string().required("Required"),
     message: Yup.string().required("Required"),
   })
-
-  const clear = props => {
-    Object.keys(props.values).forEach(v => props.values[v] = '');
-  };
 
   return <React.Fragment>
 
@@ -51,9 +47,9 @@ const MessageForm = () => {
             <Grid container item spacing={2}>
               <Grid item xs={12}>
                 <Field as={TextField}
-                       label='Username'
-                       name='username'
-                       placeholder='Username'
+                       label='Recipient'
+                       name='recipient'
+                       placeholder='Recipient'
                        fullWidth required
                        sx={{mt: 3}}
                        helperText={<ErrorMessage name="To"/>}
