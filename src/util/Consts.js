@@ -54,7 +54,6 @@ export const Item = styled(Paper)(({theme}) => ({
   color: theme.palette.text.secondary,
 }));
 
-export const emptyOrInvalid = (props) => Object.values(props.values).some((v) => v === '') || !props.isValid
 
 export const validationSchema = Yup.object().shape({
   email: Yup.string().email('Please enter valid email').required("Required"),

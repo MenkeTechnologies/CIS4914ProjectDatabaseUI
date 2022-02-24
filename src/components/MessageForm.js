@@ -2,7 +2,7 @@ import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import { Button, Checkbox, FormControlLabel } from "@mui/material";
 import GlobalState from "../state/GlobalState";
-import { BLUE, emptyOrInvalid, FACULTY, ORANGE, STUDENT } from "../util/Consts";
+import { BLUE, FACULTY, ORANGE, STUDENT } from "../util/Consts";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import { ErrorMessage, Field, Form, Formik } from 'formik'
@@ -93,7 +93,7 @@ const MessageForm = () => {
                      label="Remember me"
               />
               <Button type='Submit' variant="contained"
-                      disabled={emptyOrInvalid(props)}
+                      disabled={!props.isValid}
                       color='primary'
                       sx={{backgroundColor: BLUE}}
                       style={btnStyle}

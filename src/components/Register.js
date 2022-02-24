@@ -4,7 +4,7 @@ import TextField from '@mui/material/TextField';
 import { Avatar, Button, Checkbox, FormControlLabel } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import GlobalState from "../state/GlobalState";
-import { BLUE, DK_GRAY, emptyOrInvalid, FACULTY, LT_GRAY, ORANGE, STUDENT, TITLE } from "../util/Consts";
+import { BLUE, DK_GRAY, FACULTY, LT_GRAY, ORANGE, STUDENT, TITLE } from "../util/Consts";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import LoginIcon from '@mui/icons-material/Login';
@@ -70,9 +70,11 @@ const Register = () => {
           </Typography>
           <Avatar style={avatarStyle}><LoginIcon/></Avatar>
         </Grid>
-        <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={(v) => {
-          registerUser(v.username)
-        }}>
+        <Formik initialValues={initialValues} isInitialValid={false} validateOnMount={true}
+                validationSchema={validationSchema}
+                onSubmit={(v) => {
+                  registerUser(v.username)
+                }}>
           {(props) => (
             <Form>
               <Field as={TextField}
@@ -125,7 +127,7 @@ const Register = () => {
                      label="Remember me"
               />
               <Button type='Submit' variant="contained"
-                      disabled={emptyOrInvalid(props)}
+                      disabled={!props.isValid}
                       color='primary'
                       sx={{backgroundColor: BLUE}}
                       style={btnStyle}

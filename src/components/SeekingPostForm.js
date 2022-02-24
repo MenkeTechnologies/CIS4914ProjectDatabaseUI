@@ -2,7 +2,7 @@ import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import { Button, Stack } from "@mui/material";
 import GlobalState from "../state/GlobalState";
-import { BLUE, emptyOrInvalid } from "../util/Consts";
+import { BLUE } from "../util/Consts";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import { ErrorMessage, Field, Form, Formik } from 'formik'
@@ -17,30 +17,39 @@ const OfferingPostForm = () => {
   } = React.useContext(GlobalState);
 
   const paperStyle = {
-    padding: 20, margin: '30px auto', display: 'grid', height: '100%',
+    padding: 20, margin: '30px auto', display: 'grid', height: '100%', width: "100%"
   }
   const btnStyle = {margin: '20px 5px'}
   const initialValues = {
-    topic: '', preferredContact: '', password: '', userType: ''
+    name: '',
+    preferredContact: '',
+    summary: '',
+    members: '',
   }
   const validationSchema = Yup.object().shape({
-    email: Yup.string().email('Please enter valid email').required("Required"), password: Yup.string()
-      .min(8, 'Password is too short - should be 8 chars minimum.')
-      .required("Required")
+    name: Yup.string().required("Required"),
+    preferredContact: Yup.string().required("Required"),
+    summary: Yup.string().required("Required"),
   })
+
+  const clear = props => {
+    Object.keys(props.values).forEach(v => props.values[v] = '');
+  };
 
   return <React.Fragment>
     <Grid container spacing={'spacing'}>
       <Paper elevation={10} style={paperStyle}>
-        <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={(v) => {
-          registerUser(v.username)
-        }}>
+        <Formik initialValues={initialValues} isInitialValid={false} validateOnMount={true}
+                validationSchema={validationSchema}
+                onSubmit={(v) => {
+                  registerUser(v.username)
+                }}>
           {(props) => (<Form>
             <Grid container item spacing={2}>
               <Grid item xs={6}>
                 <Field as={TextField}
                        label='Name'
-                       name='Name'
+                       name='name'
                        placeholder='Name'
                        fullWidth required
                        sx={{mt: 3}}
@@ -61,7 +70,7 @@ const OfferingPostForm = () => {
             </Grid>
             <Field as={TextField}
                    label='Summary'
-                   name='Summary'
+                   name='summary'
                    placeholder='Project Summary'
                    multiline
                    rows={4}
@@ -72,7 +81,7 @@ const OfferingPostForm = () => {
             />
             <Field as={TextField}
                    label='Other members'
-                   name='Members'
+                   name='members'
                    placeholder='List of other students'
                    sx={{
                      mt: 3, ml: 9, width: '70%', display: 'flex',
@@ -81,16 +90,15 @@ const OfferingPostForm = () => {
             />
 
             <Stack direction='row' spacing={2} justifyContent='center'>
-              <Button type={"button"} variant="contained"
-                      onClick={notRegistering}
+              <Button type={"reset"} variant="contained"
                       color='primary'
                       sx={{backgroundColor: BLUE}}
                       style={btnStyle}
                       startIcon={<DeleteIcon/>}
               >Clear
               </Button>
-              <Button type='Post' variant="contained"
-                      disabled={emptyOrInvalid(props)}
+              <Button type={"submit"} variant="contained"
+                      disabled={!props.isValid}
                       color='primary'
                       sx={{backgroundColor: BLUE}}
                       style={btnStyle}
