@@ -6,11 +6,11 @@ export const getTeamMembers = (projectId) => {
     firstName: 'Fred',
     lastName: 'Flintstone'
   })
-    .then(function (response) {
-      console.log(response);
+    .then(res => {
+      console.log(res);
     })
-    .catch(function (error) {
-      console.log(error);
+    .catch(err => {
+      console.log(err);
     });
 }
 

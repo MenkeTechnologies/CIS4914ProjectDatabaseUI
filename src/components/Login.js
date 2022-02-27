@@ -10,6 +10,7 @@ import Paper from "@mui/material/Paper";
 import LoginIcon from '@mui/icons-material/Login';
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import * as Yup from "yup";
+import { getUsers } from "../service/User";
 
 const Login = () => {
   const {
@@ -64,6 +65,7 @@ const Login = () => {
                 validateOnMount={true}
                 onSubmit={(v) => {
                   //TODO Check user in db
+                  getUsers()
                   loginUser()
                 }}>
           {(props) => (<Form>
