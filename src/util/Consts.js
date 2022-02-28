@@ -47,6 +47,7 @@ export const API_HOSTNAME = window.location.hostname.match(/(localhost|127\.0\.0
 export const USER = 'user'
 export const PROJECT_POST = 'project-post'
 export const SEEKING_POST = 'seeking-post'
+export const MESSAGE = 'message'
 
 export const getApiUrl = (path) => `${API_HOSTNAME}/${path}`
 

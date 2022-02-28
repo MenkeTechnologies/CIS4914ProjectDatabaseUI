@@ -1,11 +1,9 @@
 import axios from "axios";
+import { getApiUrl, MESSAGE } from "../util/Consts";
 
-export const getMessages = (uid) => {
+export const getMessages = () => {
 
-  axios.post('/user', {
-    firstName: 'Fred',
-    lastName: 'Flintstone'
-  })
+  axios.get(getApiUrl(MESSAGE))
     .then(res => {
       console.log(res);
     })
@@ -14,11 +12,14 @@ export const getMessages = (uid) => {
     });
 }
 
-export const createMessage = (uid, message) => {
+export const createMessage = (message) => {
 
-  axios.post('/user', {
-    firstName: 'Fred',
-    lastName: 'Flintstone'
+  axios.post(getApiUrl(MESSAGE), {
+    sender: 'John Doe', // TODO get username from state
+    recepient: message.recepient,
+    subject: message.subject,
+    body: message.body,
+    date: Date.now()
   })
     .then(res => {
       console.log(res);

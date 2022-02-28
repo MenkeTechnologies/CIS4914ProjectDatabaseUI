@@ -9,13 +9,10 @@ import { ErrorMessage, Field, Form, Formik } from 'formik'
 import * as Yup from 'yup'
 import DeleteIcon from '@mui/icons-material/Delete';
 import SendIcon from '@mui/icons-material/Send';
+import { createMessage } from '../service/Message';
 
 
-const MessageForm = () => {
-  const {
-    notRegistering, registerUser
-  } = React.useContext(GlobalState);
-
+  const MessageForm = () => {
   const paperStyle = {
     padding: 20, margin: '30px auto', display: 'grid', height: '100%', width: "25%"
   }
@@ -23,12 +20,12 @@ const MessageForm = () => {
   const initialValues = {
     recipient: '',
     subject: '',
-    message: ''
+    body: ''
   }
   const validationSchema = Yup.object().shape({
     recipient: Yup.string().required("Required"),
     subject: Yup.string().required("Required"),
-    message: Yup.string().required("Required"),
+    body: Yup.string().required("Required"),
   })
 
   return <React.Fragment>
@@ -41,7 +38,7 @@ const MessageForm = () => {
         <Formik initialValues={initialValues} isInitialValid={false} validateOnMount={true}
                 validationSchema={validationSchema}
                 onSubmit={(v) => {
-                  registerUser(v.username)
+                  createMessage(v)
                 }}>
           {(props) => (<Form>
             <Grid container item spacing={2}>
@@ -68,14 +65,14 @@ const MessageForm = () => {
               </Grid>
             </Grid>
             <Field as={TextField}
-                   label='Message'
-                   name='message'
-                   placeholder='Message'
+                   label='Body'
+                   name='body'
+                   placeholder='Body'
                    multiline
                    rows={4}
                    fullWidth required
                    sx={{mt: 3}}
-                   helperText={<ErrorMessage name="Message"/>}
+                   helperText={<ErrorMessage name="Body"/>}
 
             />
 
