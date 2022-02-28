@@ -1,9 +1,6 @@
 import * as React from 'react';
-import { TextField, Grid, Paper, Chip, Button, InputAdornment, IconButton, Divider } from '@mui/material';
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import { Button, Chip, Divider, Grid, IconButton, InputAdornment, Paper, TextField } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import GlobalState from "../state/GlobalState";
-import { BLUE, DK_GRAY, emptyOrInvalid, FACULTY, LT_GRAY, ORANGE, STUDENT, TITLE } from "../util/Consts";
 import { FieldArray, FormikProvider, useFormik } from 'formik'
 import * as Yup from 'yup'
 import axios from 'axios';
@@ -14,7 +11,7 @@ const paperStyle = {
   display: 'grid',
   height: '100%',
 }
-const btnStyle = { margin: '20px 5px' }
+const btnStyle = {margin: '20px 5px'}
 
 const OfferingPostForm = () => {
 
@@ -55,7 +52,7 @@ const OfferingPostForm = () => {
         <Grid container spacing={4} justifyContent="center">
           <Grid item xs={12}>
             <Divider>
-              <Chip label="Student Data" />
+              <Chip label="Student Data"/>
             </Divider>
           </Grid>
           <Grid item xs={6}>
@@ -104,12 +101,12 @@ const OfferingPostForm = () => {
 
           <Grid item xs={12}>
             <Divider>
-              <Chip label="Additional Members" />
+              <Chip label="Additional Members"/>
             </Divider>
           </Grid>
           <FormikProvider value={formik}>
             <FieldArray name="memberList">
-              {({ remove, push }) => (
+              {({remove, push}) => (
                 <>
                   <Grid item xs={4}>
                     <TextField
@@ -207,7 +204,7 @@ const OfferingPostForm = () => {
                         <IconButton
                           size="small"
                           onClick={() => remove(index)}>
-                          <DeleteIcon />
+                          <DeleteIcon/>
                         </IconButton>
                       </Grid>
                     </>

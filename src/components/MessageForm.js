@@ -1,7 +1,6 @@
 import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import { Button, Stack, Typography } from "@mui/material";
-import GlobalState from "../state/GlobalState";
 import { BLUE } from "../util/Consts";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
@@ -12,7 +11,7 @@ import SendIcon from '@mui/icons-material/Send';
 import { createMessage } from '../service/Message';
 
 
-  const MessageForm = () => {
+const MessageForm = () => {
   const paperStyle = {
     padding: 20, margin: '30px auto', display: 'grid', height: '100%', width: "25%"
   }
