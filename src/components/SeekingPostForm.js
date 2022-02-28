@@ -1,7 +1,6 @@
 import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import { Button, Stack } from "@mui/material";
-import GlobalState from "../state/GlobalState";
 import { BLUE } from "../util/Consts";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
@@ -9,25 +8,24 @@ import { ErrorMessage, Field, Form, Formik } from 'formik'
 import * as Yup from 'yup'
 import DeleteIcon from '@mui/icons-material/Delete';
 import SendIcon from '@mui/icons-material/Send';
+import { createSeekingPost } from '../service/Post';
 
 
 const OfferingPostForm = () => {
-  const {
-    notRegistering, registerUser
-  } = React.useContext(GlobalState);
 
   const paperStyle = {
     padding: 20, margin: '30px auto', display: 'grid', height: '100%', width: "100%"
   }
   const btnStyle = {margin: '20px 5px'}
   const initialValues = {
-    name: '',
+    authorType: 'Student',
+    title: '',
     preferredContact: '',
     summary: '',
-    members: '',
+    memberList: ''
   }
   const validationSchema = Yup.object().shape({
-    name: Yup.string().required("Required"),
+    title: Yup.string().required("Required"),
     preferredContact: Yup.string().required("Required"),
     summary: Yup.string().required("Required"),
   })
@@ -38,14 +36,14 @@ const OfferingPostForm = () => {
         <Formik initialValues={initialValues} isInitialValid={false} validateOnMount={true}
                 validationSchema={validationSchema}
                 onSubmit={(v) => {
-                  registerUser(v.username)
+                  createSeekingPost(v)
                 }}>
           {(props) => (<Form>
             <Grid container item spacing={2}>
               <Grid item xs={6}>
                 <Field as={TextField}
                        label='Name'
-                       name='name'
+                       name='title'
                        placeholder='Name'
                        fullWidth required
                        sx={{mt: 3}}

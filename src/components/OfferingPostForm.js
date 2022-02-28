@@ -9,6 +9,7 @@ import { ErrorMessage, Field, Form, Formik } from 'formik'
 import * as Yup from 'yup'
 import DeleteIcon from '@mui/icons-material/Delete';
 import SendIcon from '@mui/icons-material/Send';
+import { createOfferingPost } from '../service/Post';
 
 
 const OfferingPostForm = () => {
@@ -27,10 +28,11 @@ const OfferingPostForm = () => {
   const btnStyle = {margin: '20px 5px'}
   const initialValues = {
     topic: '',
+    authorType: 'Student',
     preferredContact: '',
     summary: '',
-    skills: '',
-    software: '',
+    skillsList: '',
+    softwareList: '',
     members: '',
     advisor: '',
 
@@ -39,8 +41,8 @@ const OfferingPostForm = () => {
     topic: Yup.string().required("Required"),
     preferredContact: Yup.string().required("Required"),
     summary: Yup.string().required("Required"),
-    skills: Yup.string().required("Required"),
-    software: Yup.string().required("Required"),
+    skillsList: Yup.string().required("Required"),
+    softwareList: Yup.string().required("Required"),
   })
 
   return <React.Fragment>
@@ -50,7 +52,7 @@ const OfferingPostForm = () => {
         <Formik initialValues={initialValues} isInitialValid={false} validateOnMount={true}
                 validationSchema={validationSchema}
                 onSubmit={(v) => {
-                  registerUser(v.username)
+                  createOfferingPost(v)
                 }}>
           {(props) => (
             <Form>
@@ -92,7 +94,7 @@ const OfferingPostForm = () => {
                 <Grid item xs={6}>
                   <Field as={TextField}
                          label='Skills'
-                         name='skills'
+                         name='skillsList'
                          placeholder='Preferred Skills required for project'
                          fullWidth required
                          sx={{mt: 3}}
@@ -103,7 +105,7 @@ const OfferingPostForm = () => {
                 <Grid item xs={6}>
                   <Field as={TextField}
                          label='Software'
-                         name='software'
+                         name='softwareList'
                          placeholder='Targeted tech stack for project'
                          fullWidth required
                          sx={{mt: 3}}
@@ -125,7 +127,7 @@ const OfferingPostForm = () => {
                 <Grid item xs={6}>
                   <Field as={TextField}
                          label='Other members'
-                         name='members'
+                         name='memberList'
                          placeholder='List of other students'
                          fullWidth
                          sx={{mt: 3}}
