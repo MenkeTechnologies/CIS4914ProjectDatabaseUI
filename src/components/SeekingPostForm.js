@@ -4,6 +4,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { FieldArray, FormikProvider, useFormik } from 'formik'
 import * as Yup from 'yup'
 import axios from 'axios';
+import { createSeekingPost } from '../service/Post';
 
 const paperStyle = {
   padding: 20,
@@ -36,13 +37,7 @@ const OfferingPostForm = () => {
     initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: values => {
-      axios.post('/lookingforgroupposts/create-lookingforgrouppost', {
-        authorType: values.authorType,
-        title: values.title,
-        preferredContact: values.preferredContact,
-        summary: values.summary,
-        memberList: values.memberList
-      });
+      createSeekingPost(values)
     }
   });
 

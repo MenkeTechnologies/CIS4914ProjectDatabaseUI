@@ -6,6 +6,7 @@ import { FieldArray, FormikProvider, useFormik } from 'formik'
 import * as Yup from 'yup'
 import { boolean } from 'yup'
 import axios from 'axios';
+import { createOfferingPost } from '../service/Post';
 
 const paperStyle = {
   padding: 20,
@@ -52,16 +53,7 @@ const OfferingPostForm = () => {
     initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: values => {
-      axios.post('/projecttopicposts/create-projecttopicpost', {
-        authorType: values.authorType,
-        topic: values.topic,
-        preferredContact: values.preferredContact,
-        summary: values.summary,
-        skillsList: values.skillsList,
-        softwareList: values.softwareList,
-        advisor: values.advisor,
-        memberList: values.memberList
-      });
+      createOfferingPost(values)
     }
   });
 
