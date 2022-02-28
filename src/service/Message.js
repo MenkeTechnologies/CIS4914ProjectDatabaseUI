@@ -16,7 +16,7 @@ export const createMessage = (message) => {
 
   axios.post(getApiUrl(MESSAGE), {
     sender: 'John Doe', // TODO get username from state
-    recepient: message.recepient,
+    recipient: message.recipient,
     subject: message.subject,
     body: message.body,
     date: Date.now()
