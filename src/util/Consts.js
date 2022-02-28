@@ -41,9 +41,13 @@ export const POST_TAB = 3;
 export const PROJECT_TAB = 4;
 export const SEEKING_TAB = 5;
 export const MESSAGES_TAB = 6;
-export const DEPLOYED_API = "https://cis4914projectdatabase-api.herokuapp.com:4000";
+export const DEPLOYED_API = "https://cis4914projectdatabase-api.herokuapp.com";
 export const LOCALHOST = "http://localhost:4000";
 export const API_HOSTNAME = window.location.hostname.match(/(localhost|127\.0\.0\.[\d]+)/) ? LOCALHOST : DEPLOYED_API;
+export const USER = 'user'
+export const PROJECT_POST = 'project-post'
+export const SEEKING_POST = 'seeking-post'
+export const MESSAGE = 'message'
 
 export const getApiUrl = (path) => `${API_HOSTNAME}/${path}`
 
@@ -54,11 +58,34 @@ export const Item = styled(Paper)(({theme}) => ({
   color: theme.palette.text.secondary,
 }));
 
-export const emptyOrInvalid = (props) => Object.values(props.values).some((v) => v === '') || !props.isValid
-
 export const validationSchema = Yup.object().shape({
   email: Yup.string().email('Please enter valid email').required("Required"),
   password: Yup.string()
     .min(8, 'Password is too short - should be 8 chars minimum.')
     .required("Required")
+})
+
+
+export const createUser = (name, email, password, contact, date = Date.now()) => ({
+  name,
+  email,
+  password,
+  contact,
+  date
+})
+
+export const createSeekingPost = (name, email, password, contact, date = Date.now()) => ({
+  name,
+  email,
+  password,
+  contact,
+  date
+})
+
+export const createProjectPost = (name, email, password, contact, date = Date.now()) => ({
+  name,
+  email,
+  password,
+  contact,
+  date
 })

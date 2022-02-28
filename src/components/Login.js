@@ -4,11 +4,13 @@ import TextField from '@mui/material/TextField';
 import { Avatar, Button, Checkbox, FormControlLabel } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import GlobalState from "../state/GlobalState";
-import { BLUE, DK_GRAY, emptyOrInvalid, LT_GRAY, ORANGE, TITLE, validationSchema } from "../util/Consts";
+import { BLUE, DK_GRAY, LT_GRAY, ORANGE, TITLE } from "../util/Consts";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import LoginIcon from '@mui/icons-material/Login';
 import { ErrorMessage, Field, Form, Formik } from 'formik'
+import * as Yup from "yup";
+import { getUsers } from "../service/User";
 
 const Login = () => {
   const {
@@ -21,6 +23,13 @@ const Login = () => {
   const initialValues = {
     email: '', password: '', remember: false
   }
+
+  const validationSchema = Yup.object().shape({
+    email: Yup.string().email('Please enter valid email').required("Required"),
+    password: Yup.string()
+      .min(8, 'Password is too short - should be 8 chars minimum.')
+      .required("Required")
+  })
   return <React.Fragment>
     <Box
       component="form"
@@ -52,10 +61,13 @@ const Login = () => {
             <Avatar style={avatarStyle}><LoginIcon/></Avatar>
           </Typography>
         </Grid>
-        <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={(v) => {
-          //TODO Check user in db
-          loginUser()
-        }}>
+        <Formik initialValues={initialValues} validationSchema={validationSchema} isInitialValid={false}
+                validateOnMount={true}
+                onSubmit={(v) => {
+                  //TODO Check user in db
+                  getUsers()
+                  loginUser()
+                }}>
           {(props) => (<Form>
             <Field as={TextField}
                    label='Email'
@@ -83,7 +95,7 @@ const Login = () => {
                    label="Remember me"
             />
             <Button type='submit' variant="contained"
-                    disabled={emptyOrInvalid(props)}
+                    disabled={!props.isValid}
                     color='primary'
                     sx={{backgroundColor: BLUE}}
                     style={btnStyle}

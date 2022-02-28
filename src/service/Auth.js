@@ -1,17 +1,15 @@
 import axios from "axios";
-import { getApiUrl } from "../util/Consts";
 
 export const checkUser = (email, password) => {
 
   axios.post('/user', {
-    firstName: 'Fred',
-    lastName: 'Flintstone'
+    firstName: 'Fred', lastName: 'Flintstone'
   })
-    .then(function (response) {
-      console.log(response);
+    .then(res => {
+      console.log(res);
     })
-    .catch(function (error) {
-      console.log(error);
+    .catch(err => {
+      console.log(err);
     });
 }
 
@@ -19,13 +17,12 @@ export const checkUser = (email, password) => {
 export const createUser = (user, email, password) => {
 
   axios.post('/user', {
-    firstName: 'Fred',
-    lastName: 'Flintstone'
+    firstName: 'Fred', lastName: 'Flintstone'
   })
-    .then(function (response) {
-      console.log(response);
+    .then(res => {
+      console.log(res);
     })
-    .catch(function (error) {
-      console.log(error);
+    .catch(err => {
+      console.log(err);
     });
 }

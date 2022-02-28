@@ -1,31 +1,31 @@
 import axios from "axios";
-import { getApiUrl } from "../util/Consts";
+import { getApiUrl, MESSAGE } from "../util/Consts";
 
-export const getMessages = (uid) => {
+export const getMessages = () => {
 
-  axios.post('/user', {
-    firstName: 'Fred',
-    lastName: 'Flintstone'
-  })
-    .then(function (response) {
-      console.log(response);
+  axios.get(getApiUrl(MESSAGE))
+    .then(res => {
+      console.log(res);
     })
-    .catch(function (error) {
-      console.log(error);
+    .catch(err => {
+      console.log(err);
     });
 }
 
-export const createMessage = (uid, message) => {
+export const createMessage = (message) => {
 
-  axios.post('/user', {
-    firstName: 'Fred',
-    lastName: 'Flintstone'
+  axios.post(getApiUrl(MESSAGE), {
+    sender: 'John Doe', // TODO get username from state
+    recipient: message.recipient,
+    subject: message.subject,
+    body: message.body,
+    date: Date.now()
   })
-    .then(function (response) {
-      console.log(response);
+    .then(res => {
+      console.log(res);
     })
-    .catch(function (error) {
-      console.log(error);
+    .catch(err => {
+      console.log(err);
     });
 }
 

@@ -1,5 +1,4 @@
 import axios from "axios";
-import { getApiUrl } from "../util/Consts";
 
 export const getTeamMembers = (projectId) => {
 
@@ -7,11 +6,11 @@ export const getTeamMembers = (projectId) => {
     firstName: 'Fred',
     lastName: 'Flintstone'
   })
-    .then(function (response) {
-      console.log(response);
+    .then(res => {
+      console.log(res);
     })
-    .catch(function (error) {
-      console.log(error);
+    .catch(err => {
+      console.log(err);
     });
 }
 
