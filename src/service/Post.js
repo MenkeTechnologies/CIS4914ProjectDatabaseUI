@@ -2,8 +2,15 @@ import axios from "axios";
 import { getApiUrl, PROJECT_POST, SEEKING_POST } from "../util/Consts";
 
 export const getPosts = () => {
+  return {
+  ...getSeekingPost(),
+  ...getOfferingPost()
+  }
+}
 
-  axios.get(getApiUrl(PROJECT_POST))
+export const getSeekingPost = () => {
+
+  axios.get(getApiUrl(SEEKING_POST))
     .then(res => {
       console.log(res.data);
     })
@@ -12,30 +19,15 @@ export const getPosts = () => {
     });
 }
 
-export const getSeekingPost = () => {
-
-  axios.post('/user', {
-    firstName: 'Fred', lastName: 'Flintstone'
-  })
-    .then(res => {
-      console.log(res);
-    })
-    .catch(err => {
-      console.log(err);
-    });
-}
-
 export const getOfferingPost = () => {
 
-  axios.post('/user', {
-    firstName: 'Fred', lastName: 'Flintstone'
+  axios.get(getApiUrl(PROJECT_POST))
+  .then(res => {
+    console.log(res.data);
   })
-    .then(res => {
-      console.log(res);
-    })
-    .catch(err => {
-      console.log(err);
-    });
+  .catch(err => {
+    console.log(err);
+  });
 }
 
 export const createSeekingPost = (project) => {
