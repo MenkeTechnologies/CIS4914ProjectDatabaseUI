@@ -5,7 +5,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { FieldArray, FormikProvider, useFormik } from 'formik'
 import * as Yup from 'yup'
 import { boolean } from 'yup'
-import axios from 'axios';
 import { createOfferingPost } from '../service/Post';
 
 const paperStyle = {

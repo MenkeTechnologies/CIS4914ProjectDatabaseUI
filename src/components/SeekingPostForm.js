@@ -3,7 +3,6 @@ import { Button, Chip, Divider, Grid, IconButton, InputAdornment, Paper, TextFie
 import DeleteIcon from '@mui/icons-material/Delete';
 import { FieldArray, FormikProvider, useFormik } from 'formik'
 import * as Yup from 'yup'
-import axios from 'axios';
 import { createSeekingPost } from '../service/Post';
 
 const paperStyle = {

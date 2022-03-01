@@ -3,8 +3,8 @@ import { getApiUrl, PROJECT_POST, SEEKING_POST } from "../util/Consts";
 
 export const getPosts = () => {
   return {
-  ...getSeekingPost(),
-  ...getOfferingPost()
+    ...getSeekingPost(),
+    ...getOfferingPost()
   }
 }
 
@@ -22,12 +22,12 @@ export const getSeekingPost = () => {
 export const getOfferingPost = () => {
 
   axios.get(getApiUrl(PROJECT_POST))
-  .then(res => {
-    console.log(res.data);
-  })
-  .catch(err => {
-    console.log(err);
-  });
+    .then(res => {
+      console.log(res.data);
+    })
+    .catch(err => {
+      console.log(err);
+    });
 }
 
 export const createSeekingPost = (project) => {
@@ -61,10 +61,10 @@ export const createOfferingPost = (project) => {
     advisor: project.advisor,
     memberList: project.memberList
   })
-  .then(res => {
-    console.log(res);
-  })
-  .catch(err => {
-    console.log(err);
-  });
+    .then(res => {
+      console.log(res);
+    })
+    .catch(err => {
+      console.log(err);
+    });
 }
