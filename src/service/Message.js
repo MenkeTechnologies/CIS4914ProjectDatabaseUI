@@ -8,7 +8,7 @@ export const getMessages = () => {
       console.log(res);
     })
     .catch(err => {
-      console.log(err);
+      console.error(err);
     });
 }
 
@@ -25,7 +25,7 @@ export const createMessage = (message) => {
       console.log(res);
     })
     .catch(err => {
-      console.log(err);
+      console.error(err);
     });
 }
 

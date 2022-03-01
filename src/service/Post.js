@@ -15,7 +15,7 @@ export const getSeekingPost = () => {
       console.log(res.data);
     })
     .catch(err => {
-      console.log(err);
+      console.error(err);
     });
 }
 
@@ -26,7 +26,7 @@ export const getOfferingPost = () => {
       console.log(res.data);
     })
     .catch(err => {
-      console.log(err);
+      console.error(err);
     });
 }
 
@@ -44,7 +44,7 @@ export const createSeekingPost = (project) => {
       console.log(res);
     })
     .catch(err => {
-      console.log(err);
+      console.error(err);
     });
 }
 
@@ -65,6 +65,6 @@ export const createOfferingPost = (project) => {
       console.log(res);
     })
     .catch(err => {
-      console.log(err);
+      console.error(err);
     });
 }

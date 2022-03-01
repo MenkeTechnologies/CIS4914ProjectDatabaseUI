@@ -9,7 +9,7 @@ export const checkUser = (email, password) => {
       console.log(res);
     })
     .catch(err => {
-      console.log(err);
+      console.error(err);
     });
 }
 
@@ -23,6 +23,6 @@ export const createUser = (user, email, password) => {
       console.log(res);
     })
     .catch(err => {
-      console.log(err);
+      console.error(err);
     });
 }

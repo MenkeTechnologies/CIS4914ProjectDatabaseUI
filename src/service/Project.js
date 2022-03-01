@@ -10,7 +10,7 @@ export const getTeamMembers = (projectId) => {
       console.log(res);
     })
     .catch(err => {
-      console.log(err);
+      console.error(err);
     });
 }
 

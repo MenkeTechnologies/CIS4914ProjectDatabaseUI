@@ -30,8 +30,6 @@ const TabContent = () => {
     fetchData();
   }, []);
 
-  console.log(postData.offeringPosts);
-
   return <Box sx={{width: '100%', marginTop: 7}}>
     <Box sx={{borderBottom: 1, borderColor: 'divider'}}>
     </Box>

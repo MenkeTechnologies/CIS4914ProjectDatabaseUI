@@ -11,7 +11,7 @@ export const getFaculty = () => {
       console.log(res);
     })
     .catch(err => {
-      console.log(err);
+      console.error(err);
     });
 }
 
@@ -25,7 +25,7 @@ export const getStudents = () => {
       console.log(res);
     })
     .catch(err => {
-      console.log(err);
+      console.error(err);
     });
 }
 
@@ -36,7 +36,7 @@ export const getUsers = () => {
       console.log(res.data);
     })
     .catch(err => {
-      console.log(err);
+      console.error(err);
     });
 }
 
