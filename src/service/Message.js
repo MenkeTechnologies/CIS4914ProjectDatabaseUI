@@ -4,7 +4,7 @@ import { getApiUrl, MESSAGE } from "../util/Consts";
 export const getMessages = () =>
   axios.get(getApiUrl(MESSAGE))
     .then(res => {
-      console.log(res);
+      return res.data;
     })
     .catch(err => {
       console.error(err);
@@ -19,7 +19,7 @@ export const createMessage = (message, username) =>
     date: Date.now()
   })
     .then(res => {
-      console.log(res);
+      return res.data;
     })
     .catch(err => {
       console.error(err);

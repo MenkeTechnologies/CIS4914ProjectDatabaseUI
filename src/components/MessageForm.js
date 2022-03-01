@@ -1,7 +1,7 @@
 import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import { Button, Stack, Typography } from "@mui/material";
-import { BLUE, STATE, USERNAME } from "../util/Consts";
+import { BLUE, STATE, USER_ID, USERNAME } from "../util/Consts";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import { ErrorMessage, Field, Form, Formik } from 'formik'
@@ -15,19 +15,20 @@ import GlobalState from "../state/GlobalState";
 const MessageForm = () => {
 
   const {
-    [STATE]: {[USERNAME]: username}
+    [STATE]: {[USERNAME]: username, [USER_ID]: userId}
   } = React.useContext(GlobalState);
   const paperStyle = {
     padding: 20, margin: '30px auto', display: 'grid', height: '100%', width: "25%"
   }
   const btnStyle = {margin: '20px 5px'}
   const initialValues = {
-    recipient: '',
+    senderId: userId,
+    recipientId: '',
     subject: '',
     body: ''
   }
   const validationSchema = Yup.object().shape({
-    recipient: Yup.string().required("Required"),
+    recipientId: Yup.string().required("Required"),
     subject: Yup.string().required("Required"),
     body: Yup.string().required("Required"),
   })
@@ -42,6 +43,7 @@ const MessageForm = () => {
         <Formik initialValues={initialValues} isInitialValid={false} validateOnMount={true}
                 validationSchema={validationSchema}
                 onSubmit={(v) => {
+                  //TODO need to validate recipient userId
                   createMessage(v, username)
                 }}>
           {(props) => (<Form>
@@ -49,7 +51,7 @@ const MessageForm = () => {
               <Grid item xs={12}>
                 <Field as={TextField}
                        label='Recipient'
-                       name='recipient'
+                       name='recipientId'
                        placeholder='Recipient'
                        fullWidth required
                        sx={{mt: 3}}

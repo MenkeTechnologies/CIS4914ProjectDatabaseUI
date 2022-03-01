@@ -1,17 +1,30 @@
 import axios from "axios";
-import { getApiUrl, PROJECT_POST, SEEKING_POST } from "../util/Consts";
+import { getApiUrl, OFFERING, POST_TYPE, PROJECT_POST, SEEKING, SEEKING_POST } from "../util/Consts";
 
 export const getPosts = () => {
-  return {
-    ...getSeekingPost(),
-    ...getOfferingPost()
-  }
+  return getSeekingPost().then((sp) => {
+    return getOfferingPost().then((op) => {
+      return [...sp.map(p => ({
+        ...p, [POST_TYPE]: SEEKING
+      })), ...op.map(p => ({
+        ...p, [POST_TYPE]: OFFERING
+      }))
+      ]
+        ;
+    }).catch((e) => {
+      console.error(e);
+      return []
+    })
+  }).catch((e) => {
+    console.error(e);
+    return []
+  });
 }
 
 export const getSeekingPost = () =>
   axios.get(getApiUrl(SEEKING_POST))
     .then(res => {
-      console.log(res.data);
+      return res.data;
     })
     .catch(err => {
       console.error(err);
@@ -20,7 +33,7 @@ export const getSeekingPost = () =>
 export const getOfferingPost = () =>
   axios.get(getApiUrl(PROJECT_POST))
     .then(res => {
-      console.log(res.data);
+      return res.data;
     })
     .catch(err => {
       console.error(err);
@@ -38,7 +51,7 @@ export const createSeekingPost = (project) =>
     memberList: project.memberList
   })
     .then(res => {
-      console.log(res);
+      return res.data;
     })
     .catch(err => {
       console.error(err);
@@ -59,7 +72,7 @@ export const createOfferingPost = (project) =>
     memberList: project.memberList
   })
     .then(res => {
-      console.log(res);
+      return res.data;
     })
     .catch(err => {
       console.error(err);
