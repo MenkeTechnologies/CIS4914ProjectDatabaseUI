@@ -12,10 +12,10 @@ export const getMessages = () => {
     });
 }
 
-export const createMessage = (message) => {
+export const createMessage = (message, username) => {
 
   axios.post(getApiUrl(MESSAGE), {
-    sender: 'John Doe', // TODO get username from state
+    sender: username,
     recipient: message.recipient,
     subject: message.subject,
     body: message.body,

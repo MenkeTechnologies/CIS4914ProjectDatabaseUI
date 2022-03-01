@@ -1,7 +1,7 @@
 import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import { Button, Stack, Typography } from "@mui/material";
-import { BLUE } from "../util/Consts";
+import { BLUE, STATE, USERNAME } from "../util/Consts";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import { ErrorMessage, Field, Form, Formik } from 'formik'
@@ -9,9 +9,14 @@ import * as Yup from 'yup'
 import DeleteIcon from '@mui/icons-material/Delete';
 import SendIcon from '@mui/icons-material/Send';
 import { createMessage } from '../service/Message';
+import GlobalState from "../state/GlobalState";
 
 
 const MessageForm = () => {
+
+  const {
+    [STATE]: {[USERNAME]: username}
+  } = React.useContext(GlobalState);
   const paperStyle = {
     padding: 20, margin: '30px auto', display: 'grid', height: '100%', width: "25%"
   }
@@ -37,7 +42,7 @@ const MessageForm = () => {
         <Formik initialValues={initialValues} isInitialValid={false} validateOnMount={true}
                 validationSchema={validationSchema}
                 onSubmit={(v) => {
-                  createMessage(v)
+                  createMessage(v, username)
                 }}>
           {(props) => (<Form>
             <Grid container item spacing={2}>
