@@ -12,8 +12,8 @@ export const getMessages = () =>
 
 export const createMessage = (message, username) =>
   axios.post(getApiUrl(MESSAGE), {
-    sender: username,
-    recipient: message.recipient,
+    senderId: username,
+    recipientId: message.recipientId,
     subject: message.subject,
     body: message.body,
     date: Date.now()
