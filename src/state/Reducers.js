@@ -2,6 +2,7 @@ import {
   ACTIVE_TAB,
   ACTIVE_TAB_STORED,
   DRAWER_OPEN,
+  EMAIL,
   KEYDOWN,
   LOGGED_IN,
   REGISTER,
@@ -39,15 +40,17 @@ export const createReducers = (state, setState) => {
     hideDrawerAndSetTab(e, tabIdx);
   }
 
-  const loginUser = () => {
+  const loginUser = (uname, email) => {
     hideDrawer();
+    setUserName(uname);
+    addState({[EMAIL]: email});
     sessionStorage.setItem(LOGGED_IN, 'true')
     addState({[LOGGED_IN]: 'true'})
   }
 
   const registerUser = (uname) => {
     setUserName(uname);
-    loginUser()
+    loginUser(uname)
   }
 
   const registering = () => {

@@ -1,19 +1,16 @@
 import axios from "axios";
 import { getApiUrl, MESSAGE } from "../util/Consts";
 
-export const getMessages = () => {
-
+export const getMessages = () =>
   axios.get(getApiUrl(MESSAGE))
     .then(res => {
       console.log(res);
     })
     .catch(err => {
       console.error(err);
-    });
-}
+    })
 
-export const createMessage = (message, username) => {
-
+export const createMessage = (message, username) =>
   axios.post(getApiUrl(MESSAGE), {
     sender: username,
     recipient: message.recipient,
@@ -26,6 +23,5 @@ export const createMessage = (message, username) => {
     })
     .catch(err => {
       console.error(err);
-    });
-}
+    })
 

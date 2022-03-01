@@ -8,8 +8,7 @@ export const getPosts = () => {
   }
 }
 
-export const getSeekingPost = () => {
-
+export const getSeekingPost = () =>
   axios.get(getApiUrl(SEEKING_POST))
     .then(res => {
       console.log(res.data);
@@ -17,10 +16,8 @@ export const getSeekingPost = () => {
     .catch(err => {
       console.error(err);
     });
-}
 
-export const getOfferingPost = () => {
-
+export const getOfferingPost = () =>
   axios.get(getApiUrl(PROJECT_POST))
     .then(res => {
       console.log(res.data);
@@ -28,9 +25,8 @@ export const getOfferingPost = () => {
     .catch(err => {
       console.error(err);
     });
-}
 
-export const createSeekingPost = (project) => {
+export const createSeekingPost = (project) =>
 
   axios.post(getApiUrl(SEEKING_POST), {
     date: Date.now,
@@ -46,9 +42,8 @@ export const createSeekingPost = (project) => {
     .catch(err => {
       console.error(err);
     });
-}
 
-export const createOfferingPost = (project) => {
+export const createOfferingPost = (project) =>
 
   axios.post(getApiUrl(PROJECT_POST), {
     date: Date.now,
@@ -67,4 +62,3 @@ export const createOfferingPost = (project) => {
     .catch(err => {
       console.error(err);
     });
-}

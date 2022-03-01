@@ -11,24 +11,10 @@ import GlobalState from "../state/GlobalState";
 import OfferingPostForm from "./OfferingPostForm";
 import SeekingPostForm from "./SeekingPostForm";
 import MessageForm from "./MessageForm";
-import axios from 'axios';
 
 const TabContent = () => {
 
   const {[STATE]: {[ACTIVE_TAB]: activeTab}} = React.useContext(GlobalState);
-
-  const [postData, setPostData] = useState({offeringPosts: null, seekingPosts: null});
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const offeringPosts = await axios('/projecttopicposts');
-      const seekingPosts = await axios('/lookingforgroupposts');
-
-      setPostData({offeringPosts: offeringPosts.data, seekingPosts: seekingPosts.data});
-    };
-
-    fetchData();
-  }, []);
 
   return <Box sx={{width: '100%', marginTop: 7}}>
     <Box sx={{borderBottom: 1, borderColor: 'divider'}}>

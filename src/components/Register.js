@@ -14,6 +14,7 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
+import { checkEmail, createUser } from "../service/Auth";
 
 
 const Register = () => {
@@ -21,6 +22,8 @@ const Register = () => {
     notRegistering,
     registerUser
   } = React.useContext(GlobalState);
+
+  const [registrationError, setRegistrationError] = React.useState('');
 
   const paperStyle = {padding: 20, width: 300, margin: '30px auto'}
   const avatarStyle = {backgroundColor: ORANGE}
@@ -73,7 +76,21 @@ const Register = () => {
         <Formik initialValues={initialValues} isInitialValid={false} validateOnMount={true}
                 validationSchema={validationSchema}
                 onSubmit={(v) => {
-                  registerUser(v.username)
+                  checkEmail(v.email).then((match) => {
+                    if (match) {
+                      setRegistrationError('Error: account already exists for email.')
+                    } else {
+                      createUser(v.username, v.email, v.password, v.userType).then((data) => {
+                        registerUser(v.username)
+                      }).catch((e) => {
+                        console.error(e);
+                      })
+
+                    }
+                  }).catch((e) => {
+                    console.error(e);
+                  })
+
                 }}>
           {(props) => (
             <Form>
@@ -138,9 +155,10 @@ const Register = () => {
                       onClick={notRegistering}
                       color='primary'
                       sx={{backgroundColor: BLUE}}
-                      style={btnStyle}
                       fullWidth>{"Login"}
               </Button>
+
+              {registrationError ? <h1>{registrationError}</h1> : <React.Fragment/>}
 
 
             </Form>

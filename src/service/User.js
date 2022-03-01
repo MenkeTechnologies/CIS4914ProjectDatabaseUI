@@ -1,11 +1,10 @@
 import axios from "axios";
 import { getApiUrl, USER } from "../util/Consts";
 
-export const getFaculty = () => {
+export const getFaculty = () =>
 
   axios.post('/user', {
-    firstName: 'Fred',
-    lastName: 'Flintstone'
+    firstName: 'Fred', lastName: 'Flintstone'
   })
     .then(res => {
       console.log(res);
@@ -13,13 +12,11 @@ export const getFaculty = () => {
     .catch(err => {
       console.error(err);
     });
-}
 
-export const getStudents = () => {
+export const getStudents = () =>
 
   axios.post('/user', {
-    firstName: 'Fred',
-    lastName: 'Flintstone'
+    firstName: 'Fred', lastName: 'Flintstone'
   })
     .then(res => {
       console.log(res);
@@ -27,9 +24,9 @@ export const getStudents = () => {
     .catch(err => {
       console.error(err);
     });
-}
 
-export const getUsers = () => {
+
+export const getUsers = () =>
 
   axios.get(getApiUrl(USER))
     .then(res => {
@@ -38,5 +35,5 @@ export const getUsers = () => {
     .catch(err => {
       console.error(err);
     });
-}
+
 

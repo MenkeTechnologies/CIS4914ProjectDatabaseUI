@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const getTeamMembers = (projectId) => {
+export const getTeamMembers = (projectId) =>
 
   axios.post('/user', {
     firstName: 'Fred',
@@ -12,5 +12,4 @@ export const getTeamMembers = (projectId) => {
     .catch(err => {
       console.error(err);
     });
-}
 

@@ -10,12 +10,14 @@ import Paper from "@mui/material/Paper";
 import LoginIcon from '@mui/icons-material/Login';
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import * as Yup from "yup";
-import { getUsers } from "../service/User";
+import { checkUser } from "../service/Auth";
 
 const Login = () => {
   const {
     loginUser, registering
   } = React.useContext(GlobalState);
+
+  const [loginError, setLoginError] = React.useState('');
 
   const paperStyle = {padding: 20, width: 300, margin: '30px auto'}
   const avatarStyle = {backgroundColor: ORANGE}
@@ -64,9 +66,16 @@ const Login = () => {
         <Formik initialValues={initialValues} validationSchema={validationSchema} isInitialValid={false}
                 validateOnMount={true}
                 onSubmit={(v) => {
-                  //TODO Check user in db
-                  getUsers()
-                  loginUser()
+                  checkUser(v.email, v.password).then((match) => {
+                    if (match) {
+                      loginUser(match.name, match.email)
+                    } else {
+                      setLoginError('Error: user or password is not valid')
+                    }
+                  }).catch((e) => {
+                    console.error(e);
+                  });
+
                 }}>
           {(props) => (<Form>
             <Field as={TextField}
@@ -106,9 +115,10 @@ const Login = () => {
                     onClick={registering}
                     color='primary'
                     sx={{backgroundColor: BLUE}}
-                    style={btnStyle}
                     fullWidth>{"Register"}
             </Button>
+
+            {loginError ? <h1>{loginError}</h1> : <React.Fragment/>}
 
           </Form>)}
         </Formik>
