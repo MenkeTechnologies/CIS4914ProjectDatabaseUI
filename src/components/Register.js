@@ -81,7 +81,7 @@ const Register = () => {
                       setRegistrationError('Error: account already exists for email.')
                     } else {
                       createUser(v.username, v.email, v.password, v.userType).then((data) => {
-                        registerUser(v.username)
+                        registerUser(v.username, v.email, data._id)
                       }).catch((e) => {
                         console.error(e);
                       })

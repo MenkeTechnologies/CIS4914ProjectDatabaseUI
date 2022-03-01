@@ -6,6 +6,7 @@ import {
   LOGGED_IN,
   REGISTER,
   SORT_BY,
+  USER_ID,
   USERNAME
 } from "../util/Consts";
 
@@ -14,7 +15,8 @@ const initialState = {
   [DRAWER_OPEN]: false,
   [LOGGED_IN]: sessionStorage.getItem(LOGGED_IN),
   [USERNAME]: sessionStorage.getItem(USERNAME) || "John Doe",
-  [USERNAME]: sessionStorage.getItem(EMAIL) || "john.doe@gmail.com",
+  [EMAIL]: sessionStorage.getItem(EMAIL) || "john.doe@gmail.com",
+  [USER_ID]: sessionStorage.getItem(USER_ID) || '',
   [REGISTER]: false,
   [SORT_BY]: '',
 };

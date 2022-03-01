@@ -30,6 +30,7 @@ export const createSeekingPost = (project) =>
 
   axios.post(getApiUrl(SEEKING_POST), {
     date: Date.now,
+    authorId: project.authorId,
     authorType: project.authorType,
     title: project.title,
     preferredContact: project.preferredContact,
@@ -47,6 +48,7 @@ export const createOfferingPost = (project) =>
 
   axios.post(getApiUrl(PROJECT_POST), {
     date: Date.now,
+    authorId: project.authorId,
     authorType: project.authorType,
     topic: project.topic,
     preferredContact: project.preferredContact,

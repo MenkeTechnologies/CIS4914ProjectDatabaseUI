@@ -3,10 +3,13 @@ import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import * as Yup from "yup";
 
-export const DRAWER_OPEN = 'drawerOpen';
 const LOCAL_STORAGE_PREFIX = 'cis4914seniorprojectApp::';
+export const DRAWER_OPEN = LOCAL_STORAGE_PREFIX + 'drawerOpen';
 export const USERNAME = LOCAL_STORAGE_PREFIX + 'username';
 export const LOGGED_IN = LOCAL_STORAGE_PREFIX + 'loggedIn';
+export const EMAIL = LOCAL_STORAGE_PREFIX + 'email'
+export const USER_ID = LOCAL_STORAGE_PREFIX + 'userId'
+
 export const REGISTER = 'register';
 export const LEFT = 'left';
 export const STATE = 'state';
@@ -44,12 +47,11 @@ export const MESSAGES_TAB = 6;
 export const DEPLOYED_API = "https://cis4914projectdatabase-api.herokuapp.com";
 export const LOCALHOST = "http://localhost:4000";
 export const API_HOSTNAME = window.location.hostname.match(/(localhost|127\.0\.0\.[\d]+)/) ? LOCALHOST : DEPLOYED_API;
+export const MESSAGE = 'message'
 export const USER = 'user'
 export const SEARCH_USER = USER + '/search'
 export const PROJECT_POST = 'project-post'
 export const SEEKING_POST = 'seeking-post'
-export const MESSAGE = 'message'
-export const EMAIL = 'email'
 
 export const getApiUrl = (path) => `${API_HOSTNAME}/${path}`
 

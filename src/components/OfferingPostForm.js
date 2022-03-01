@@ -6,6 +6,8 @@ import { FieldArray, FormikProvider, useFormik } from 'formik'
 import * as Yup from 'yup'
 import { boolean } from 'yup'
 import { createOfferingPost } from '../service/Post';
+import { STATE, USER_ID } from "../util/Consts";
+import GlobalState from "../state/GlobalState";
 
 const paperStyle = {
   padding: 20,
@@ -13,11 +15,13 @@ const paperStyle = {
   display: 'grid',
   height: '100%',
 }
-const btnStyle = {margin: '20px 5px'}
 
 const OfferingPostForm = () => {
 
+  const {[STATE]: {[USER_ID]: userId}} = React.useContext(GlobalState);
+
   const initialValues = {
+    authorId: userId,
     authorType: "Student",
     topic: "",
     preferredContact: "",

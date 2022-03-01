@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import { messages, posts } from "../mock/MockData";
