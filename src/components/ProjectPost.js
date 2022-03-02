@@ -5,7 +5,7 @@ import { ACTIVE_TAB, Item, MESSAGES_TAB, PROJECT_TAB, SORT_BY, STATE } from "../
 import GlobalState from "../state/GlobalState";
 import AccountCircle from "@mui/icons-material/AccountCircle"
 
-const ProjectPost = ({post: {title, name, userType, date, details, skills, software, memberList, advisor}}) => {
+const ProjectPost = ({post: {topic, authorId, userType, date, summary, skillsList, softwareList, memberList, advisor}}) => {
 
   const {
     [STATE]: {[ACTIVE_TAB]: activeTab, [SORT_BY]: sortBy}, hideDrawer, handleNavChange, hideDrawerAndSetTab,
@@ -17,26 +17,26 @@ const ProjectPost = ({post: {title, name, userType, date, details, skills, softw
 
         <h1>
           <Stack direction="row" spacing={1}>
-            {title}
+            {topic}
             <Chip label={userType}/>
             <Chip label={date} variant="outlined"/>
-            <Chip icon={<AccountCircle/>} label={name}/>
+            <Chip icon={<AccountCircle/>} label={authorId}/>
           </Stack>
         </h1>
-        {details}
+        {summary}
 
         <Grid container item spacing={2}>
           <Grid item xs={6}>
             <h2>
               Skills
             </h2>
-            {skills}
+            {skillsList.join(", ")}
           </Grid>
           <Grid item xs={6}>
             <h2>
               Software
             </h2>
-            {software}
+            {softwareList.join(", ")}
           </Grid>
         </Grid>
 

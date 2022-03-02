@@ -4,7 +4,7 @@ import { Button, Stack } from "@mui/material";
 import { ACTIVE_TAB, Item, MESSAGES_TAB, POST_TAB, SORT_BY, STATE } from "../util/Consts";
 import GlobalState from "../state/GlobalState";
 
-const SeekingPost = ({post: {title, details, name, contact}}) => {
+const SeekingPost = ({post: {title, summary, authorId, preferredContact}}) => {
 
   const {
     [STATE]: {[ACTIVE_TAB]: activeTab, [SORT_BY]: sortBy}, hideDrawer, handleNavChange, hideDrawerAndSetTab,
@@ -18,7 +18,7 @@ const SeekingPost = ({post: {title, details, name, contact}}) => {
             {title}
           </Stack>
         </h1>
-        {details}
+        {summary}
         <Grid container item spacing={2}>
           <Grid item xs={4}>
             <h2>
@@ -27,7 +27,7 @@ const SeekingPost = ({post: {title, details, name, contact}}) => {
           </Grid>
           <Grid item xs={8}>
             <h2>
-              {name}
+              {authorId}
             </h2>
           </Grid>
         </Grid>
@@ -39,7 +39,7 @@ const SeekingPost = ({post: {title, details, name, contact}}) => {
           </Grid>
           <Grid item xs={8}>
             <h2>
-              {contact}
+              {preferredContact}
             </h2>
           </Grid>
         </Grid>

@@ -2,10 +2,12 @@ import axios from "axios";
 import { getApiUrl, OFFERING, POST_TYPE, PROJECT_POST, SEEKING, SEEKING_POST } from "../util/Consts";
 
 export const getPosts = async () => {
-  const sp = (await getSeekingPost()).map(p => ({...p, [POST_TYPE]: SEEKING}))
-  const op = (await getOfferingPost()).map(p => ({...p, [POST_TYPE]: OFFERING}))
+  const seekingPosts = (await getSeekingPost()).map(p => ({...p, [POST_TYPE]: SEEKING}))
+  //TODO get user name and user type from findUserById(_id)
+  const offeringPosts = (await getOfferingPost()).map(p => ({...p, [POST_TYPE]: OFFERING}))
+  //TODO get user name and user type from findUserById(_id)
 
-  return [...sp, ...op]
+  return [...seekingPosts, ...offeringPosts]
 }
 
 export const getSeekingPost = async () =>

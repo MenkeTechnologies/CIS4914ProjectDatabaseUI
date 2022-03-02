@@ -23,6 +23,17 @@ export const checkUser = (email, password) =>
     console.error(err);
   })
 
+export const findUserById = (_id) =>
+  axios.post(getApiUrl(SEARCH_USER), {
+    _id,
+  }).then(res => {
+    console.log(res);
+    return res.data[0]
+
+  }).catch(err => {
+    console.error(err);
+  })
+
 
 export const createUser = async (name, email, password, type) =>
   (await axios.post(getApiUrl(USER), {
