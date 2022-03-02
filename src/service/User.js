@@ -1,7 +1,7 @@
 import axios from "axios";
 import { getApiUrl, USER } from "../util/Consts";
 
-export const getFaculty = () =>
+export const getFaculty = async () =>
 
   axios.post('/user', {
     firstName: 'Fred', lastName: 'Flintstone'
@@ -13,7 +13,7 @@ export const getFaculty = () =>
       console.error(err);
     });
 
-export const getStudents = () =>
+export const getStudents = async () =>
 
   axios.post('/user', {
     firstName: 'Fred', lastName: 'Flintstone'
@@ -26,7 +26,7 @@ export const getStudents = () =>
     });
 
 
-export const getUsers = () =>
+export const getUsers = async () =>
 
   axios.get(getApiUrl(USER))
     .then(res => {
