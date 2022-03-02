@@ -36,6 +36,7 @@ const SeekingPostForm = () => {
   const formik = useFormik({
     initialValues: initialValues, validationSchema: validationSchema, onSubmit: values => {
       createSeekingPost(values)
+      //TODO add success message to UI
     }
   });
 

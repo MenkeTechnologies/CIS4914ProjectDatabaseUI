@@ -11,6 +11,7 @@ import LoginIcon from '@mui/icons-material/Login';
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import * as Yup from "yup";
 import { checkUser } from "../service/Auth";
+import ErrorMessageBox from "./ErrorMessageBox";
 
 const Login = () => {
   const {
@@ -118,7 +119,7 @@ const Login = () => {
                     fullWidth>{"Register"}
             </Button>
 
-            {loginError ? <h1>{loginError}</h1> : <React.Fragment/>}
+            {loginError ? <ErrorMessageBox msg={loginError}/> : <React.Fragment/>}
 
           </Form>)}
         </Formik>

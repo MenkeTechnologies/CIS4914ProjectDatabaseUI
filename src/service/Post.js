@@ -1,14 +1,14 @@
 import axios from "axios";
-import { getApiUrl, OFFERING, POST_TYPE, PROJECT_POST, SEEKING, SEEKING_POST } from "../util/Consts";
+import { getApiUrl, PROJECT_POST, SEEKING_POST } from "../util/Consts";
 
-export const getPosts = async () => {
-  const seekingPosts = (await getSeekingPost()).map(p => ({...p, [POST_TYPE]: SEEKING}))
-  //TODO get user name and user type from findUserById(_id)
-  const offeringPosts = (await getOfferingPost()).map(p => ({...p, [POST_TYPE]: OFFERING}))
-  //TODO get user name and user type from findUserById(_id)
+export const getAllPosts = async () => {
+  const seekingPosts = await getSeekingPost();
+  const offeringPosts = await getOfferingPost();
 
   return [...seekingPosts, ...offeringPosts]
 }
+
+export const getPosts = async () => await getAllPosts();
 
 export const getSeekingPost = async () =>
   (await axios.get(getApiUrl(SEEKING_POST))).data
@@ -19,7 +19,7 @@ export const getOfferingPost = async () =>
 export const createSeekingPost = async (project) =>
   (await axios.post(getApiUrl(SEEKING_POST), {
     date: Date.now,
-    authorId: project.authorId,
+    author: project.authorId,
     authorType: project.authorType,
     title: project.title,
     preferredContact: project.preferredContact,
@@ -30,7 +30,7 @@ export const createSeekingPost = async (project) =>
 export const createOfferingPost = async (project) =>
   (await axios.post(getApiUrl(PROJECT_POST), {
     date: Date.now,
-    authorId: project.authorId,
+    author: project.authorId,
     authorType: project.authorType,
     topic: project.topic,
     preferredContact: project.preferredContact,
