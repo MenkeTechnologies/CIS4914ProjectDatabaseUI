@@ -15,7 +15,14 @@ import { getPosts } from "../service/Post";
 
 const TabContent = () => {
 
-  const {[STATE]: {[ACTIVE_TAB]: activeTab, [USER_ID]: userId, [EMAIL]: email, [USERNAME]: username}} = React.useContext(GlobalState);
+  const {
+    [STATE]: {
+      [ACTIVE_TAB]: activeTab,
+      [USER_ID]: userId,
+      [EMAIL]: email,
+      [USERNAME]: username
+    }
+  } = React.useContext(GlobalState);
   const [posts, setPosts] = React.useState([]);
   const [messages, setMessages] = React.useState([]);
 

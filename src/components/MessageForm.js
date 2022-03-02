@@ -44,7 +44,7 @@ const MessageForm = () => {
                 validationSchema={validationSchema}
                 onSubmit={(v) => {
                   //TODO need to validate recipient userId
-                  createMessage(v, username)
+                  createMessage(v, userId)
                 }}>
           {(props) => (<Form>
             <Grid container item spacing={2}>

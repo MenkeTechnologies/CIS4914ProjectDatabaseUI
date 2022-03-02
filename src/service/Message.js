@@ -6,10 +6,10 @@ export const getMessages = async () =>
 
 export const getMsgs = async () => await getMessages();
 
-export const createMessage = async (message, username) =>
+export const createMessage = async (message, userId) =>
   (await axios.post(getApiUrl(MESSAGE), {
-    senderId: username,
-    recipientId: message.recipientId,
+    sender: userId,
+    recipient: message.recipientId,
     subject: message.subject,
     body: message.body,
     date: Date.now()
