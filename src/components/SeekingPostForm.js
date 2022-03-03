@@ -37,8 +37,20 @@ const SeekingPostForm = () => {
 
   const formik = useFormik({
     initialValues: initialValues, validationSchema: validationSchema, onSubmit: values => {
-      createSeekingPost(values, _id)
-      //TODO add success message to UI
+      createSeekingPost(values, _id).then((resp) => {
+
+          if (resp.status === 200) {
+            //TODO snackbar successful post
+          } else {
+            // resp.statusText
+            //TODO snackbar error
+          }
+
+        }).catch((e) => {
+        // resp.statusText
+        //TODO snackbar error
+        console.error(e);
+      })
     }
   });
 

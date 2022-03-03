@@ -71,6 +71,7 @@ const Login = () => {
                     if (match) {
                       loginUser(match.name, match.email, match._id, match.type)
                     } else {
+                        //TODO snackbar error
                       setLoginError('Error: user or password is not valid')
                     }
                   }).catch((e) => {

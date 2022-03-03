@@ -25,7 +25,7 @@ export const createSeekingPost = async (project, _id) =>
     preferredContact: project.preferredContact,
     summary: project.summary,
     memberList: project.memberList
-  })).data
+  }))
 
 export const createOfferingPost = async (project, _id) =>
   (await axios.post(getApiUrl(PROJECT_POST), {
@@ -40,4 +40,4 @@ export const createOfferingPost = async (project, _id) =>
     maximumMembers: project.maximumMembers,
     advisor: project.advisor,
     memberList: project.memberList
-  })).data
+  }))

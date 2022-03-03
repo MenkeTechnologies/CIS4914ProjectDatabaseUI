@@ -44,7 +44,20 @@ const MessageForm = () => {
                 validationSchema={validationSchema}
                 onSubmit={(v) => {
                   //TODO need to validate recipient userId
-                  createMessage(v, userId)
+                  createMessage(v, userId).then((resp) => {
+
+                      if (resp.status === 200) {
+                        //TODO snackbar successful msg
+                      } else {
+                        // resp.statusText
+                        //TODO snackbar error
+                      }
+
+                    }).catch((e) => {
+                    // resp.statusText
+                    //TODO snackbar error
+                    console.error(e);
+                  })
                 }}>
           {(props) => (<Form>
             <Grid container item spacing={2}>

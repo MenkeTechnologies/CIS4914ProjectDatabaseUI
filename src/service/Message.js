@@ -13,5 +13,5 @@ export const createMessage = async (message, userId) =>
     subject: message.subject,
     body: message.body,
     date: Date.now()
-  })).data
+  }))
 

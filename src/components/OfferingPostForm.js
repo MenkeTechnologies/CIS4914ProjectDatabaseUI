@@ -74,8 +74,21 @@ const OfferingPostForm = () => {
     initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: values => {
-      createOfferingPost(values, _id)
-      //TODO add success message to UI
+      createOfferingPost(values, _id).then((resp) => {
+
+        if (resp.status === 200) {
+            //TODO snackbar successful post
+        } else {
+          // resp.statusText
+          //TODO snackbar error
+        }
+
+      }).catch((e) => {
+        // resp.statusText
+        //TODO snackbar error
+        console.error(e);
+      })
+
     }
   });
 

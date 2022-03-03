@@ -79,16 +79,19 @@ const Register = () => {
                   checkEmail(v.email).then((match) => {
                     if (match) {
                       setRegistrationError('Error: account already exists for email.')
+                        //TODO snackbar error
                     } else {
                       createUser(v.username, v.email, v.password, v.userType).then((resp) => {
                         registerUser(v.username, v.email, resp._id, resp.type)
                       }).catch((e) => {
                         console.error(e);
+                        //TODO snackbar error
                       })
 
                     }
                   }).catch((e) => {
                     console.error(e);
+                        //TODO snackbar error
                   })
 
                 }}>
