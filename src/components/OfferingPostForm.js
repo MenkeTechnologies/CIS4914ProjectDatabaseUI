@@ -57,6 +57,7 @@ const OfferingPostForm = () => {
     validationSchema: validationSchema,
     onSubmit: values => {
       createOfferingPost(values)
+      //TODO add success message to UI
     }
   });
 

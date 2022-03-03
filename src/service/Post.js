@@ -1,67 +1,36 @@
 import axios from "axios";
-import { getApiUrl, OFFERING, POST_TYPE, PROJECT_POST, SEEKING, SEEKING_POST } from "../util/Consts";
+import { getApiUrl, PROJECT_POST, SEEKING_POST } from "../util/Consts";
 
-export const getPosts = () => {
-  return getSeekingPost().then((sp) => {
-    return getOfferingPost().then((op) => {
-      return [...sp.map(p => ({
-        ...p, [POST_TYPE]: SEEKING
-      })), ...op.map(p => ({
-        ...p, [POST_TYPE]: OFFERING
-      }))
-      ]
-        ;
-    }).catch((e) => {
-      console.error(e);
-      return []
-    })
-  }).catch((e) => {
-    console.error(e);
-    return []
-  });
+export const getAllPosts = async () => {
+  const seekingPosts = await getSeekingPost();
+  const offeringPosts = await getOfferingPost();
+
+  return [...seekingPosts, ...offeringPosts]
 }
 
-export const getSeekingPost = () =>
-  axios.get(getApiUrl(SEEKING_POST))
-    .then(res => {
-      return res.data;
-    })
-    .catch(err => {
-      console.error(err);
-    });
+export const getPosts = async () => await getAllPosts();
 
-export const getOfferingPost = () =>
-  axios.get(getApiUrl(PROJECT_POST))
-    .then(res => {
-      return res.data;
-    })
-    .catch(err => {
-      console.error(err);
-    });
+export const getSeekingPost = async () =>
+  (await axios.get(getApiUrl(SEEKING_POST))).data
 
-export const createSeekingPost = (project) =>
+export const getOfferingPost = async () =>
+  (await axios.get(getApiUrl(PROJECT_POST))).data
 
-  axios.post(getApiUrl(SEEKING_POST), {
+export const createSeekingPost = async (project) =>
+  (await axios.post(getApiUrl(SEEKING_POST), {
     date: Date.now,
-    authorId: project.authorId,
+    author: project.authorId,
     authorType: project.authorType,
     title: project.title,
     preferredContact: project.preferredContact,
     summary: project.summary,
     memberList: project.memberList
-  })
-    .then(res => {
-      return res.data;
-    })
-    .catch(err => {
-      console.error(err);
-    });
+  })).data
 
-export const createOfferingPost = (project) =>
-
-  axios.post(getApiUrl(PROJECT_POST), {
+export const createOfferingPost = async (project) =>
+  (await axios.post(getApiUrl(PROJECT_POST), {
     date: Date.now,
-    authorId: project.authorId,
+    author: project.authorId,
     authorType: project.authorType,
     topic: project.topic,
     preferredContact: project.preferredContact,
@@ -70,10 +39,4 @@ export const createOfferingPost = (project) =>
     softwareList: project.softwareList,
     advisor: project.advisor,
     memberList: project.memberList
-  })
-    .then(res => {
-      return res.data;
-    })
-    .catch(err => {
-      console.error(err);
-    });
+  })).data

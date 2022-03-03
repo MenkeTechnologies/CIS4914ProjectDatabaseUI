@@ -1,15 +1,9 @@
 import axios from "axios";
 
-export const getTeamMembers = (projectId) =>
+export const getTeamMembers = async (projectId) =>
 
-  axios.post('/user', {
+  (await axios.post('/user', {
     firstName: 'Fred',
     lastName: 'Flintstone'
-  })
-    .then(res => {
-      console.log(res);
-    })
-    .catch(err => {
-      console.error(err);
-    });
+  })).data
 

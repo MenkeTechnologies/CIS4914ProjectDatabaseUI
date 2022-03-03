@@ -23,18 +23,22 @@ export const checkUser = (email, password) =>
     console.error(err);
   })
 
+export const findUserById = (_id) =>
+  axios.post(getApiUrl(SEARCH_USER), {
+    _id,
+  }).then(res => {
+    console.log(res);
+    return res.data[0]
 
-export const createUser = (name, email, password, type) =>
-  axios.post(getApiUrl(USER), {
+  }).catch(err => {
+    console.error(err);
+  })
+
+
+export const createUser = async (name, email, password, type) =>
+  (await axios.post(getApiUrl(USER), {
     name,
     email,
     password,
     type
-  })
-    .then(res => {
-      console.log(res);
-      return res.data
-    })
-    .catch(err => {
-      console.error(err);
-    })
+  })).data
