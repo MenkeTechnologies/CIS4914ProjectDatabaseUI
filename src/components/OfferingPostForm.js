@@ -321,10 +321,11 @@ const OfferingPostForm = () => {
           <Grid item xs={2}>
             <Button
               type="button"
+              onClick={formik.resetForm}
               variant="outlined"
               color="error"
               fullWidth
-            >Cancel
+            >Reset
             </Button>
           </Grid>
         </Grid>

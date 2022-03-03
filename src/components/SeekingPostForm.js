@@ -219,7 +219,8 @@ const SeekingPostForm = () => {
               variant="outlined"
               color="error"
               fullWidth
-            >Cancel
+              onClick={formik.resetForm}
+            >Reset
             </Button>
           </Grid>
         </Grid>
