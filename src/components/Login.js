@@ -69,7 +69,7 @@ const Login = () => {
                 onSubmit={(v) => {
                   checkUser(v.email, v.password).then((match) => {
                     if (match) {
-                      loginUser(match.name, match.email, match._id)
+                      loginUser(match.name, match.email, match._id, match.type)
                     } else {
                       setLoginError('Error: user or password is not valid')
                     }

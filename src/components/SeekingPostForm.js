@@ -27,6 +27,8 @@ const SeekingPostForm = () => {
     memberList: []
   }
 
+  const _id = "";
+
   const validationSchema = Yup.object().shape({
     title: Yup.string().required("Required"),
     preferredContact: Yup.string().required("Required"),
@@ -35,7 +37,7 @@ const SeekingPostForm = () => {
 
   const formik = useFormik({
     initialValues: initialValues, validationSchema: validationSchema, onSubmit: values => {
-      createSeekingPost(values)
+      createSeekingPost(values, _id)
       //TODO add success message to UI
     }
   });

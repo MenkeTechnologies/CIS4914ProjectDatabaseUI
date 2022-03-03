@@ -3,12 +3,13 @@ import {
   ACTIVE_TAB_STORED,
   DRAWER_OPEN,
   EMAIL,
-  LOGGED_IN,
-  REGISTER,
+  LOGGED_IN, OFFERING_DATA,
+  REGISTER, SEEKING_DATA,
   SORT_BY,
   USER_ID,
   USERNAME
 } from "../util/Consts";
+import { boolean } from "yup";
 
 const initialState = {
   [ACTIVE_TAB]: parseInt(localStorage.getItem(ACTIVE_TAB_STORED) || 0),
@@ -19,6 +20,34 @@ const initialState = {
   [USER_ID]: sessionStorage.getItem(USER_ID) || '',
   [REGISTER]: false,
   [SORT_BY]: '',
+  [OFFERING_DATA]: {
+    _id: "",
+    topic: "",
+    preferredContact: "",
+    summary: "",
+    skillToAdd: "",
+    skillsList: [],
+    hasSkill: boolean,
+    softwareToAdd: "",
+    softwareList: [],
+    advisor: "",
+    memberNameToAdd: "",
+    memberEmailToAdd: "",
+    memberContactToAdd: "",
+    memberList: [],
+    maximumMembers: 6
+  },
+  [SEEKING_DATA]: {
+    _id: "",
+    authorType: "Student",
+    title: "",
+    preferredContact: "",
+    summary: "",
+    memberNameToAdd: "",
+    memberEmailToAdd: "",
+    memberContactToAdd: "",
+    memberList: []
+  }
 };
 
 export default initialState;

@@ -15,7 +15,8 @@ const ProjectPost = ({
                          softwareList,
                          memberList,
                          maximumMembers,
-                         advisor
+                         advisor,
+                         _id
                        }
                      }) => {
 

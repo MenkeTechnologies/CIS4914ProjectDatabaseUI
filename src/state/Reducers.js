@@ -9,7 +9,7 @@ import {
   SHIFT,
   SORT_BY,
   TAB,
-  USER_ID,
+  USER_ID, USER_TYPE,
   USERNAME
 } from "../util/Consts";
 
@@ -28,12 +28,14 @@ export const createReducers = (state, setState) => {
     return addState({[SORT_BY]: v});
   }
 
-  const setUserName = (uname, email, id) => {
+  const setUserName = (uname, email, id, userType) => {
     state[USERNAME] = uname
     sessionStorage.setItem(USERNAME, uname)
     state[USER_ID] = id
     sessionStorage.setItem(USER_ID, id)
     state[EMAIL] = email
+    state[USER_TYPE] = userType
+    sessionStorage.setItem(USER_TYPE, userType)
     sessionStorage.setItem(EMAIL, email)
   };
 
@@ -45,15 +47,15 @@ export const createReducers = (state, setState) => {
     hideDrawerAndSetTab(e, tabIdx);
   }
 
-  const loginUser = (uname, email, id) => {
+  const loginUser = (uname, email, id, userType) => {
     hideDrawer();
-    setUserName(uname, email, id);
+    setUserName(uname, email, id, userType);
     sessionStorage.setItem(LOGGED_IN, 'true')
     addState({[LOGGED_IN]: 'true'})
   }
 
-  const registerUser = (uname, email, id) => {
-    loginUser(uname, email, id)
+  const registerUser = (uname, email, id, userType) => {
+    loginUser(uname, email, id, userType)
   }
 
   const registering = () => {

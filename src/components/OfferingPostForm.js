@@ -6,7 +6,7 @@ import { FieldArray, FormikProvider, useFormik } from 'formik'
 import * as Yup from 'yup'
 import { boolean } from 'yup'
 import { createOfferingPost } from '../service/Post';
-import { STATE, USER_ID } from "../util/Consts";
+import { OFFERING_DATA, STATE, USER_ID, USER_TYPE } from "../util/Consts";
 import GlobalState from "../state/GlobalState";
 
 const paperStyle = {
@@ -18,25 +18,41 @@ const paperStyle = {
 
 const OfferingPostForm = () => {
 
-  const {[STATE]: {[USER_ID]: userId}} = React.useContext(GlobalState);
+  const {[STATE]: {[USER_ID]: userId, [USER_TYPE]:authorType, [OFFERING_DATA]: {
+    topic,
+    preferredContact,
+    summary,
+    skillToAdd,
+    skillsList,
+    hasSkill,
+    softwareToAdd,
+    softwareList,
+    advisor,
+    memberNameToAdd,
+    memberEmailToAdd,
+    memberContactToAdd,
+    memberList,
+    maximumMembers,
+    _id
+  }}} = React.useContext(GlobalState);
 
   const initialValues = {
     authorId: userId,
-    authorType: "Student",
-    topic: "",
-    preferredContact: "",
-    summary: "",
-    skillToAdd: "",
-    skillsList: [],
-    hasSkill: boolean,
-    softwareToAdd: "",
-    softwareList: [],
-    advisor: "",
-    memberNameToAdd: "",
-    memberEmailToAdd: "",
-    memberContactToAdd: "",
-    memberList: [],
-    maximumMembers: 6
+    authorType,
+    topic,
+    preferredContact,
+    summary,
+    skillToAdd,
+    skillsList,
+    hasSkill,
+    softwareToAdd,
+    softwareList,
+    advisor,
+    memberNameToAdd,
+    memberEmailToAdd,
+    memberContactToAdd,
+    memberList,
+    maximumMembers,
   }
 
   const validationSchema = Yup.object().shape({
@@ -58,7 +74,7 @@ const OfferingPostForm = () => {
     initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: values => {
-      createOfferingPost(values)
+      createOfferingPost(values, _id)
       //TODO add success message to UI
     }
   });

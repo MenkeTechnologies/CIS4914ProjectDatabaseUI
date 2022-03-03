@@ -9,6 +9,9 @@ export const USERNAME = LOCAL_STORAGE_PREFIX + 'username';
 export const LOGGED_IN = LOCAL_STORAGE_PREFIX + 'loggedIn';
 export const EMAIL = LOCAL_STORAGE_PREFIX + 'email'
 export const USER_ID = LOCAL_STORAGE_PREFIX + 'userId'
+export const OFFERING_DATA = LOCAL_STORAGE_PREFIX + 'offeringData'
+export const SEEKING_DATA = LOCAL_STORAGE_PREFIX + 'seekingData'
+export const USER_TYPE = LOCAL_STORAGE_PREFIX + 'userType'
 
 export const REGISTER = 'register';
 export const LEFT = 'left';

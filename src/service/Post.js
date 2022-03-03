@@ -16,7 +16,7 @@ export const getSeekingPost = async () =>
 export const getOfferingPost = async () =>
   (await axios.get(getApiUrl(PROJECT_POST))).data
 
-export const createSeekingPost = async (project) =>
+export const createSeekingPost = async (project, _id) =>
   (await axios.post(getApiUrl(SEEKING_POST), {
     date: Date.now,
     author: project.authorId,
@@ -27,7 +27,7 @@ export const createSeekingPost = async (project) =>
     memberList: project.memberList
   })).data
 
-export const createOfferingPost = async (project) =>
+export const createOfferingPost = async (project, _id) =>
   (await axios.post(getApiUrl(PROJECT_POST), {
     date: Date.now,
     author: project.authorId,

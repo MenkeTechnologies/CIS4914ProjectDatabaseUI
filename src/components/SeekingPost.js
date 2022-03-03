@@ -4,7 +4,7 @@ import { Button, Stack } from "@mui/material";
 import { ACTIVE_TAB, Item, MESSAGES_TAB, POST_TAB, SORT_BY, STATE } from "../util/Consts";
 import GlobalState from "../state/GlobalState";
 
-const SeekingPost = ({post: {title, summary, author: {name, type}, preferredContact}}) => {
+const SeekingPost = ({post: {title, summary, author: {name, type}, preferredContact, _id}}) => {
 
   const {
     [STATE]: {[ACTIVE_TAB]: activeTab, [SORT_BY]: sortBy}, hideDrawer, handleNavChange, hideDrawerAndSetTab,
