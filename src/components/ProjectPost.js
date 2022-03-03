@@ -14,6 +14,7 @@ const ProjectPost = ({
                          skillsList,
                          softwareList,
                          memberList,
+                         maximumMembers,
                          advisor
                        }
                      }) => {
@@ -71,7 +72,7 @@ const ProjectPost = ({
 
       <Item>
         <Stack direction="row" spacing={1}>
-          <Chip label="6/6 Members"/>
+          <Chip label={`${memberList.length}/${maximumMembers} Members`}/>
           <Button variant={"contained"} onClick={handleNavChange(MESSAGES_TAB)}>Request to Join</Button>
           <Button variant={"contained"} onClick={handleNavChange(PROJECT_TAB)}>Edit</Button>
         </Stack>

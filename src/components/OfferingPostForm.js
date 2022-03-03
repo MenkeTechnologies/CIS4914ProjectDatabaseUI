@@ -35,13 +35,15 @@ const OfferingPostForm = () => {
     memberNameToAdd: "",
     memberEmailToAdd: "",
     memberContactToAdd: "",
-    memberList: []
+    memberList: [],
+    maximumMembers: 6
   }
 
   const validationSchema = Yup.object().shape({
     topic: Yup.string().required("Required"),
     preferredContact: Yup.string().required("Required"),
     summary: Yup.string().required("Required"),
+    maximumMembers: Yup.number().min(1).max(6).required("Required"),
     skillToAdd: Yup.string().when("skillsList", {
       is: value => !(value.length >= 1),
       then: Yup.string().required("Please add at least one applicable project skill")
@@ -83,7 +85,7 @@ const OfferingPostForm = () => {
               helperText={formik.touched.topic && formik.errors.topic}
             />
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={2}>
             <TextField
               fullWidth
               id="advisor"
@@ -93,6 +95,18 @@ const OfferingPostForm = () => {
               onChange={formik.handleChange}
               error={formik.touched.advisor && Boolean(formik.errors.advisor)}
               helperText={formik.touched.advisor && formik.errors.advisor}
+            />
+          </Grid>
+          <Grid item xs={1}>
+            <TextField
+              fullWidth
+              id="maximumMembers"
+              name="maximumMembers"
+              label="maximumMembers"
+              value={formik.values.maximumMembers}
+              onChange={formik.handleChange}
+              error={formik.touched.maximumMembers && Boolean(formik.errors.maximumMembers)}
+              helperText={formik.touched.maximumMembers && formik.errors.maximumMembers}
             />
           </Grid>
           <Grid item xs={3}>

@@ -37,6 +37,7 @@ export const createOfferingPost = async (project) =>
     summary: project.summary,
     skillsList: project.skillsList,
     softwareList: project.softwareList,
+    maximumMembers: project.maximumMembers,
     advisor: project.advisor,
     memberList: project.memberList
   })).data
