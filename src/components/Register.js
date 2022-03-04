@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { Avatar, Button, Checkbox, FormControlLabel } from "@mui/material";
+import { Alert, Avatar, Button, Checkbox, FormControlLabel, Slide, Snackbar } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import GlobalState from "../state/GlobalState";
 import { BLUE, DK_GRAY, FACULTY, LT_GRAY, ORANGE, STUDENT, TITLE } from "../util/Consts";
@@ -23,7 +23,8 @@ const Register = () => {
     registerUser
   } = React.useContext(GlobalState);
 
-  const [registrationError, setRegistrationError] = React.useState('');
+  const [registrationError, setRegistrationError] = React.useState(false);
+  const TransitionLeft = props => <Slide {...props} direction="up"/>;
 
   const paperStyle = {padding: 20, width: 300, margin: '30px auto'}
   const avatarStyle = {backgroundColor: ORANGE}
@@ -79,7 +80,7 @@ const Register = () => {
                   checkEmail(v.email).then((match) => {
                     if (match) {
                       setRegistrationError('Error: account already exists for email.')
-                        //TODO snackbar error
+                      //TODO snackbar error
                     } else {
                       createUser(v.username, v.email, v.password, v.userType).then((resp) => {
                         registerUser(v.username, v.email, resp._id, resp.type)
@@ -91,7 +92,7 @@ const Register = () => {
                     }
                   }).catch((e) => {
                     console.error(e);
-                        //TODO snackbar error
+                    //TODO snackbar error
                   })
 
                 }}>
@@ -161,12 +162,24 @@ const Register = () => {
                       fullWidth>{"Login"}
               </Button>
 
-              {registrationError ? <h1>{registrationError}</h1> : <React.Fragment/>}
-
-
             </Form>
           )}
         </Formik>
+
+        <Snackbar
+          open={registrationError}
+          autoHideDuration={5000}
+          TransitionComponent={TransitionLeft}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center'
+          }}
+          onClose={() => setRegistrationError(false)}
+        >
+          <Alert severity="error">Error: account already exists for email.</Alert>
+
+
+        </Snackbar>
 
       </Paper>
     </Grid>
