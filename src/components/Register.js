@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { Alert, Avatar, Button, Checkbox, FormControlLabel, Slide, Snackbar } from "@mui/material";
+import { Alert, Avatar, Button, Checkbox, FormControlLabel, Slide } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import GlobalState from "../state/GlobalState";
 import { BLUE, DK_GRAY, FACULTY, LT_GRAY, ORANGE, STUDENT, TITLE } from "../util/Consts";
@@ -15,6 +15,7 @@ import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { checkEmail, createUser } from "../service/Auth";
+import Snack from "./Snack";
 
 
 const Register = () => {
@@ -80,7 +81,6 @@ const Register = () => {
                   checkEmail(v.email).then((match) => {
                     if (match) {
                       setRegistrationError('Error: account already exists for email.')
-                      //TODO snackbar error
                     } else {
                       createUser(v.username, v.email, v.password, v.userType).then((resp) => {
                         registerUser(v.username, v.email, resp._id, resp.type)
@@ -166,20 +166,9 @@ const Register = () => {
           )}
         </Formik>
 
-        <Snackbar
-          open={registrationError}
-          autoHideDuration={5000}
-          TransitionComponent={TransitionLeft}
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'center'
-          }}
-          onClose={() => setRegistrationError(false)}
-        >
+        <Snack open={registrationError} set={() => setRegistrationError(false)}>
           <Alert severity="error">Error: account already exists for email.</Alert>
-
-
-        </Snackbar>
+        </Snack>
 
       </Paper>
     </Grid>

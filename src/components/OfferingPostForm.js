@@ -4,7 +4,6 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { FieldArray, FormikProvider, useFormik } from 'formik'
 import * as Yup from 'yup'
-import { boolean } from 'yup'
 import { createOfferingPost } from '../service/Post';
 import { OFFERING_DATA, STATE, USER_ID, USER_TYPE } from "../util/Consts";
 import GlobalState from "../state/GlobalState";
@@ -18,23 +17,27 @@ const paperStyle = {
 
 const OfferingPostForm = () => {
 
-  const {[STATE]: {[USER_ID]: userId, [USER_TYPE]:authorType, [OFFERING_DATA]: {
-    topic,
-    preferredContact,
-    summary,
-    skillToAdd,
-    skillsList,
-    hasSkill,
-    softwareToAdd,
-    softwareList,
-    advisor,
-    memberNameToAdd,
-    memberEmailToAdd,
-    memberContactToAdd,
-    memberList,
-    maximumMembers,
-    _id
-  }}} = React.useContext(GlobalState);
+  const {
+    [STATE]: {
+      [USER_ID]: userId, [USER_TYPE]: authorType, [OFFERING_DATA]: {
+        topic,
+        preferredContact,
+        summary,
+        skillToAdd,
+        skillsList,
+        hasSkill,
+        softwareToAdd,
+        softwareList,
+        advisor,
+        memberNameToAdd,
+        memberEmailToAdd,
+        memberContactToAdd,
+        memberList,
+        maximumMembers,
+        _id
+      }
+    }
+  } = React.useContext(GlobalState);
 
   const initialValues = {
     authorId: userId,
@@ -77,7 +80,7 @@ const OfferingPostForm = () => {
       createOfferingPost(values, _id).then((resp) => {
 
         if (resp.status === 200) {
-            //TODO snackbar successful post
+          //TODO snackbar successful post
         } else {
           // resp.statusText
           //TODO snackbar error

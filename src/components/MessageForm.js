@@ -46,14 +46,14 @@ const MessageForm = () => {
                   //TODO need to validate recipient userId
                   createMessage(v, userId).then((resp) => {
 
-                      if (resp.status === 200) {
-                        //TODO snackbar successful msg
-                      } else {
-                        // resp.statusText
-                        //TODO snackbar error
-                      }
+                    if (resp.status === 200) {
+                      //TODO snackbar successful msg
+                    } else {
+                      // resp.statusText
+                      //TODO snackbar error
+                    }
 
-                    }).catch((e) => {
+                  }).catch((e) => {
                     // resp.statusText
                     //TODO snackbar error
                     console.error(e);

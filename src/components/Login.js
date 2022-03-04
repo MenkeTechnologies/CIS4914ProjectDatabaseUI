@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { Alert, Avatar, Button, Checkbox, FormControlLabel, Slide, Snackbar } from "@mui/material";
+import { Alert, Avatar, Button, Checkbox, FormControlLabel } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import GlobalState from "../state/GlobalState";
 import { BLUE, DK_GRAY, LT_GRAY, ORANGE, TITLE } from "../util/Consts";
@@ -11,6 +11,7 @@ import LoginIcon from '@mui/icons-material/Login';
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import * as Yup from "yup";
 import { checkUser } from "../service/Auth";
+import Snack from "./Snack";
 
 const Login = () => {
   const {
@@ -18,7 +19,6 @@ const Login = () => {
   } = React.useContext(GlobalState);
 
   const [loginError, setLoginError] = React.useState(false)
-  const TransitionLeft = props => <Slide {...props} direction="up"/>;
 
   const paperStyle = {padding: 20, width: 300, margin: '30px auto'}
   const avatarStyle = {backgroundColor: ORANGE}
@@ -75,6 +75,7 @@ const Login = () => {
                     }
                   }).catch((e) => {
                     console.error(e);
+                    //TODO snackbar error
                   });
 
                 }}>
@@ -119,19 +120,10 @@ const Login = () => {
                     fullWidth>{"Register"}
             </Button>
 
-            <Snackbar
-              open={loginError}
-              autoHideDuration={5000}
-              TransitionComponent={TransitionLeft}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'center'
-              }}
-              onClose={() => setLoginError(false)}
-            >
-              <Alert severity="error">Error: email or password is not valid</Alert>
 
-            </Snackbar>
+            <Snack open={loginError} set={() => setLoginError(false)}>
+              <Alert severity="error">Error: email or password is not valid</Alert>
+            </Snack>
 
           </Form>)}
         </Formik>
