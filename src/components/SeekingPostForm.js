@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { Button, Chip, Divider, Grid, IconButton, InputAdornment, Paper, TextField } from '@mui/material';
+import { Alert, Button, Chip, Divider, Grid, IconButton, InputAdornment, Paper, TextField } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { FieldArray, FormikProvider, useFormik } from 'formik'
 import * as Yup from 'yup'
 import { createSeekingPost } from '../service/Post';
 import { STATE, USER_ID } from "../util/Consts";
 import GlobalState from "../state/GlobalState";
+import Snack from "./Snack";
 
 const paperStyle = {
   padding: 20, margin: '30px auto', display: 'grid', height: '100%',
@@ -14,6 +15,9 @@ const paperStyle = {
 const SeekingPostForm = () => {
 
   const {[STATE]: {[USER_ID]: userId}} = React.useContext(GlobalState);
+
+  const [success, setSuccess] = React.useState(false);
+  const [apiErr, setApiErr] = React.useState(false)
 
   const initialValues = {
     authorId: userId,
@@ -40,15 +44,13 @@ const SeekingPostForm = () => {
       createSeekingPost(values, _id).then((resp) => {
 
         if (resp.status === 200) {
-          //TODO snackbar successful post
+          setSuccess(true);
         } else {
-          // resp.statusText
-          //TODO snackbar error
+          setApiErr(true);
         }
 
       }).catch((e) => {
-        // resp.statusText
-        //TODO snackbar error
+        setApiErr(true);
         console.error(e);
       })
     }
@@ -240,6 +242,12 @@ const SeekingPostForm = () => {
         </Grid>
       </form>
     </Paper>
+    <Snack open={success} set={() => setSuccess(false)}>
+      <Alert severity="success">Success</Alert>
+    </Snack>
+    <Snack open={apiErr} set={() => setApiErr(false)}>
+      <Alert severity="error">Error: could not connect to API</Alert>
+    </Snack>
   </React.Fragment>
 }
 export default SeekingPostForm;

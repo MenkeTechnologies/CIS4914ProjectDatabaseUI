@@ -1,17 +1,18 @@
 import axios from "axios";
 import { getApiUrl, SEARCH_USER, USER } from "../util/Consts";
 
-export const checkEmail = (email) =>
+export const checkEmail = (email, showErr) =>
   axios.post(getApiUrl(SEARCH_USER), {
     email,
   }).then(res => {
     console.log(res);
     return res.data[0]
 
-  }).catch(err => {
-    console.error(err);
+  }).catch(e => {
+    showErr(true);
+    console.error(e);
   })
-export const checkUser = (email, password) =>
+export const checkUser = (email, password, showErr) =>
   axios.post(getApiUrl(SEARCH_USER), {
     email,
     password
@@ -19,26 +20,31 @@ export const checkUser = (email, password) =>
     console.log(res);
     return res.data[0]
 
-  }).catch(err => {
-    console.error(err);
+  }).catch(e => {
+    console.error(e)
+    showErr(true);
   })
 
 export const findUserById = (_id) =>
   axios.post(getApiUrl(SEARCH_USER), {
     _id,
   }).then(res => {
-    console.log(res);
     return res.data[0]
 
-  }).catch(err => {
-    console.error(err);
+  }).catch(e => {
+    console.error(e);
   })
 
 
-export const createUser = async (name, email, password, type) =>
-  (await axios.post(getApiUrl(USER), {
+export const createUser = async (name, email, password, type, showErr) =>
+  axios.post(getApiUrl(USER), {
     name,
     email,
     password,
     type
-  })).data
+  }).then(res => {
+    return res.data;
+  }).catch(e => {
+    console.error(e);
+    showErr(true);
+  })

@@ -1,11 +1,8 @@
 import React from 'react';
 
-const ErrorMessageBox = ({msg}) => {
-
-  return <React.Fragment>
+const ErrorMessageBox = ({msg}) =>
+  <React.Fragment>
     {msg}
-  </React.Fragment>;
-
-}
+  </React.Fragment>
 
 export default ErrorMessageBox;

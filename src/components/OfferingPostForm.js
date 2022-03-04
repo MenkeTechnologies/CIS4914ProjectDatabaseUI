@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, Chip, Divider, Grid, IconButton, InputAdornment, Paper, TextField } from '@mui/material';
+import { Alert, Button, Chip, Divider, Grid, IconButton, InputAdornment, Paper, TextField } from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { FieldArray, FormikProvider, useFormik } from 'formik'
@@ -7,6 +7,7 @@ import * as Yup from 'yup'
 import { createOfferingPost } from '../service/Post';
 import { OFFERING_DATA, STATE, USER_ID, USER_TYPE } from "../util/Consts";
 import GlobalState from "../state/GlobalState";
+import Snack from "./Snack";
 
 const paperStyle = {
   padding: 20,
@@ -57,6 +58,8 @@ const OfferingPostForm = () => {
     memberList,
     maximumMembers,
   }
+  const [success, setSuccess] = React.useState(false);
+  const [apiErr, setApiErr] = React.useState(false)
 
   const validationSchema = Yup.object().shape({
     topic: Yup.string().required("Required"),
@@ -78,17 +81,14 @@ const OfferingPostForm = () => {
     validationSchema: validationSchema,
     onSubmit: values => {
       createOfferingPost(values, _id).then((resp) => {
-
         if (resp.status === 200) {
-          //TODO snackbar successful post
+          setSuccess(true);
         } else {
-          // resp.statusText
-          //TODO snackbar error
+          setApiErr(true);
         }
 
       }).catch((e) => {
-        // resp.statusText
-        //TODO snackbar error
+        setApiErr(true);
         console.error(e);
       })
 
@@ -377,6 +377,12 @@ const OfferingPostForm = () => {
         </Grid>
       </form>
     </Paper>
+    <Snack open={success} set={() => setSuccess(false)}>
+      <Alert severity="success">Success</Alert>
+    </Snack>
+    <Snack open={apiErr} set={() => setApiErr(false)}>
+      <Alert severity="error">Error: could not connect to API</Alert>
+    </Snack>
   </React.Fragment>
 }
 export default OfferingPostForm;

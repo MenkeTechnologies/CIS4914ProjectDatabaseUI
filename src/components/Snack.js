@@ -3,8 +3,8 @@ import * as React from "react";
 
 const TransitionUp = props => <Slide {...props} direction="up"/>;
 
-const Snack = ({children, open, set}) => {
-  return <Snackbar
+const Snack = ({children, open, set}) =>
+  <Snackbar
     open={open}
     autoHideDuration={5000}
     TransitionComponent={TransitionUp}
@@ -15,11 +15,7 @@ const Snack = ({children, open, set}) => {
     onClose={() => set(false)}
   >
     {children}
-
-
   </Snackbar>
-
-}
 
 
 export default Snack;

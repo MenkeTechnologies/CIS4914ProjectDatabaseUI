@@ -14,11 +14,9 @@ import { checkUser } from "../service/Auth";
 import Snack from "./Snack";
 
 const Login = () => {
-  const {
-    loginUser, registering
-  } = React.useContext(GlobalState);
-
-  const [loginError, setLoginError] = React.useState(false)
+  const {loginUser, registering} = React.useContext(GlobalState);
+  const [loginErr, setLoginErr] = React.useState(false)
+  const [apiErr, setApiErr] = React.useState(false)
 
   const paperStyle = {padding: 20, width: 300, margin: '30px auto'}
   const avatarStyle = {backgroundColor: ORANGE}
@@ -67,15 +65,14 @@ const Login = () => {
         <Formik initialValues={initialValues} validationSchema={validationSchema} isInitialValid={false}
                 validateOnMount={true}
                 onSubmit={(v) => {
-                  checkUser(v.email, v.password).then((match) => {
+                  checkUser(v.email, v.password, setApiErr).then((match) => {
                     if (match) {
                       loginUser(match.name, match.email, match._id, match.type)
                     } else {
-                      setLoginError(true)
+                      setLoginErr(true)
                     }
                   }).catch((e) => {
                     console.error(e);
-                    //TODO snackbar error
                   });
 
                 }}>
@@ -121,8 +118,12 @@ const Login = () => {
             </Button>
 
 
-            <Snack open={loginError} set={() => setLoginError(false)}>
+            <Snack open={loginErr} set={() => setLoginErr(false)}>
               <Alert severity="error">Error: email or password is not valid</Alert>
+            </Snack>
+
+            <Snack open={apiErr} set={() => setApiErr(false)}>
+              <Alert severity="error">Error: could not connect to API</Alert>
             </Snack>
 
           </Form>)}

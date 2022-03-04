@@ -1,11 +1,8 @@
 import React from 'react';
 
-const SuccessMessageBox = ({msg}) => {
-
-  return <React.Fragment>
+const SuccessMessageBox = ({msg}) =>
+  <React.Fragment>
     {msg}
-  </React.Fragment>;
-
-}
+  </React.Fragment>
 
 export default SuccessMessageBox;
