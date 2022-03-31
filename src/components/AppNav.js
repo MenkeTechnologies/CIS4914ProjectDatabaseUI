@@ -38,6 +38,7 @@ import Box from "@mui/material/Box";
 import { Logout } from "@mui/icons-material";
 
 
+/** Navbar Component */
 const AppNav = () => {
 
   const {

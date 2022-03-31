@@ -10,6 +10,7 @@ import { LOGGED_IN, REGISTER } from "../util/Consts";
 import Login from "./Login";
 import Register from "./Register";
 
+/** Entry Component */
 const App = () => {
   const [state, setState] = React.useState(initialState);
   const reducers = createReducers(state, setState);
