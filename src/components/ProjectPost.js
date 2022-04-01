@@ -5,6 +5,25 @@ import { ACTIVE_TAB, Item, MESSAGES_TAB, PROJECT_TAB, SORT_BY, STATE } from "../
 import GlobalState from "../state/GlobalState";
 import AccountCircle from "@mui/icons-material/AccountCircle"
 
+/**
+ * @file Project post component
+ */
+
+/**
+ * @param topic
+ * @param name
+ * @param type
+ * @param date
+ * @param summary
+ * @param skillsList
+ * @param softwareList
+ * @param memberList
+ * @param maximumMembers
+ * @param advisor
+ * @param _id
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const ProjectPost = ({
                        post: {
                          topic,

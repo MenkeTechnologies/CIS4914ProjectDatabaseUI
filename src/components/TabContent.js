@@ -1,3 +1,7 @@
+/**
+ * @file Tab content
+ */
+
 import React from 'react';
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -13,6 +17,10 @@ import MessageForm from "./MessageForm";
 import { getMsgs } from "../service/Message";
 import { getPosts } from "../service/Post";
 
+/**
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const TabContent = () => {
 
   const {

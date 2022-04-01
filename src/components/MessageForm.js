@@ -11,8 +11,14 @@ import SendIcon from '@mui/icons-material/Send';
 import { createMessage } from '../service/Message';
 import GlobalState from "../state/GlobalState";
 import Snack from "./Snack";
+/**
+ * @file Message form component
+ */
 
-
+/**
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const MessageForm = () => {
 
   const {

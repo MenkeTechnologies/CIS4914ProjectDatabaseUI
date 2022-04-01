@@ -36,9 +36,15 @@ import { AppBar, Button } from "@mui/material";
 import GlobalState from "../state/GlobalState";
 import Box from "@mui/material/Box";
 import { Logout } from "@mui/icons-material";
+/**
+ * @file App Nav component
+ */
 
 
-/** Navbar Component */
+/**
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const AppNav = () => {
 
   const {

@@ -15,7 +15,14 @@ const paperStyle = {
   display: 'grid',
   height: '100%',
 }
+/**
+ * @file Offering post component
+ */
 
+/**
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const OfferingPostForm = () => {
 
   const {

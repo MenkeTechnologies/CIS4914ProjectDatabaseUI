@@ -8,10 +8,17 @@ import { STATE, USER_ID } from "../util/Consts";
 import GlobalState from "../state/GlobalState";
 import Snack from "./Snack";
 
+/**
+ * @file Seeking Post form
+ */
 const paperStyle = {
   padding: 20, margin: '30px auto', display: 'grid', height: '100%',
 }
 
+/**
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const SeekingPostForm = () => {
 
   const {[STATE]: {[USER_ID]: userId}} = React.useContext(GlobalState);

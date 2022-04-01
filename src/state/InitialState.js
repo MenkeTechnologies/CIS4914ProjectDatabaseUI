@@ -3,14 +3,19 @@ import {
   ACTIVE_TAB_STORED,
   DRAWER_OPEN,
   EMAIL,
-  LOGGED_IN, OFFERING_DATA,
-  REGISTER, SEEKING_DATA,
+  LOGGED_IN,
+  OFFERING_DATA,
+  REGISTER,
+  SEEKING_DATA,
   SORT_BY,
   USER_ID,
   USERNAME
 } from "../util/Consts";
 import { boolean } from "yup";
 
+/**
+ * @file initial global state
+ */
 const initialState = {
   [ACTIVE_TAB]: parseInt(localStorage.getItem(ACTIVE_TAB_STORED) || 0),
   [DRAWER_OPEN]: false,

@@ -3,7 +3,20 @@ import Grid from "@mui/material/Grid";
 import { Button, Stack } from "@mui/material";
 import { ACTIVE_TAB, Item, MESSAGES_TAB, POST_TAB, SORT_BY, STATE } from "../util/Consts";
 import GlobalState from "../state/GlobalState";
+/**
+ * @file Seeking Post component
+ */
 
+/**
+ * @param title
+ * @param summary
+ * @param name
+ * @param type
+ * @param preferredContact
+ * @param _id
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const SeekingPost = ({post: {title, summary, author: {name, type}, preferredContact, _id}}) => {
 
   const {

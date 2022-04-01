@@ -1,3 +1,6 @@
+/**
+ * @file UI constants
+ */
 import { styled } from "@mui/material/styles";
 
 import Paper from "@mui/material/Paper";
@@ -56,14 +59,24 @@ export const SEARCH_USER = USER + '/search'
 export const PROJECT_POST = 'project-post'
 export const SEEKING_POST = 'seeking-post'
 
+/**
+ * get api url
+ * @param path
+ * @returns {string}
+ */
 export const getApiUrl = (path) => `${API_HOSTNAME}/${path}`
 
+/**
+ * styled item
+ * @type {StyledComponent<PropsOf<OverridableComponent>>}
+ */
 export const Item = styled(Paper)(({theme}) => ({
   ...theme.typography.body2,
   padding: theme.spacing(1),
   textAlign: 'center',
   color: theme.palette.text.secondary,
 }));
+
 
 export const validationSchema = Yup.object().shape({
   email: Yup.string().email('Please enter valid email').required("Required"),
@@ -73,6 +86,15 @@ export const validationSchema = Yup.object().shape({
 })
 
 
+/**
+ *
+ * @param name
+ * @param email
+ * @param password
+ * @param contact
+ * @param date
+ * @returns {{date: number, password, contact, name, email}}
+ */
 export const createUser = (name, email, password, contact, date = Date.now()) => ({
   name,
   email,
@@ -81,6 +103,15 @@ export const createUser = (name, email, password, contact, date = Date.now()) =>
   date
 })
 
+/**
+ *
+ * @param name
+ * @param email
+ * @param password
+ * @param contact
+ * @param date
+ * @returns {{date: number, password, contact, name, email}}
+ */
 export const createSeekingPost = (name, email, password, contact, date = Date.now()) => ({
   name,
   email,
@@ -89,6 +120,15 @@ export const createSeekingPost = (name, email, password, contact, date = Date.no
   date
 })
 
+/**
+ *
+ * @param name
+ * @param email
+ * @param password
+ * @param contact
+ * @param date
+ * @returns {{date: number, password, contact, name, email}}
+ */
 export const createProjectPost = (name, email, password, contact, date = Date.now()) => ({
   name,
   email,

@@ -9,10 +9,16 @@ import {
   SHIFT,
   SORT_BY,
   TAB,
-  USER_ID, USER_TYPE,
+  USER_ID,
+  USER_TYPE,
   USERNAME
 } from "../util/Consts";
 
+/**
+ * Create reducers
+ * @param state
+ * @param setState
+ */
 export const createReducers = (state, setState) => {
   const addState = (obj) => setState({...state, ...obj})
   const stayOpen = (e) => e.type === KEYDOWN && (e.key === TAB || e.key === SHIFT);

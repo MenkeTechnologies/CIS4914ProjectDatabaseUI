@@ -16,6 +16,12 @@ export const getSeekingPost = async () =>
 export const getOfferingPost = async () =>
   (await axios.get(getApiUrl(PROJECT_POST))).data
 
+/**
+ * create seeking post
+ * @param project
+ * @param _id
+ * @returns {Promise<AxiosResponse<any>>}
+ */
 export const createSeekingPost = async (project, _id) =>
   (await axios.post(getApiUrl(SEEKING_POST), {
     date: Date.now,
@@ -27,6 +33,12 @@ export const createSeekingPost = async (project, _id) =>
     memberList: project.memberList
   }))
 
+/**
+ * create offering post
+ * @param project
+ * @param _id
+ * @returns {Promise<AxiosResponse<any>>}
+ */
 export const createOfferingPost = async (project, _id) =>
   (await axios.post(getApiUrl(PROJECT_POST), {
     date: Date.now,

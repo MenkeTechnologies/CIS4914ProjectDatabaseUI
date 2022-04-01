@@ -16,8 +16,15 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { checkEmail, createUser } from "../service/Auth";
 import Snack from "./Snack";
+/**
+ * @file Register component
+ */
 
 
+/**
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const Register = () => {
   const {notRegistering, registerUser} = React.useContext(GlobalState);
   const [registrationError, setRegistrationError] = React.useState(false);

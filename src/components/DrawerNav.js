@@ -34,8 +34,15 @@ import Drawer from "@mui/material/Drawer";
 import Toolbar from "@mui/material/Toolbar";
 import SearchButton from "./SearchButton";
 import GlobalState from "../state/GlobalState";
+/**
+ * @file Drawer Nav
+ */
 
 
+/**
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const DrawerNav = () => {
 
   const {

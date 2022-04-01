@@ -12,7 +12,14 @@ import { ErrorMessage, Field, Form, Formik } from 'formik'
 import * as Yup from "yup";
 import { checkUser } from "../service/Auth";
 import Snack from "./Snack";
+/**
+ * @file Login component
+ */
 
+/**
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const Login = () => {
   const {loginUser, registering} = React.useContext(GlobalState);
   const [loginErr, setLoginErr] = React.useState(false)
