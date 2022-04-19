@@ -10,9 +10,19 @@ import {
   SORT_BY,
   TAB,
   USER_ID,
+<<<<<<< HEAD
   USERNAME,
+=======
+  USER_TYPE,
+  USERNAME
+>>>>>>> 2953e21be1c062eb47e365b1adcb9221044fd297
 } from "../util/Consts";
 
+/**
+ * Create reducers
+ * @param state
+ * @param setState
+ */
 export const createReducers = (state, setState) => {
   const addState = (obj) => setState({ ...state, ...obj });
   const stayOpen = (e) => e.type === KEYDOWN && (e.key === TAB || e.key === SHIFT);
@@ -31,12 +41,14 @@ export const createReducers = (state, setState) => {
     addState({ [SORT_BY]: sort });
   };
 
-  const setUserName = (uname, email, id) => {
+  const setUserName = (uname, email, id, userType) => {
     state[USERNAME] = uname
     sessionStorage.setItem(USERNAME, uname)
     state[USER_ID] = id
     sessionStorage.setItem(USER_ID, id)
     state[EMAIL] = email
+    state[USER_TYPE] = userType
+    sessionStorage.setItem(USER_TYPE, userType)
     sessionStorage.setItem(EMAIL, email)
   };
 
@@ -48,15 +60,15 @@ export const createReducers = (state, setState) => {
     hideDrawerAndSetTab(e, tabIdx);
   }
 
-  const loginUser = (uname, email, id) => {
+  const loginUser = (uname, email, id, userType) => {
     hideDrawer();
-    setUserName(uname, email, id);
+    setUserName(uname, email, id, userType);
     sessionStorage.setItem(LOGGED_IN, 'true')
     addState({ [LOGGED_IN]: 'true' })
   }
 
-  const registerUser = (uname, email, id) => {
-    loginUser(uname, email, id)
+  const registerUser = (uname, email, id, userType) => {
+    loginUser(uname, email, id, userType)
   }
 
   const registering = () => {

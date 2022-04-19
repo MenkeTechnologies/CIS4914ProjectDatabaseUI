@@ -1,7 +1,18 @@
+/**
+ * @file Tab bar panel
+ */
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import React from "react";
 
+/**
+ * @param children
+ * @param value
+ * @param index
+ * @param other
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const TabPanel = ({children, value, index, ...other}) =>
   <div
     role="tabpanel"

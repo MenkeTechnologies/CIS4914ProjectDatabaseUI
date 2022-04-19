@@ -9,7 +9,14 @@ import { createReducers } from "../state/Reducers";
 import { LOGGED_IN, REGISTER } from "../util/Consts";
 import Login from "./Login";
 import Register from "./Register";
+/**
+ * @file Entry Component
+ */
 
+/**
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const App = () => {
   const [state, setState] = React.useState(initialState);
   const reducers = createReducers(state, setState);

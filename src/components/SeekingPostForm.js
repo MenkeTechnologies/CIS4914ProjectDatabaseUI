@@ -9,10 +9,14 @@ import * as Yup from 'yup'
 import { createSeekingPost } from '../service/Post';
 import { STATE, USER_ID, ALL_TAB, BLUE } from "../util/Consts";
 import GlobalState from "../state/GlobalState";
+import Snack from "./Snack";
 
 const SeekingPostForm = () => {
 
   const { [STATE]: { [USER_ID]: userId }, handleNavChange } = React.useContext(GlobalState);
+
+  const [success, setSuccess] = React.useState(false);
+  const [apiErr, setApiErr] = React.useState(false)
 
   const initialValues = {
     authorId: userId,
@@ -25,6 +29,8 @@ const SeekingPostForm = () => {
     memberContactToAdd: "",
     memberList: []
   }
+
+  const _id = "";
 
   const validationSchema = Yup.object().shape({
     title: Yup.string().required("Required"),
@@ -251,6 +257,12 @@ const SeekingPostForm = () => {
         </Grid>
       </form>
     </Paper>
+    <Snack open={success} set={() => setSuccess(false)}>
+      <Alert severity="success">Success</Alert>
+    </Snack>
+    <Snack open={apiErr} set={() => setApiErr(false)}>
+      <Alert severity="error">Error: could not connect to API</Alert>
+    </Snack>
   </React.Fragment>
 }
 export default SeekingPostForm;

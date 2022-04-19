@@ -4,7 +4,9 @@ import {
   DRAWER_OPEN,
   EMAIL,
   LOGGED_IN,
+  OFFERING_DATA,
   REGISTER,
+  SEEKING_DATA,
   SORT_BY,
   USER_ID,
   USERNAME,
@@ -17,7 +19,11 @@ import {
   SEARCH_VALUE,
   ALL_TAB,
 } from "../util/Consts";
+import { boolean } from "yup";
 
+/**
+ * @file initial global state
+ */
 const initialState = {
   [ACTIVE_TAB]: parseInt(localStorage.getItem(ACTIVE_TAB_STORED) || ALL_TAB),
   [DRAWER_OPEN]: false,

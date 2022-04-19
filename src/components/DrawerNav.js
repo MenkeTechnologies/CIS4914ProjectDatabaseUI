@@ -27,8 +27,15 @@ import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
 import Toolbar from "@mui/material/Toolbar";
 import GlobalState from "../state/GlobalState";
+/**
+ * @file Drawer Nav
+ */
 
 
+/**
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const DrawerNav = () => {
 
   const {

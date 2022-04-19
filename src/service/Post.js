@@ -16,7 +16,13 @@ export const getSeekingPost = async () =>
 export const getOfferingPost = async () =>
   (await axios.get(getApiUrl(PROJECT_POST))).data
 
-export const createSeekingPost = async (project) =>
+/**
+ * create seeking post
+ * @param project
+ * @param _id
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const createSeekingPost = async (project, _id) =>
   (await axios.post(getApiUrl(SEEKING_POST), {
     date: Date.now,
     author: project.authorId,
@@ -25,9 +31,15 @@ export const createSeekingPost = async (project) =>
     preferredContact: project.preferredContact,
     summary: project.summary,
     memberList: project.memberList
-  })).data
+  }))
 
-export const createOfferingPost = async (project) =>
+/**
+ * create offering post
+ * @param project
+ * @param _id
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const createOfferingPost = async (project, _id) =>
   (await axios.post(getApiUrl(PROJECT_POST), {
     date: Date.now,
     author: project.authorId,
@@ -37,6 +49,7 @@ export const createOfferingPost = async (project) =>
     summary: project.summary,
     skillsList: project.skillsList,
     softwareList: project.softwareList,
+    maximumMembers: project.maximumMembers,
     advisor: project.advisor,
     memberList: project.memberList
-  })).data
+  }))

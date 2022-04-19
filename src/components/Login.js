@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { Avatar, Button, Checkbox, FormControlLabel } from "@mui/material";
+import { Alert, Avatar, Button, Checkbox, FormControlLabel } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import GlobalState from "../state/GlobalState";
 import { BLUE, DK_GRAY, LT_GRAY, ORANGE, TITLE } from "../util/Consts";
@@ -11,14 +11,19 @@ import LoginIcon from '@mui/icons-material/Login';
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import * as Yup from "yup";
 import { checkUser } from "../service/Auth";
-import ErrorMessageBox from "./ErrorMessageBox";
+import Snack from "./Snack";
+/**
+ * @file Login component
+ */
 
+/**
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const Login = () => {
-  const {
-    loginUser, registering
-  } = React.useContext(GlobalState);
-
-  const [loginError, setLoginError] = React.useState('');
+  const {loginUser, registering} = React.useContext(GlobalState);
+  const [loginErr, setLoginErr] = React.useState(false)
+  const [apiErr, setApiErr] = React.useState(false)
 
   const paperStyle = {padding: 20, width: 300, margin: '30px auto'}
   const avatarStyle = {backgroundColor: ORANGE}
@@ -67,11 +72,11 @@ const Login = () => {
         <Formik initialValues={initialValues} validationSchema={validationSchema} isInitialValid={false}
                 validateOnMount={true}
                 onSubmit={(v) => {
-                  checkUser(v.email, v.password).then((match) => {
+                  checkUser(v.email, v.password, setApiErr).then((match) => {
                     if (match) {
-                      loginUser(match.name, match.email, match._id)
+                      loginUser(match.name, match.email, match._id, match.type)
                     } else {
-                      setLoginError('Error: user or password is not valid')
+                      setLoginErr(true)
                     }
                   }).catch((e) => {
                     console.error(e);
@@ -119,7 +124,14 @@ const Login = () => {
                     fullWidth>{"Register"}
             </Button>
 
-            {loginError ? <ErrorMessageBox msg={loginError}/> : <React.Fragment/>}
+
+            <Snack open={loginErr} set={() => setLoginErr(false)}>
+              <Alert severity="error">Error: email or password is not valid</Alert>
+            </Snack>
+
+            <Snack open={apiErr} set={() => setApiErr(false)}>
+              <Alert severity="error">Error: could not connect to API</Alert>
+            </Snack>
 
           </Form>)}
         </Formik>

@@ -1,3 +1,7 @@
+/**
+ * @file Tab content
+ */
+
 import React from 'react';
 import { Grid, Paper, Box } from "@mui/material";
 import { ACTIVE_TAB, ADVISOR_READY, AVAILABILITY, DATE_ASC, DATE_DESC, DATE_POSTED, OFFERING, POST_TYPE, PROJECT_ADVISED_ONLY, PROJECT_AVAILABLE_ONLY, SEEKING, SORT_BY, STATE, SEARCH_VALUE, USER_ID } from "../util/Consts";
@@ -13,6 +17,10 @@ import FacultyStatistics from './FacultyStatistics';
 import { getPosts } from "../service/Post";
 import { getMessages } from "../service/Message";
 
+/**
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const TabContent = () => {
 
   const { [STATE]: { [ACTIVE_TAB]: activeTab, [SORT_BY]: sortBy, [USER_ID]: userId } } = React.useContext(GlobalState);

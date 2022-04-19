@@ -1,3 +1,6 @@
+/**
+ * @file UI constants
+ */
 import { styled } from "@mui/material/styles";
 
 import Paper from "@mui/material/Paper";
@@ -9,6 +12,9 @@ export const USERNAME = LOCAL_STORAGE_PREFIX + 'username';
 export const LOGGED_IN = LOCAL_STORAGE_PREFIX + 'loggedIn';
 export const EMAIL = LOCAL_STORAGE_PREFIX + 'email'
 export const USER_ID = LOCAL_STORAGE_PREFIX + 'userId'
+export const OFFERING_DATA = LOCAL_STORAGE_PREFIX + 'offeringData'
+export const SEEKING_DATA = LOCAL_STORAGE_PREFIX + 'seekingData'
+export const USER_TYPE = LOCAL_STORAGE_PREFIX + 'userType'
 
 export const REGISTER = 'register';
 export const LEFT = 'left';
@@ -67,6 +73,11 @@ export const SEARCH_USER = USER + '/search'
 export const PROJECT_POST = 'project-post'
 export const SEEKING_POST = 'seeking-post'
 
+/**
+ * get api url
+ * @param path
+ * @returns {string}
+ */
 export const getApiUrl = (path) => `${API_HOSTNAME}/${path}`
 
 export const Item = styled(Paper)(({ theme }) => ({
@@ -76,6 +87,7 @@ export const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
+
 export const validationSchema = Yup.object().shape({
   email: Yup.string().email('Please enter valid email').required("Required"),
   password: Yup.string()
@@ -84,6 +96,15 @@ export const validationSchema = Yup.object().shape({
 })
 
 
+/**
+ *
+ * @param name
+ * @param email
+ * @param password
+ * @param contact
+ * @param date
+ * @returns {{date: number, password, contact, name, email}}
+ */
 export const createUser = (name, email, password, contact, date = Date.now()) => ({
   name,
   email,
@@ -92,6 +113,15 @@ export const createUser = (name, email, password, contact, date = Date.now()) =>
   date
 })
 
+/**
+ *
+ * @param name
+ * @param email
+ * @param password
+ * @param contact
+ * @param date
+ * @returns {{date: number, password, contact, name, email}}
+ */
 export const createSeekingPost = (name, email, password, contact, date = Date.now()) => ({
   name,
   email,
@@ -100,6 +130,15 @@ export const createSeekingPost = (name, email, password, contact, date = Date.no
   date
 })
 
+/**
+ *
+ * @param name
+ * @param email
+ * @param password
+ * @param contact
+ * @param date
+ * @returns {{date: number, password, contact, name, email}}
+ */
 export const createProjectPost = (name, email, password, contact, date = Date.now()) => ({
   name,
   email,

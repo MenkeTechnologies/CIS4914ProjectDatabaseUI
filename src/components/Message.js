@@ -4,7 +4,18 @@ import { Button, Chip, Stack } from "@mui/material";
 import { ACTIVE_TAB, Item, SORT_BY, STATE } from "../util/Consts";
 import GlobalState from "../state/GlobalState";
 import AccountCircle from '@mui/icons-material/AccountCircle';
+/**
+ * @file Message component
+ */
 
+/**
+ * @param sender
+ * @param date
+ * @param subject
+ * @param body
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const Message = ({message: {sender, date, subject, body}}) => {
 
   const {

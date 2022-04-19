@@ -1,17 +1,32 @@
 import axios from "axios";
 import { getApiUrl, SEARCH_USER, USER } from "../util/Consts";
 
-export const checkEmail = (email) =>
+/**
+ * query for email
+ * @param email
+ * @param showErr
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const checkEmail = (email, showErr) =>
   axios.post(getApiUrl(SEARCH_USER), {
     email,
   }).then(res => {
     console.log(res);
     return res.data[0]
 
-  }).catch(err => {
-    console.error(err);
+  }).catch(e => {
+    showErr(true);
+    console.error(e);
   })
-export const checkUser = (email, password) =>
+
+/**
+ * query for user
+ * @param email
+ * @param password
+ * @param showErr
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const checkUser = (email, password, showErr) =>
   axios.post(getApiUrl(SEARCH_USER), {
     email,
     password
@@ -19,26 +34,44 @@ export const checkUser = (email, password) =>
     console.log(res);
     return res.data[0]
 
-  }).catch(err => {
-    console.error(err);
+  }).catch(e => {
+    console.error(e)
+    showErr(true);
   })
 
+/**
+ * query for user by id
+ * @param _id
+ * @returns {Promise<AxiosResponse<any>>}
+ */
 export const findUserById = (_id) =>
   axios.post(getApiUrl(SEARCH_USER), {
     _id,
   }).then(res => {
-    console.log(res);
     return res.data[0]
 
-  }).catch(err => {
-    console.error(err);
+  }).catch(e => {
+    console.error(e);
   })
 
-
-export const createUser = async (name, email, password, type) =>
-  (await axios.post(getApiUrl(USER), {
+/**
+ * create user in API
+ * @param name
+ * @param email
+ * @param password
+ * @param type
+ * @param showErr
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const createUser = async (name, email, password, type, showErr) =>
+  axios.post(getApiUrl(USER), {
     name,
     email,
     password,
     type
-  })).data
+  }).then(res => {
+    return res.data;
+  }).catch(e => {
+    console.error(e);
+    showErr(true);
+  })

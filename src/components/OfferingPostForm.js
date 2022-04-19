@@ -9,10 +9,10 @@ import ContactMailIcon from '@mui/icons-material/ContactMail';
 import ClearIcon from '@mui/icons-material/Clear';
 import { FieldArray, FormikProvider, useFormik } from 'formik'
 import * as Yup from 'yup'
-import { boolean } from 'yup'
 import { createOfferingPost } from '../service/Post';
 import { ALL_TAB, BLUE, STATE, USER_ID } from "../util/Consts";
 import GlobalState from "../state/GlobalState";
+import Snack from "./Snack";
 
 const OfferingPostForm = () => {
 
@@ -24,26 +24,30 @@ const OfferingPostForm = () => {
 
   const initialValues = {
     authorId: userId,
-    authorType: "Student",
-    topic: "",
-    preferredContact: "",
-    summary: "",
-    skillToAdd: "",
-    skillsList: [],
-    hasSkill: boolean,
-    softwareToAdd: "",
-    softwareList: [],
-    advisor: "",
-    memberNameToAdd: "",
-    memberEmailToAdd: "",
-    memberContactToAdd: "",
-    memberList: []
+    authorType,
+    topic,
+    preferredContact,
+    summary,
+    skillToAdd,
+    skillsList,
+    hasSkill,
+    softwareToAdd,
+    softwareList,
+    advisor,
+    memberNameToAdd,
+    memberEmailToAdd,
+    memberContactToAdd,
+    memberList,
+    maximumMembers,
   }
+  const [success, setSuccess] = React.useState(false);
+  const [apiErr, setApiErr] = React.useState(false)
 
   const validationSchema = Yup.object().shape({
     topic: Yup.string().required("Required"),
     preferredContact: Yup.string().required("Required"),
     summary: Yup.string().required("Required"),
+    maximumMembers: Yup.number().min(1).max(6).required("Required"),
     skillToAdd: Yup.string().when("skillsList", {
       is: value => !(value.length >= 1),
       then: Yup.string().required("Please add at least one applicable project skill")

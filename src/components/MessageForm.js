@@ -1,6 +1,6 @@
 import * as React from 'react';
 import TextField from '@mui/material/TextField';
-import { Button, Stack, Typography } from "@mui/material";
+import { Alert, Button, Stack, Typography } from "@mui/material";
 import { BLUE, STATE, USER_ID, USERNAME } from "../util/Consts";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
@@ -10,13 +10,24 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import SendIcon from '@mui/icons-material/Send';
 import { createMessage } from '../service/Message';
 import GlobalState from "../state/GlobalState";
+import Snack from "./Snack";
+/**
+ * @file Message form component
+ */
 
-
+/**
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const MessageForm = () => {
 
   const {
     [STATE]: {[USERNAME]: username, [USER_ID]: userId}
   } = React.useContext(GlobalState);
+  const [success, setSuccess] = React.useState(false);
+  const [apiErr, setApiErr] = React.useState(false)
+  const [messageErr, setMessageErr] = React.useState(false)
+
   const paperStyle = {
     padding: 20, margin: '30px auto', display: 'grid', height: '100%', width: "25%"
   }
@@ -44,7 +55,18 @@ const MessageForm = () => {
                 validationSchema={validationSchema}
                 onSubmit={(v) => {
                   //TODO need to validate recipient userId
-                  createMessage(v, userId)
+                  createMessage(v, userId).then((resp) => {
+
+                    if (resp.status === 200) {
+                      setSuccess(true);
+                    } else {
+                      setMessageErr(true);
+                    }
+
+                  }).catch((e) => {
+                    setMessageErr(true);
+                    console.error(e);
+                  })
                 }}>
           {(props) => (<Form>
             <Grid container item spacing={2}>
@@ -106,6 +128,15 @@ const MessageForm = () => {
 
       </Paper>
     </Grid>
+    <Snack open={success} set={() => setSuccess(false)}>
+      <Alert severity="success">Success</Alert>
+    </Snack>
+    <Snack open={apiErr} set={() => setApiErr(false)}>
+      <Alert severity="error">Error: could not connect to API</Alert>
+    </Snack>
+    <Snack open={messageErr} set={() => setMessageErr(false)}>
+      <Alert severity="error">Error: could not send message to API</Alert>
+    </Snack>
 
   </React.Fragment>
 }

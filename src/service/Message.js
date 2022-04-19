@@ -6,6 +6,12 @@ export const getMessages = async () =>
 
 export const getMsgs = async () => await getMessages();
 
+/**
+ * create message
+ * @param message
+ * @param userId
+ * @returns {Promise<AxiosResponse<any>>}
+ */
 export const createMessage = async (message, userId) =>
   (await axios.post(getApiUrl(MESSAGE), {
     sender: userId,
@@ -13,5 +19,5 @@ export const createMessage = async (message, userId) =>
     subject: message.subject,
     body: message.body,
     date: Date.now()
-  })).data
+  }))
 

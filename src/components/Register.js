@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { Avatar, Button, Checkbox, FormControlLabel } from "@mui/material";
+import { Alert, Avatar, Button, Checkbox, FormControlLabel } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import GlobalState from "../state/GlobalState";
 import { BLUE, DK_GRAY, FACULTY, LT_GRAY, ORANGE, STUDENT, TITLE } from "../util/Consts";
@@ -15,15 +15,20 @@ import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { checkEmail, createUser } from "../service/Auth";
+import Snack from "./Snack";
+/**
+ * @file Register component
+ */
 
 
+/**
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const Register = () => {
-  const {
-    notRegistering,
-    registerUser
-  } = React.useContext(GlobalState);
-
-  const [registrationError, setRegistrationError] = React.useState('');
+  const {notRegistering, registerUser} = React.useContext(GlobalState);
+  const [registrationError, setRegistrationError] = React.useState(false);
+  const [apiErr, setApiErr] = React.useState(false)
 
   const paperStyle = {padding: 20, width: 300, margin: '30px auto'}
   const avatarStyle = {backgroundColor: ORANGE}
@@ -76,19 +81,21 @@ const Register = () => {
         <Formik initialValues={initialValues} isInitialValid={false} validateOnMount={true}
                 validationSchema={validationSchema}
                 onSubmit={(v) => {
-                  checkEmail(v.email).then((match) => {
+                  checkEmail(v.email, setApiErr).then((match) => {
                     if (match) {
                       setRegistrationError('Error: account already exists for email.')
                     } else {
-                      createUser(v.username, v.email, v.password, v.userType).then((data) => {
-                        registerUser(v.username, v.email, data._id)
+                      createUser(v.username, v.email, v.password, v.userType, setApiErr).then((resp) => {
+                        registerUser(v.username, v.email, resp._id, resp.type)
                       }).catch((e) => {
                         console.error(e);
+                        setApiErr(true);
                       })
 
                     }
                   }).catch((e) => {
                     console.error(e);
+                    setApiErr(true);
                   })
 
                 }}>
@@ -158,12 +165,16 @@ const Register = () => {
                       fullWidth>{"Login"}
               </Button>
 
-              {registrationError ? <h1>{registrationError}</h1> : <React.Fragment/>}
-
-
             </Form>
           )}
         </Formik>
+
+        <Snack open={registrationError} set={() => setRegistrationError(false)}>
+          <Alert severity="error">Error: account already exists for email.</Alert>
+        </Snack>
+        <Snack open={apiErr} set={() => setApiErr(false)}>
+          <Alert severity="error">Error: could not connect to API</Alert>
+        </Snack>
 
       </Paper>
     </Grid>
