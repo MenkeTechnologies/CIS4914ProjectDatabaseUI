@@ -1,50 +1,36 @@
 import React from 'react';
 import Grid from "@mui/material/Grid";
-import { Button, Stack, Paper, Typography, Chip, List, ListItem, ListItemText } from "@mui/material";
-import { ACTIVE_TAB, Item, MESSAGES_TAB, POST_TAB, SORT_BY, STATE } from "../util/Consts";
-import GlobalState from "../state/GlobalState";
+import { Typography, Chip } from "@mui/material";
+import { BLUE } from "../util/Consts";
 import moment from 'moment';
 
-const SeekingPost = ({ post: { title, date, summary, name, preferredContact, memberList } }) => {
+const SeekingPost = ({ post: { title, date, summary, maximumMembers, preferredContact, memberList } }) => {
 
-  const {
-    [STATE]: { [ACTIVE_TAB]: activeTab, [SORT_BY]: sortBy }, hideDrawer, handleNavChange, hideDrawerAndSetTab,
-  } = React.useContext(GlobalState);
-
-  return <Grid item xs={6}>
-    <Paper elevation={3}>
-      <Grid container justifyContent="center">
-        <Grid item xs={10}>
-          <Typography variant="h4">{title}</Typography>
+  return <Grid container spacing={3}>
+    <Grid item xs={12} sx={{ textAlign: "center" }}>
+      <Typography variant="h4">{title}</Typography>
+    </Grid>
+    <Grid item xs={12} sx={{ textAlign: "center" }}>
+      <Chip label={moment(date).format("MM/DD/YYYY")} variant="outlined" sx={{ backgroundColor: BLUE, color: "white" }} />
+    </Grid>
+    <Grid item xs={12}>
+      <Typography variant="h6">Contact: {preferredContact}</Typography>
+    </Grid>
+    <Grid item xs={12} sx={{ marginBottom: "40px" }}>
+      <Typography variant="body1">
+        {summary}
+      </Typography>
+    </Grid>
+    <Grid item xs={12}>
+      <Grid container justifyContent={"space-between"}>
+        <Grid item>
+          <Chip label={"Request Join"} variant="outlined" sx={{ minWidth: "90px", backgroundColor: BLUE, color: "white" }} />
         </Grid>
-        <Grid item xs={2}>
-          <Chip label={moment(date).format("MM/DD/YYYY")} variant="outlined" />
-        </Grid>
-        <Grid item xs={6}>
-          <Typography variant="h6">{"Student Name"}</Typography>
-        </Grid>
-        <Grid item xs={6}>
-          <Typography variant="h6">{preferredContact}</Typography>
-        </Grid>
-        <Grid item xs={12}>
-          <Typography variant="body1">
-            {summary}
-          </Typography>
-        </Grid>
-        <Grid item xs={12}>
-          <Typography variant="h6">Members</Typography>
-          <List>
-            {memberList.map((member) => (
-              <ListItem divider>
-                <ListItemText>
-                  <Typography variant="body1">{member.name} - {member.contact}</Typography>
-                </ListItemText>
-              </ListItem>
-            ))}
-          </List>
+        <Grid item>
+          <Chip label={memberList.length.toString() + "/" + maximumMembers} variant="outlined" sx={{ minWidth: "90px", backgroundColor: BLUE, color: "white" }} />
         </Grid>
       </Grid>
-    </Paper>
+    </Grid>
   </Grid>
 }
 

@@ -1,24 +1,26 @@
 import * as React from 'react';
-import { Button, Chip, Divider, Grid, IconButton, InputAdornment, Paper, TextField } from '@mui/material';
+import { Button, Chip, Divider, Grid, IconButton, InputAdornment, Paper, TextField, Typography, Stack } from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import DeleteIcon from '@mui/icons-material/Delete';
+import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
+import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
+import ContactMailIcon from '@mui/icons-material/ContactMail';
+import ClearIcon from '@mui/icons-material/Clear';
 import { FieldArray, FormikProvider, useFormik } from 'formik'
 import * as Yup from 'yup'
 import { boolean } from 'yup'
 import { createOfferingPost } from '../service/Post';
-import { STATE, USER_ID } from "../util/Consts";
+import { ALL_TAB, BLUE, STATE, USER_ID } from "../util/Consts";
 import GlobalState from "../state/GlobalState";
-
-const paperStyle = {
-  padding: 20,
-  margin: '30px auto',
-  display: 'grid',
-  height: '100%',
-}
 
 const OfferingPostForm = () => {
 
-  const {[STATE]: {[USER_ID]: userId}} = React.useContext(GlobalState);
+  const {
+    [STATE]: { [USER_ID]: userId },
+    handleNavChange,
+
+  } = React.useContext(GlobalState);
 
   const initialValues = {
     authorId: userId,
@@ -57,20 +59,20 @@ const OfferingPostForm = () => {
     validationSchema: validationSchema,
     onSubmit: values => {
       createOfferingPost(values)
-      //TODO add success message to UI
+        .then(handleNavChange(ALL_TAB));
     }
   });
 
   return <React.Fragment>
-    <Paper elevation={10} style={paperStyle}>
+    <Paper elevation={10} fullWidth sx={{ marginTop: 3 }}>
       <form onSubmit={formik.handleSubmit}>
-        <Grid container spacing={4} justifyContent="center">
+        <Grid container spacing={3} justifyContent={"center"} sx={{ padding: 3, paddingTop: 0 }}>
           <Grid item xs={12}>
-            <Divider>
-              <Chip label="Project Data"/>
+            <Divider sx={{ "&::before, &::after": { borderColor: BLUE, } }}>
+              <Chip label="Project Details" sx={{ backgroundColor: BLUE, color: "white" }} />
             </Divider>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} md={6}>
             <TextField
               fullWidth
               required
@@ -83,7 +85,7 @@ const OfferingPostForm = () => {
               helperText={formik.touched.topic && formik.errors.topic}
             />
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={12} sm={6} md={3}>
             <TextField
               fullWidth
               id="advisor"
@@ -95,7 +97,7 @@ const OfferingPostForm = () => {
               helperText={formik.touched.advisor && formik.errors.advisor}
             />
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={12} sm={6} md={3}>
             <TextField
               fullWidth
               required
@@ -123,10 +125,10 @@ const OfferingPostForm = () => {
               rows={4}
             />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} sm={12} md={6}>
             <FormikProvider value={formik}>
               <FieldArray name="skillsList">
-                {({remove, push}) => (
+                {({ remove, push }) => (
                   <>
                     <TextField
                       fullWidth
@@ -143,27 +145,32 @@ const OfferingPostForm = () => {
                             push(formik.values.skillToAdd)
                             formik.setFieldValue('skillToAdd', '');
                           }}>
-                            <AddCircleOutlineIcon/>
+                            <AddCircleOutlineIcon sx={{ color: BLUE }} />
                           </IconButton>
                         </InputAdornment>
                       }}
                     />
-                    {formik.values.skillsList.length > 0 && formik.values.skillsList.map((skill, index) => (
-                      <Chip label={skill} style={{marginTop: "5px", marginRight: "5px"}} variant="outlined"
-                            onDelete={() => {
-                              remove(index);
-                            }
-                            }/>
-                    ))}
+                    <Grid container direction={"row"}>
+                      {formik.values.skillsList.length > 0 && formik.values.skillsList.map((skill, index) => (
+                        <Grid item sx={{ border: 1, borderColor: "rgba(0, 0, 0, 0.23)", borderRadius: "30px", marginTop: 1, marginRight: 1, padding: 2 }} maxWidth={"100%"}>
+                          <Stack direction="row" alignItems="center" gap={1} >
+                            <ClearIcon onClick={() => remove(index)} sx={{ fontSize: 18 }}></ClearIcon>
+                            <Typography style={{ wordWrap: "break-word" }} maxWidth={"95%"}>
+                              {skill}
+                            </Typography>
+                          </Stack>
+                        </Grid>
+                      ))}
+                    </Grid>
                   </>
                 )}
               </FieldArray>
             </FormikProvider>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} sm={12} md={6}>
             <FormikProvider value={formik}>
               <FieldArray name="softwareList">
-                {({remove, push}) => (
+                {({ remove, push }) => (
                   <>
                     <TextField
                       fullWidth
@@ -180,30 +187,38 @@ const OfferingPostForm = () => {
                             push(formik.values.softwareToAdd)
                             formik.setFieldValue('softwareToAdd', '');
                           }}>
-                            <AddCircleOutlineIcon/>
+                            <AddCircleOutlineIcon sx={{ color: BLUE }} />
                           </IconButton>
                         </InputAdornment>
                       }}
                     />
-                    {formik.values.softwareList.length > 0 && formik.values.softwareList.map((software, index) => (
-                      <Chip label={software} style={{marginTop: "5px", marginRight: "5px"}} variant="outlined"
-                            onDelete={() => remove(index)}/>
-                    ))}
+                    <Grid container direction={"row"}>
+                      {formik.values.softwareList.length > 0 && formik.values.softwareList.map((software, index) => (
+                        <Grid item sx={{ border: 1, borderColor: "rgba(0, 0, 0, 0.23)", borderRadius: "30px", marginTop: 1, marginRight: 1, padding: 2 }} maxWidth={"100%"}>
+                          <Stack direction="row" alignItems="center" gap={1} >
+                            <ClearIcon onClick={() => remove(index)} sx={{ fontSize: 18 }}></ClearIcon>
+                            <Typography style={{ wordWrap: "break-word" }} maxWidth={"95%"}>
+                              {software}
+                            </Typography>
+                          </Stack>
+                        </Grid>
+                      ))}
+                    </Grid>
                   </>
                 )}
               </FieldArray>
             </FormikProvider>
           </Grid>
           <Grid item xs={12}>
-            <Divider>
-              <Chip label="Additional Members"/>
+            <Divider sx={{ "&::before, &::after": { borderColor: BLUE, } }}>
+              <Chip label="Additional Members" sx={{ backgroundColor: BLUE, color: "white" }} />
             </Divider>
           </Grid>
           <FormikProvider value={formik}>
             <FieldArray name="memberList">
-              {({remove, push}) => (
-                <>
-                  <Grid item xs={4}>
+              {({ remove, push }) => (
+                <Grid container alignItems={"center"} justifyContent={"center"} padding={3} spacing={3}>
+                  <Grid item xs={12} md={4}>
                     <TextField
                       fullWidth
                       id="memberNameToAdd"
@@ -215,7 +230,7 @@ const OfferingPostForm = () => {
                       helperText={formik.touched.memberNameToAdd && formik.errors.memberNameToAdd}
                     />
                   </Grid>
-                  <Grid item xs={4}>
+                  <Grid item xs={12} md={4}>
                     <TextField
                       fullWidth
                       id="memberContactToAdd"
@@ -227,7 +242,7 @@ const OfferingPostForm = () => {
                       helperText={formik.touched.memberContactToAdd && formik.errors.memberContactToAdd}
                     />
                   </Grid>
-                  <Grid item xs={3}>
+                  <Grid item xs={12} md={3}>
                     <TextField
                       fullWidth
                       id="memberEmailToAdd"
@@ -242,7 +257,7 @@ const OfferingPostForm = () => {
                       }}
                     />
                   </Grid>
-                  <Grid item xs={1}>
+                  <Grid item xs={12} md={1}>
                     <Button
                       type="button"
                       variant="outlined"
@@ -257,59 +272,80 @@ const OfferingPostForm = () => {
                         formik.setFieldValue('memberContactToAdd', '');
                         formik.setFieldValue('memberEmailToAdd', '');
                       }}
-                    >Add
+                    ><PersonAddAlt1Icon></PersonAddAlt1Icon>
                     </Button>
                   </Grid>
                   {formik.values.memberList.length > 0 && formik.values.memberList.map((member, index) => (
                     <>
-                      <Grid item xs={4}>
+                      <Grid item xs={12} md={4}>
                         <TextField
                           fullWidth
                           id={index + "name"}
                           defaultValue={member.memberName}
                           InputProps={{
                             readOnly: true,
+                            startAdornment:
+                              <InputAdornment position="end">
+                                <IconButton edge="start">
+                                  <AccountBoxIcon sx={{ color: BLUE, margin: 1 }} />
+                                </IconButton>
+                              </InputAdornment>
                           }}
                           variant="standard"
                         />
                       </Grid>
-                      <Grid item xs={4}>
+                      <Grid item xs={12} md={4}>
                         <TextField
                           fullWidth
                           id={index + "contact"}
                           defaultValue={member.memberContact}
                           InputProps={{
                             readOnly: true,
+                            startAdornment:
+                              <InputAdornment position="end">
+                                <IconButton edge="start">
+                                  <ContactPhoneIcon sx={{ color: BLUE, margin: 1 }} />
+                                </IconButton>
+                              </InputAdornment>
                           }}
                           variant="standard"
                         />
                       </Grid>
-                      <Grid item xs={3}>
+                      <Grid item xs={12} md={3}>
                         <TextField
                           fullWidth
                           id={index + "email"}
                           defaultValue={member.memberEmail}
                           InputProps={{
                             readOnly: true,
+                            startAdornment:
+                              <InputAdornment position="end">
+                                <IconButton edge="start">
+                                  <ContactMailIcon sx={{ color: BLUE, margin: 1 }} />
+                                </IconButton>
+                              </InputAdornment>
                           }}
                           variant="standard"
                         />
                       </Grid>
-                      <Grid item xs={1}>
-                        <IconButton
+                      <Grid item xs={12} md={1} >
+                        <Button
+                          type="button"
+                          variant="outlined"
                           size="small"
+                          fullWidth
+                          color="error"
                           onClick={() => remove(index)}>
-                          <DeleteIcon/>
-                        </IconButton>
+                          <PersonRemoveIcon></PersonRemoveIcon>
+                        </Button>
                       </Grid>
                     </>
                   ))}
-                </>
+                </Grid>
               )}
             </FieldArray>
           </FormikProvider>
-
-          <Grid item xs={2}>
+          <Grid item xs={3}>
             <Button
               type="submit"
               variant="contained"
@@ -318,7 +354,7 @@ const OfferingPostForm = () => {
             >Post
             </Button>
           </Grid>
-          <Grid item xs={2}>
+          <Grid item xs={3}>
             <Button
               type="button"
               onClick={formik.resetForm}
@@ -331,7 +367,7 @@ const OfferingPostForm = () => {
         </Grid>
       </form>
     </Paper>
-  </React.Fragment>
+  </React.Fragment >
 }
 export default OfferingPostForm;
 

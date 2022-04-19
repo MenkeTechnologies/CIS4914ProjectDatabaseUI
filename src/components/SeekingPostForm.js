@@ -1,19 +1,18 @@
 import * as React from 'react';
 import { Button, Chip, Divider, Grid, IconButton, InputAdornment, Paper, TextField } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import { FieldArray, FormikProvider, useFormik } from 'formik'
+import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
+import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
+import ContactMailIcon from '@mui/icons-material/ContactMail'; import { FieldArray, FormikProvider, useFormik } from 'formik'
 import * as Yup from 'yup'
 import { createSeekingPost } from '../service/Post';
-import { STATE, USER_ID } from "../util/Consts";
+import { STATE, USER_ID, ALL_TAB, BLUE } from "../util/Consts";
 import GlobalState from "../state/GlobalState";
-
-const paperStyle = {
-  padding: 20, margin: '30px auto', display: 'grid', height: '100%',
-}
 
 const SeekingPostForm = () => {
 
-  const {[STATE]: {[USER_ID]: userId}} = React.useContext(GlobalState);
+  const { [STATE]: { [USER_ID]: userId }, handleNavChange } = React.useContext(GlobalState);
 
   const initialValues = {
     authorId: userId,
@@ -36,17 +35,17 @@ const SeekingPostForm = () => {
   const formik = useFormik({
     initialValues: initialValues, validationSchema: validationSchema, onSubmit: values => {
       createSeekingPost(values)
-      //TODO add success message to UI
+        .then(handleNavChange(ALL_TAB));
     }
   });
 
   return <React.Fragment>
-    <Paper elevation={10} style={paperStyle}>
+    <Paper elevation={10} fullWidth sx={{ marginTop: 3 }}>
       <form onSubmit={formik.handleSubmit}>
-        <Grid container spacing={4} justifyContent="center">
+        <Grid container spacing={3} justifyContent={"center"} sx={{ padding: 3, paddingTop: 0 }}>
           <Grid item xs={12}>
-            <Divider>
-              <Chip label="Student Data"/>
+            <Divider sx={{ "&::before, &::after": { borderColor: BLUE, } }}>
+              <Chip label="Student Details" sx={{ backgroundColor: BLUE, color: "white" }} />
             </Divider>
           </Grid>
           <Grid item xs={6}>
@@ -94,112 +93,138 @@ const SeekingPostForm = () => {
           </Grid>
 
           <Grid item xs={12}>
-            <Divider>
-              <Chip label="Additional Members"/>
+            <Divider sx={{ "&::before, &::after": { borderColor: BLUE, } }}>
+              <Chip label="Additional Members" sx={{ backgroundColor: BLUE, color: "white" }} />
             </Divider>
           </Grid>
           <FormikProvider value={formik}>
             <FieldArray name="memberList">
-              {({remove, push}) => (<>
-                <Grid item xs={4}>
-                  <TextField
-                    fullWidth
-                    id="memberNameToAdd"
-                    name="memberNameToAdd"
-                    label="Member Name"
-                    value={formik.values.memberNameToAdd}
-                    onChange={formik.handleChange}
-                    error={formik.touched.memberNameToAdd && Boolean(formik.errors.memberNameToAdd)}
-                    helperText={formik.touched.memberNameToAdd && formik.errors.memberNameToAdd}
-                  />
-                </Grid>
-                <Grid item xs={4}>
-                  <TextField
-                    fullWidth
-                    id="memberContactToAdd"
-                    name="memberContactToAdd"
-                    label="Member Contact"
-                    value={formik.values.memberContactToAdd}
-                    onChange={formik.handleChange}
-                    error={formik.touched.memberContactToAdd && Boolean(formik.errors.memberContactToAdd)}
-                    helperText={formik.touched.memberContactToAdd && formik.errors.memberContactToAdd}
-                  />
-                </Grid>
-                <Grid item xs={3}>
-                  <TextField
-                    fullWidth
-                    id="memberEmailToAdd"
-                    name="memberEmailToAdd"
-                    label="Member Email"
-                    value={formik.values.memberEmailToAdd}
-                    onChange={formik.handleChange}
-                    error={formik.touched.memberEmailToAdd && Boolean(formik.errors.memberEmailToAdd)}
-                    helperText={formik.touched.memberEmailToAdd && formik.errors.memberEmailToAdd}
-                    InputProps={{
-                      endAdornment: <InputAdornment position="end">@ufl.edu</InputAdornment>,
-                    }}
-                  />
-                </Grid>
-                <Grid item xs={1}>
-                  <Button
-                    type="button"
-                    variant="outlined"
-                    fullWidth
-                    onClick={() => {
-                      push({
-                        memberName: formik.values.memberNameToAdd,
-                        memberContact: formik.values.memberContactToAdd,
-                        memberEmail: formik.values.memberEmailToAdd + "@ufl.edu"
-                      });
-                      formik.setFieldValue('memberNameToAdd', '');
-                      formik.setFieldValue('memberContactToAdd', '');
-                      formik.setFieldValue('memberEmailToAdd', '');
-                    }}
-                  >Add
-                  </Button>
-                </Grid>
-                {formik.values.memberList.length > 0 && formik.values.memberList.map((member, index) => (<>
-                  <Grid item xs={4}>
+              {({ remove, push }) => (<>
+                <Grid container alignItems={"center"} justifyContent={"center"} padding={3} spacing={3}>
+                  <Grid item xs={12} md={4}>
                     <TextField
                       fullWidth
-                      id={index + "name"}
-                      defaultValue={member.memberName}
-                      InputProps={{
-                        readOnly: true,
-                      }}
-                      variant="standard"
+                      id="memberNameToAdd"
+                      name="memberNameToAdd"
+                      label="Member Name"
+                      value={formik.values.memberNameToAdd}
+                      onChange={formik.handleChange}
+                      error={formik.touched.memberNameToAdd && Boolean(formik.errors.memberNameToAdd)}
+                      helperText={formik.touched.memberNameToAdd && formik.errors.memberNameToAdd}
                     />
                   </Grid>
-                  <Grid item xs={4}>
+                  <Grid item xs={12} md={4}>
                     <TextField
                       fullWidth
-                      id={index + "contact"}
-                      defaultValue={member.memberContact}
-                      InputProps={{
-                        readOnly: true,
-                      }}
-                      variant="standard"
+                      id="memberContactToAdd"
+                      name="memberContactToAdd"
+                      label="Member Contact"
+                      value={formik.values.memberContactToAdd}
+                      onChange={formik.handleChange}
+                      error={formik.touched.memberContactToAdd && Boolean(formik.errors.memberContactToAdd)}
+                      helperText={formik.touched.memberContactToAdd && formik.errors.memberContactToAdd}
                     />
                   </Grid>
-                  <Grid item xs={3}>
+                  <Grid item xs={12} md={3}>
                     <TextField
                       fullWidth
-                      id={index + "email"}
-                      defaultValue={member.memberEmail}
+                      id="memberEmailToAdd"
+                      name="memberEmailToAdd"
+                      label="Member Email"
+                      value={formik.values.memberEmailToAdd}
+                      onChange={formik.handleChange}
+                      error={formik.touched.memberEmailToAdd && Boolean(formik.errors.memberEmailToAdd)}
+                      helperText={formik.touched.memberEmailToAdd && formik.errors.memberEmailToAdd}
                       InputProps={{
-                        readOnly: true,
+                        endAdornment: <InputAdornment position="end">@ufl.edu</InputAdornment>,
                       }}
-                      variant="standard"
                     />
                   </Grid>
-                  <Grid item xs={1}>
-                    <IconButton
-                      size="small"
-                      onClick={() => remove(index)}>
-                      <DeleteIcon/>
-                    </IconButton>
+                  <Grid item xs={12} md={1}>
+                    <Button
+                      type="button"
+                      variant="outlined"
+                      fullWidth
+                      onClick={() => {
+                        push({
+                          memberName: formik.values.memberNameToAdd,
+                          memberContact: formik.values.memberContactToAdd,
+                          memberEmail: formik.values.memberEmailToAdd + "@ufl.edu"
+                        });
+                        formik.setFieldValue('memberNameToAdd', '');
+                        formik.setFieldValue('memberContactToAdd', '');
+                        formik.setFieldValue('memberEmailToAdd', '');
+                      }}
+                    ><PersonAddAlt1Icon></PersonAddAlt1Icon>
+                    </Button>
                   </Grid>
-                </>))}
+                  {formik.values.memberList.length > 0 && formik.values.memberList.map((member, index) => (
+                    <>
+                      <Grid item xs={12} md={4}>
+                        <TextField
+                          fullWidth
+                          id={index + "name"}
+                          defaultValue={member.memberName}
+                          InputProps={{
+                            readOnly: true,
+                            startAdornment:
+                              <InputAdornment position="end">
+                                <IconButton edge="start">
+                                  <AccountBoxIcon sx={{ color: BLUE, margin: 1 }} />
+                                </IconButton>
+                              </InputAdornment>
+                          }}
+                          variant="standard"
+                        />
+                      </Grid>
+                      <Grid item xs={12} md={4}>
+                        <TextField
+                          fullWidth
+                          id={index + "contact"}
+                          defaultValue={member.memberContact}
+                          InputProps={{
+                            readOnly: true,
+                            startAdornment:
+                              <InputAdornment position="end">
+                                <IconButton edge="start">
+                                  <ContactPhoneIcon sx={{ color: BLUE, margin: 1 }} />
+                                </IconButton>
+                              </InputAdornment>
+                          }}
+                          variant="standard"
+                        />
+                      </Grid>
+                      <Grid item xs={12} md={3}>
+                        <TextField
+                          fullWidth
+                          id={index + "email"}
+                          defaultValue={member.memberEmail}
+                          InputProps={{
+                            readOnly: true,
+                            startAdornment:
+                              <InputAdornment position="end">
+                                <IconButton edge="start">
+                                  <ContactMailIcon sx={{ color: BLUE, margin: 1 }} />
+                                </IconButton>
+                              </InputAdornment>
+                          }}
+                          variant="standard"
+                        />
+                      </Grid>
+                      <Grid item xs={12} md={1} >
+                        <Button
+                          type="button"
+                          variant="outlined"
+                          size="small"
+                          fullWidth
+                          color="error"
+                          onClick={() => remove(index)}>
+                          <PersonRemoveIcon></PersonRemoveIcon>
+                        </Button>
+                      </Grid>
+                    </>
+                  ))}
+                </Grid>
               </>)}
             </FieldArray>
           </FormikProvider>
