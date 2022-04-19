@@ -10,12 +10,8 @@ import {
   SORT_BY,
   TAB,
   USER_ID,
-<<<<<<< HEAD
   USERNAME,
-=======
   USER_TYPE,
-  USERNAME
->>>>>>> 2953e21be1c062eb47e365b1adcb9221044fd297
 } from "../util/Consts";
 
 /**

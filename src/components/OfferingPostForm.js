@@ -12,7 +12,6 @@ import * as Yup from 'yup'
 import { createOfferingPost } from '../service/Post';
 import { ALL_TAB, BLUE, STATE, USER_ID } from "../util/Consts";
 import GlobalState from "../state/GlobalState";
-import Snack from "./Snack";
 
 const OfferingPostForm = () => {
 
@@ -24,21 +23,20 @@ const OfferingPostForm = () => {
 
   const initialValues = {
     authorId: userId,
-    authorType,
-    topic,
-    preferredContact,
-    summary,
-    skillToAdd,
-    skillsList,
-    hasSkill,
-    softwareToAdd,
-    softwareList,
-    advisor,
-    memberNameToAdd,
-    memberEmailToAdd,
-    memberContactToAdd,
-    memberList,
-    maximumMembers,
+    authorType: "Student",
+    topic: "",
+    preferredContact: "",
+    summary: "",
+    skillToAdd: "",
+    skillsList: [],
+    softwareToAdd: "",
+    softwareList: [],
+    advisor: "",
+    memberNameToAdd: "",
+    memberEmailToAdd: "",
+    memberContactToAdd: "",
+    memberList: [],
+    maximumMembers: null
   }
   const [success, setSuccess] = React.useState(false);
   const [apiErr, setApiErr] = React.useState(false)
