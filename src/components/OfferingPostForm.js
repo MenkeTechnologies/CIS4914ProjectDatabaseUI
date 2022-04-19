@@ -36,7 +36,7 @@ const OfferingPostForm = () => {
     memberEmailToAdd: "",
     memberContactToAdd: "",
     memberList: [],
-    maximumMembers: null
+    maximumMembers: 6
   }
   const [success, setSuccess] = React.useState(false);
   const [apiErr, setApiErr] = React.useState(false)
@@ -74,7 +74,7 @@ const OfferingPostForm = () => {
               <Chip label="Project Details" sx={{ backgroundColor: BLUE, color: "white" }} />
             </Divider>
           </Grid>
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} md={5}>
             <TextField
               fullWidth
               required
@@ -97,6 +97,18 @@ const OfferingPostForm = () => {
               onChange={formik.handleChange}
               error={formik.touched.advisor && Boolean(formik.errors.advisor)}
               helperText={formik.touched.advisor && formik.errors.advisor}
+            />
+          </Grid>
+          <Grid item xs={12} md={1} sm={1}>
+            <TextField
+              fullWidth
+              id="maximumMembers"
+              name="maximumMembers"
+              label="maximumMembers"
+              value={formik.values.maximumMembers}
+              onChange={formik.handleChange}
+              error={formik.touched.maximumMembers && Boolean(formik.errors.maximumMembers)}
+              helperText={formik.touched.maximumMembers && formik.errors.maximumMembers}
             />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
