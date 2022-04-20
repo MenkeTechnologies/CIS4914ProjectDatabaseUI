@@ -39,7 +39,7 @@ import GlobalState from "../state/GlobalState";
 const DrawerNav = () => {
 
   const {
-    [STATE]: { [DRAWER_OPEN]: open },
+    [STATE]: {[DRAWER_OPEN]: open},
     toggleDrawer,
     handleNavChange,
     notRegistering
@@ -47,56 +47,56 @@ const DrawerNav = () => {
   } = React.useContext(GlobalState);
 
   const navItems = (anchor) => <Box
-    sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 230 }}
+    sx={{width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 230}}
     role="presentation"
   >
-    <List sx={{ paddingTop: "0px" }}>
+    <List sx={{paddingTop: "0px"}}>
 
       <ListItem button onClick={handleNavChange(ALL_TAB)}>
-        <ListItemIcon> <Dashboard /> </ListItemIcon>
-        <ListItemText primary={'All Posts'} />
+        <ListItemIcon> <Dashboard/> </ListItemIcon>
+        <ListItemText primary={'All Posts'}/>
       </ListItem>
       <ListItem button key={'Faculty_Statistics'} onClick={handleNavChange(FACULTY_STATISTICS_TAB)}>
-        <ListItemIcon> <Calculate /> </ListItemIcon>
-        <ListItemText primary={'Faculty Statistics'} />
+        <ListItemIcon> <Calculate/> </ListItemIcon>
+        <ListItemText primary={'Faculty Statistics'}/>
       </ListItem>
 
-      <Divider />
+      <Divider/>
 
       <ListItem button onClick={handleNavChange(USER_POST_TAB)}>
-        <ListItemIcon> <Person /> </ListItemIcon>
-        <ListItemText primary={'My Posts'} />
+        <ListItemIcon> <Person/> </ListItemIcon>
+        <ListItemText primary={'My Posts'}/>
       </ListItem>
       <ListItem button onClick={handleNavChange(PROJECT_TAB)}>
-        <ListItemIcon> <Add /> </ListItemIcon>
-        <ListItemText primary={'Project Post'} />
+        <ListItemIcon> <Add/> </ListItemIcon>
+        <ListItemText primary={'Project Post'}/>
       </ListItem>
       <ListItem button onClick={handleNavChange(SEEKING_TAB)}>
-        <ListItemIcon> <Add /> </ListItemIcon>
-        <ListItemText primary={'Looking for Group Post'} />
+        <ListItemIcon> <Add/> </ListItemIcon>
+        <ListItemText primary={'Looking for Group Post'}/>
       </ListItem>
       <ListItem button onClick={handleNavChange(MESSAGES_TAB)}>
-        <ListItemIcon> <Mail /> </ListItemIcon>
-        <ListItemText primary={'Messages'} />
+        <ListItemIcon> <Mail/> </ListItemIcon>
+        <ListItemText primary={'Messages'}/>
       </ListItem>
 
     </List>
 
-    <Divider />
+    <Divider/>
 
     <List>
       <ListItem button key={'Logout'} onClick={notRegistering}>
-        <ListItemIcon> <Logout /> </ListItemIcon>
-        <ListItemText primary={'Logout'} />
+        <ListItemIcon> <Logout/> </ListItemIcon>
+        <ListItemText primary={'Logout'}/>
       </ListItem>
     </List>
   </Box>
 
   return <Drawer variant="temporary"
-    anchor={LEFT}
-    open={open}
-    onClose={toggleDrawer}>
-    <Toolbar />
+                 anchor={LEFT}
+                 open={open}
+                 onClose={toggleDrawer}>
+    <Toolbar/>
     {navItems(DRAWER_OPEN)}
   </Drawer>
 };

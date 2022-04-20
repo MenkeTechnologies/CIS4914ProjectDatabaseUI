@@ -80,7 +80,7 @@ export const SEEKING_POST = 'seeking-post'
  */
 export const getApiUrl = (path) => `${API_HOSTNAME}/${path}`
 
-export const Item = styled(Paper)(({ theme }) => ({
+export const Item = styled(Paper)(({theme}) => ({
   ...theme.typography.body2,
   padding: theme.spacing(1),
   textAlign: 'center',

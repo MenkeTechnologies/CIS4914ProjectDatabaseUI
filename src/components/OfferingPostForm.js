@@ -1,5 +1,16 @@
 import * as React from 'react';
-import { Button, Chip, Divider, Grid, IconButton, InputAdornment, Paper, TextField, Typography, Stack } from '@mui/material';
+import {
+  Button,
+  Chip,
+  Divider,
+  Grid,
+  IconButton,
+  InputAdornment,
+  Paper,
+  TextField,
+  Typography,
+  Stack
+} from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
@@ -16,7 +27,7 @@ import GlobalState from "../state/GlobalState";
 const OfferingPostForm = () => {
 
   const {
-    [STATE]: { [USER_ID]: userId },
+    [STATE]: {[USER_ID]: userId},
     handleNavChange,
 
   } = React.useContext(GlobalState);
@@ -66,12 +77,12 @@ const OfferingPostForm = () => {
   });
 
   return <React.Fragment>
-    <Paper elevation={10} fullWidth sx={{ marginTop: 3 }}>
+    <Paper elevation={10} fullWidth sx={{marginTop: 3}}>
       <form onSubmit={formik.handleSubmit}>
-        <Grid container spacing={3} justifyContent={"center"} sx={{ padding: 3, paddingTop: 0 }}>
+        <Grid container spacing={3} justifyContent={"center"} sx={{padding: 3, paddingTop: 0}}>
           <Grid item xs={12}>
-            <Divider sx={{ "&::before, &::after": { borderColor: BLUE, } }}>
-              <Chip label="Project Details" sx={{ backgroundColor: BLUE, color: "white" }} />
+            <Divider sx={{"&::before, &::after": {borderColor: BLUE,}}}>
+              <Chip label="Project Details" sx={{backgroundColor: BLUE, color: "white"}}/>
             </Divider>
           </Grid>
           <Grid item xs={12} md={5}>
@@ -142,7 +153,7 @@ const OfferingPostForm = () => {
           <Grid item xs={12} sm={12} md={6}>
             <FormikProvider value={formik}>
               <FieldArray name="skillsList">
-                {({ remove, push }) => (
+                {({remove, push}) => (
                   <>
                     <TextField
                       fullWidth
@@ -159,17 +170,24 @@ const OfferingPostForm = () => {
                             push(formik.values.skillToAdd)
                             formik.setFieldValue('skillToAdd', '');
                           }}>
-                            <AddCircleOutlineIcon sx={{ color: BLUE }} />
+                            <AddCircleOutlineIcon sx={{color: BLUE}}/>
                           </IconButton>
                         </InputAdornment>
                       }}
                     />
                     <Grid container direction={"row"}>
                       {formik.values.skillsList.length > 0 && formik.values.skillsList.map((skill, index) => (
-                        <Grid item sx={{ border: 1, borderColor: "rgba(0, 0, 0, 0.23)", borderRadius: "30px", marginTop: 1, marginRight: 1, padding: 2 }} maxWidth={"100%"}>
-                          <Stack direction="row" alignItems="center" gap={1} >
-                            <ClearIcon onClick={() => remove(index)} sx={{ fontSize: 18 }}></ClearIcon>
-                            <Typography style={{ wordWrap: "break-word" }} maxWidth={"95%"}>
+                        <Grid item sx={{
+                          border: 1,
+                          borderColor: "rgba(0, 0, 0, 0.23)",
+                          borderRadius: "30px",
+                          marginTop: 1,
+                          marginRight: 1,
+                          padding: 2
+                        }} maxWidth={"100%"}>
+                          <Stack direction="row" alignItems="center" gap={1}>
+                            <ClearIcon onClick={() => remove(index)} sx={{fontSize: 18}}></ClearIcon>
+                            <Typography style={{wordWrap: "break-word"}} maxWidth={"95%"}>
                               {skill}
                             </Typography>
                           </Stack>
@@ -184,7 +202,7 @@ const OfferingPostForm = () => {
           <Grid item xs={12} sm={12} md={6}>
             <FormikProvider value={formik}>
               <FieldArray name="softwareList">
-                {({ remove, push }) => (
+                {({remove, push}) => (
                   <>
                     <TextField
                       fullWidth
@@ -201,17 +219,24 @@ const OfferingPostForm = () => {
                             push(formik.values.softwareToAdd)
                             formik.setFieldValue('softwareToAdd', '');
                           }}>
-                            <AddCircleOutlineIcon sx={{ color: BLUE }} />
+                            <AddCircleOutlineIcon sx={{color: BLUE}}/>
                           </IconButton>
                         </InputAdornment>
                       }}
                     />
                     <Grid container direction={"row"}>
                       {formik.values.softwareList.length > 0 && formik.values.softwareList.map((software, index) => (
-                        <Grid item sx={{ border: 1, borderColor: "rgba(0, 0, 0, 0.23)", borderRadius: "30px", marginTop: 1, marginRight: 1, padding: 2 }} maxWidth={"100%"}>
-                          <Stack direction="row" alignItems="center" gap={1} >
-                            <ClearIcon onClick={() => remove(index)} sx={{ fontSize: 18 }}></ClearIcon>
-                            <Typography style={{ wordWrap: "break-word" }} maxWidth={"95%"}>
+                        <Grid item sx={{
+                          border: 1,
+                          borderColor: "rgba(0, 0, 0, 0.23)",
+                          borderRadius: "30px",
+                          marginTop: 1,
+                          marginRight: 1,
+                          padding: 2
+                        }} maxWidth={"100%"}>
+                          <Stack direction="row" alignItems="center" gap={1}>
+                            <ClearIcon onClick={() => remove(index)} sx={{fontSize: 18}}></ClearIcon>
+                            <Typography style={{wordWrap: "break-word"}} maxWidth={"95%"}>
                               {software}
                             </Typography>
                           </Stack>
@@ -224,13 +249,13 @@ const OfferingPostForm = () => {
             </FormikProvider>
           </Grid>
           <Grid item xs={12}>
-            <Divider sx={{ "&::before, &::after": { borderColor: BLUE, } }}>
-              <Chip label="Additional Members" sx={{ backgroundColor: BLUE, color: "white" }} />
+            <Divider sx={{"&::before, &::after": {borderColor: BLUE,}}}>
+              <Chip label="Additional Members" sx={{backgroundColor: BLUE, color: "white"}}/>
             </Divider>
           </Grid>
           <FormikProvider value={formik}>
             <FieldArray name="memberList">
-              {({ remove, push }) => (
+              {({remove, push}) => (
                 <Grid container alignItems={"center"} justifyContent={"center"} padding={3} spacing={3}>
                   <Grid item xs={12} md={4}>
                     <TextField
@@ -301,7 +326,7 @@ const OfferingPostForm = () => {
                             startAdornment:
                               <InputAdornment position="end">
                                 <IconButton edge="start">
-                                  <AccountBoxIcon sx={{ color: BLUE, margin: 1 }} />
+                                  <AccountBoxIcon sx={{color: BLUE, margin: 1}}/>
                                 </IconButton>
                               </InputAdornment>
                           }}
@@ -318,7 +343,7 @@ const OfferingPostForm = () => {
                             startAdornment:
                               <InputAdornment position="end">
                                 <IconButton edge="start">
-                                  <ContactPhoneIcon sx={{ color: BLUE, margin: 1 }} />
+                                  <ContactPhoneIcon sx={{color: BLUE, margin: 1}}/>
                                 </IconButton>
                               </InputAdornment>
                           }}
@@ -335,14 +360,14 @@ const OfferingPostForm = () => {
                             startAdornment:
                               <InputAdornment position="end">
                                 <IconButton edge="start">
-                                  <ContactMailIcon sx={{ color: BLUE, margin: 1 }} />
+                                  <ContactMailIcon sx={{color: BLUE, margin: 1}}/>
                                 </IconButton>
                               </InputAdornment>
                           }}
                           variant="standard"
                         />
                       </Grid>
-                      <Grid item xs={12} md={1} >
+                      <Grid item xs={12} md={1}>
                         <Button
                           type="button"
                           variant="outlined"
@@ -381,7 +406,7 @@ const OfferingPostForm = () => {
         </Grid>
       </form>
     </Paper>
-  </React.Fragment >
+  </React.Fragment>
 }
 export default OfferingPostForm;
 

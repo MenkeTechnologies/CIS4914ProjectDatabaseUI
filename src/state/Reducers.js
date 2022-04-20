@@ -20,21 +20,21 @@ import {
  * @param setState
  */
 export const createReducers = (state, setState) => {
-  const addState = (obj) => setState({ ...state, ...obj });
+  const addState = (obj) => setState({...state, ...obj});
   const stayOpen = (e) => e.type === KEYDOWN && (e.key === TAB || e.key === SHIFT);
   const toggleDrawer = (e) => {
     if (!stayOpen(e)) {
-      addState({ [DRAWER_OPEN]: !state[DRAWER_OPEN] });
+      addState({[DRAWER_OPEN]: !state[DRAWER_OPEN]});
     }
   };
   const setTab = (e, v) => {
-    return addState({ [ACTIVE_TAB]: v });
+    return addState({[ACTIVE_TAB]: v});
   };
   const setSortBy = (sortType, sortValue) => {
-    addState({ [SORT_BY]: { ...state[SORT_BY], [sortType]: sortValue } });
+    addState({[SORT_BY]: {...state[SORT_BY], [sortType]: sortValue}});
   };
   const setFullSort = (sort) => {
-    addState({ [SORT_BY]: sort });
+    addState({[SORT_BY]: sort});
   };
 
   const setUserName = (uname, email, id, userType) => {
@@ -50,7 +50,7 @@ export const createReducers = (state, setState) => {
 
   const hideDrawer = () => {
     state[DRAWER_OPEN] = false
-    addState({ [DRAWER_OPEN]: false });
+    addState({[DRAWER_OPEN]: false});
   };
   const handleNavChange = (tabIdx) => (e) => {
     hideDrawerAndSetTab(e, tabIdx);
@@ -60,7 +60,7 @@ export const createReducers = (state, setState) => {
     hideDrawer();
     setUserName(uname, email, id, userType);
     sessionStorage.setItem(LOGGED_IN, 'true')
-    addState({ [LOGGED_IN]: 'true' })
+    addState({[LOGGED_IN]: 'true'})
   }
 
   const registerUser = (uname, email, id, userType) => {
@@ -69,12 +69,12 @@ export const createReducers = (state, setState) => {
 
   const registering = () => {
     logoutUser();
-    addState({ [REGISTER]: true });
+    addState({[REGISTER]: true});
   }
 
   const notRegistering = () => {
     logoutUser();
-    addState({ [REGISTER]: false })
+    addState({[REGISTER]: false})
   }
 
   const logoutUser = () => {
@@ -87,8 +87,8 @@ export const createReducers = (state, setState) => {
   const hideDrawerAndSetTab = (e, tab) => {
     hideDrawer();
     addState({
-      [ACTIVE_TAB]: tab
-    }
+        [ACTIVE_TAB]: tab
+      }
     );
     localStorage.setItem(ACTIVE_TAB_STORED, tab)
   };

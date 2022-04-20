@@ -4,7 +4,23 @@
 
 import React from 'react';
 import { Grid, Paper, Box } from "@mui/material";
-import { ACTIVE_TAB, ADVISOR_READY, AVAILABILITY, DATE_ASC, DATE_DESC, DATE_POSTED, OFFERING, POST_TYPE, PROJECT_ADVISED_ONLY, PROJECT_AVAILABLE_ONLY, SEEKING, SORT_BY, STATE, SEARCH_VALUE, USER_ID } from "../util/Consts";
+import {
+  ACTIVE_TAB,
+  ADVISOR_READY,
+  AVAILABILITY,
+  DATE_ASC,
+  DATE_DESC,
+  DATE_POSTED,
+  OFFERING,
+  POST_TYPE,
+  PROJECT_ADVISED_ONLY,
+  PROJECT_AVAILABLE_ONLY,
+  SEEKING,
+  SORT_BY,
+  STATE,
+  SEARCH_VALUE,
+  USER_ID
+} from "../util/Consts";
 import Message from "./Message";
 import ProjectPost from "./ProjectPost";
 import SeekingPost from "./SeekingPost";
@@ -23,7 +39,7 @@ import { getMessages } from "../service/Message";
  */
 const TabContent = () => {
 
-  const { [STATE]: { [ACTIVE_TAB]: activeTab, [SORT_BY]: sortBy, [USER_ID]: userId } } = React.useContext(GlobalState);
+  const {[STATE]: {[ACTIVE_TAB]: activeTab, [SORT_BY]: sortBy, [USER_ID]: userId}} = React.useContext(GlobalState);
 
   const [filteredPosts, setFilteredPosts] = React.useState([]);
   const [allPosts, setAllPosts] = React.useState([]);
@@ -35,11 +51,11 @@ const TabContent = () => {
   }, []);
   React.useEffect(async () => {
     const posts = await getPosts();
-    setAllPosts(posts.slice().sort(function (a, b) { return new Date(b.date) - new Date(a.date) }));
-  }, []);
+    setAllPosts(posts.slice().sort((a, b) => new Date(b.date) - new Date(a.date)));
+  }, [activeTab]);
   React.useEffect(() => {
-    var posts = allPosts;
-    console.log(sortBy);
+    let posts = allPosts;
+    // console.log(sortBy);
     Object.entries(sortBy).forEach(filter => {
       const [filterType, filterValue] = filter;
       switch (filterType) {
@@ -52,9 +68,13 @@ const TabContent = () => {
           break;
         case DATE_POSTED:
           if (filterValue === DATE_ASC) {
-            posts = posts.slice().sort(function (a, b) { return new Date(a.date) - new Date(b.date) });
+            posts = posts.slice().sort(function (a, b) {
+              return new Date(a.date) - new Date(b.date)
+            });
           } else if (filterValue === DATE_DESC) {
-            posts = posts.slice().sort(function (a, b) { return new Date(b.date) - new Date(a.date) });
+            posts = posts.slice().sort(function (a, b) {
+              return new Date(b.date) - new Date(a.date)
+            });
           }
           break;
         case AVAILABILITY:
@@ -71,10 +91,9 @@ const TabContent = () => {
           if (filterValue !== "") {
 
             posts = posts.filter(post => {
-              var returnPost = null;
+              let returnPost = null;
 
-              if ((post[POST_TYPE] === SEEKING && post.title.toLowerCase().includes(filterValue.toLowerCase()))
-                || (post[POST_TYPE] === OFFERING && post.topic.toLowerCase().includes(filterValue.toLowerCase()))) {
+              if ((post[POST_TYPE] === SEEKING && post.title.toLowerCase().includes(filterValue.toLowerCase())) || (post[POST_TYPE] === OFFERING && post.topic.toLowerCase().includes(filterValue.toLowerCase()))) {
                 returnPost = post;
               } else if (post.summary.toLowerCase().includes(filterValue.toLowerCase())) {
                 returnPost = post;
@@ -101,7 +120,8 @@ const TabContent = () => {
           }
           break;
 
-        default: console.log("Value in filter does not match with filterable attributes:" + filterType)
+        default:
+          console.log("Value in filter does not match with filterable attributes:" + filterType)
       }
     })
 
@@ -109,17 +129,15 @@ const TabContent = () => {
 
   }, [allPosts, sortBy]);
 
-  return <Box sx={{ width: '100%', marginTop: 7 }}>
+  return <Box sx={{width: '100%', marginTop: 7}}>
 
     <TabPanel value={activeTab} index={0}>
       <Grid container spacing={2}>
-        {filteredPosts.map(post =>
-          <Grid item xs={12} md={6}>
-            <Paper elevation={5} sx={{ padding: "20px" }}>
-              {post[POST_TYPE] === OFFERING ? <ProjectPost post={post} /> : <SeekingPost post={post} />}
-            </Paper>
-          </Grid>
-        )}
+        {filteredPosts.map(post => <Grid item xs={12} md={6}>
+          <Paper elevation={5} sx={{padding: "20px"}}>
+            {post[POST_TYPE] === OFFERING ? <ProjectPost post={post}/> : <SeekingPost post={post}/>}
+          </Paper>
+        </Grid>)}
       </Grid>
     </TabPanel>
 
@@ -129,41 +147,37 @@ const TabContent = () => {
           .filter(post => {
             if (post.author !== null && post.author._id === userId) return post;
           })
-          .map(post =>
-            <Grid item xs={6} minWidth={"350px"}>
-              <Paper elevation={5} sx={{ padding: "20px" }}>
-                {post[POST_TYPE] === OFFERING ? <ProjectPost post={post} /> : <SeekingPost post={post} />}
-              </Paper>
-            </Grid>
-          )}
+          .map(post => <Grid item xs={6} minWidth={"350px"}>
+            <Paper elevation={5} sx={{padding: "20px"}}>
+              {post[POST_TYPE] === OFFERING ? <ProjectPost post={post}/> : <SeekingPost post={post}/>}
+            </Paper>
+          </Grid>)}
       </Grid>
     </TabPanel>
 
     <TabPanel value={activeTab} index={4}>
-      <Box sx={{ flexGrow: 1 }}>
-        <OfferingPostForm />
+      <Box sx={{flexGrow: 1}}>
+        <OfferingPostForm/>
       </Box>
     </TabPanel>
 
     <TabPanel value={activeTab} index={5}>
-      <Box sx={{ flexGrow: 1 }}>
-        <SeekingPostForm />
+      <Box sx={{flexGrow: 1}}>
+        <SeekingPostForm/>
       </Box>
     </TabPanel>
 
     <TabPanel value={activeTab} index={6}>
-      <Box sx={{ flexGrow: 1 }}>
-        <MessageForm />
+      <Box sx={{flexGrow: 1}}>
+        <MessageForm/>
         <Grid container spacing={2}>
-          {messages.map(message =>
-            <Message message={message} />
-          )}
+          {messages.map(message => <Message message={message}/>)}
         </Grid>
       </Box>
     </TabPanel>
 
     <TabPanel value={activeTab} index={7}>
-      <FacultyStatistics posts={filteredPosts} />
+      <FacultyStatistics posts={filteredPosts}/>
     </TabPanel>
   </Box>
 }

@@ -5,13 +5,13 @@ import Menu from "@mui/icons-material/Menu"
 
 const MobileDrawerButton = () => {
 
-    const { toggleDrawer } = useContext(GlobalState);
+  const {toggleDrawer} = useContext(GlobalState);
 
-    return <Grid item>
-        <IconButton edge="start" color="inherit" aria-label="menu" onClick={toggleDrawer}>
-            <Menu />
-        </IconButton>
-    </Grid>
+  return <Grid item>
+    <IconButton edge="start" color="inherit" aria-label="menu" onClick={toggleDrawer}>
+      <Menu/>
+    </IconButton>
+  </Grid>
 }
 
 export default MobileDrawerButton;

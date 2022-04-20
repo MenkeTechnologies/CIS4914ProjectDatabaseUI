@@ -21,17 +21,17 @@ const App = () => {
   const [state, setState] = React.useState(initialState);
   const reducers = createReducers(state, setState);
 
-  return <GlobalState.Provider value={{ state, setState, ...reducers }}>
+  return <GlobalState.Provider value={{state, setState, ...reducers}}>
     {state[LOGGED_IN] === 'true' ?
       <React.Fragment>
-        <AppNav />
-        <TabContent />
-        <DrawerNav />
+        <AppNav/>
+        <TabContent/>
+        <DrawerNav/>
       </React.Fragment> :
       state[REGISTER] ?
-        <Register />
+        <Register/>
         :
-        <Login />
+        <Login/>
     }
   </GlobalState.Provider>
 };

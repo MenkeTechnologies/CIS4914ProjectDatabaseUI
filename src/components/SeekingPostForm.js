@@ -4,7 +4,8 @@ import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
-import ContactMailIcon from '@mui/icons-material/ContactMail'; import { FieldArray, FormikProvider, useFormik } from 'formik'
+import ContactMailIcon from '@mui/icons-material/ContactMail';
+import { FieldArray, FormikProvider, useFormik } from 'formik'
 import * as Yup from 'yup'
 import { createSeekingPost } from '../service/Post';
 import { STATE, USER_ID, ALL_TAB, BLUE } from "../util/Consts";
@@ -13,7 +14,7 @@ import Snack from "./Snack";
 
 const SeekingPostForm = () => {
 
-  const { [STATE]: { [USER_ID]: userId }, handleNavChange } = React.useContext(GlobalState);
+  const {[STATE]: {[USER_ID]: userId}, handleNavChange} = React.useContext(GlobalState);
 
   const [success, setSuccess] = React.useState(false);
   const [apiErr, setApiErr] = React.useState(false)
@@ -46,12 +47,12 @@ const SeekingPostForm = () => {
   });
 
   return <React.Fragment>
-    <Paper elevation={10} fullWidth sx={{ marginTop: 3 }}>
+    <Paper elevation={10} fullWidth sx={{marginTop: 3}}>
       <form onSubmit={formik.handleSubmit}>
-        <Grid container spacing={3} justifyContent={"center"} sx={{ padding: 3, paddingTop: 0 }}>
+        <Grid container spacing={3} justifyContent={"center"} sx={{padding: 3, paddingTop: 0}}>
           <Grid item xs={12}>
-            <Divider sx={{ "&::before, &::after": { borderColor: BLUE, } }}>
-              <Chip label="Student Details" sx={{ backgroundColor: BLUE, color: "white" }} />
+            <Divider sx={{"&::before, &::after": {borderColor: BLUE,}}}>
+              <Chip label="Student Details" sx={{backgroundColor: BLUE, color: "white"}}/>
             </Divider>
           </Grid>
           <Grid item xs={6}>
@@ -99,13 +100,13 @@ const SeekingPostForm = () => {
           </Grid>
 
           <Grid item xs={12}>
-            <Divider sx={{ "&::before, &::after": { borderColor: BLUE, } }}>
-              <Chip label="Additional Members" sx={{ backgroundColor: BLUE, color: "white" }} />
+            <Divider sx={{"&::before, &::after": {borderColor: BLUE,}}}>
+              <Chip label="Additional Members" sx={{backgroundColor: BLUE, color: "white"}}/>
             </Divider>
           </Grid>
           <FormikProvider value={formik}>
             <FieldArray name="memberList">
-              {({ remove, push }) => (<>
+              {({remove, push}) => (<>
                 <Grid container alignItems={"center"} justifyContent={"center"} padding={3} spacing={3}>
                   <Grid item xs={12} md={4}>
                     <TextField
@@ -176,7 +177,7 @@ const SeekingPostForm = () => {
                             startAdornment:
                               <InputAdornment position="end">
                                 <IconButton edge="start">
-                                  <AccountBoxIcon sx={{ color: BLUE, margin: 1 }} />
+                                  <AccountBoxIcon sx={{color: BLUE, margin: 1}}/>
                                 </IconButton>
                               </InputAdornment>
                           }}
@@ -193,7 +194,7 @@ const SeekingPostForm = () => {
                             startAdornment:
                               <InputAdornment position="end">
                                 <IconButton edge="start">
-                                  <ContactPhoneIcon sx={{ color: BLUE, margin: 1 }} />
+                                  <ContactPhoneIcon sx={{color: BLUE, margin: 1}}/>
                                 </IconButton>
                               </InputAdornment>
                           }}
@@ -210,14 +211,14 @@ const SeekingPostForm = () => {
                             startAdornment:
                               <InputAdornment position="end">
                                 <IconButton edge="start">
-                                  <ContactMailIcon sx={{ color: BLUE, margin: 1 }} />
+                                  <ContactMailIcon sx={{color: BLUE, margin: 1}}/>
                                 </IconButton>
                               </InputAdornment>
                           }}
                           variant="standard"
                         />
                       </Grid>
-                      <Grid item xs={12} md={1} >
+                      <Grid item xs={12} md={1}>
                         <Button
                           type="button"
                           variant="outlined"
