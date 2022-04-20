@@ -177,7 +177,7 @@ const TabContent = () => {
     </TabPanel>
 
     <TabPanel value={activeTab} index={7}>
-      <FacultyStatistics posts={filteredPosts}/>
+      <FacultyStatistics posts={filteredPosts.filter(p => p[POST_TYPE] === OFFERING)}/>
     </TabPanel>
   </Box>
 }
